@@ -1,0 +1,2299 @@
+# Donation Suite - Translation Template
+# Copyright (C) 2024 Easy Payment Plugins
+# This file is distributed under the same license as the Donation Suite package.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: DonateOcean Donation Suite 1.0.0\n"
+"Report-Msgid-Bugs-To: https://profiles.wordpress.org/easypayment/\n"
+"POT-Creation-Date: 2026-04-04 00:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: donateocean-donation-suite.php
+msgid "Donation Suite requires PHP 7.4 or later."
+msgstr ""
+
+#: donateocean-donation-suite.php
+msgid "Donation Suite requires WordPress 6.0 or later."
+msgstr ""
+
+#: donateocean-donation-suite.php includes/admin/class-settings-page.php templates/admin-settings.php
+msgid "Settings"
+msgstr ""
+
+#: donateocean-donation-suite.php
+msgid "Donation History"
+msgstr ""
+
+#: includes/admin/class-campaign-tracking-page.php
+msgid "Campaign Tracking"
+msgstr ""
+
+#: includes/admin/class-campaign-tracking-page.php includes/admin/class-donation-detail-page.php includes/admin/class-donor-profile-page.php includes/admin/class-settings-page.php
+msgid "You do not have permission to view this page."
+msgstr ""
+
+#: includes/admin/class-campaign-tracking-page.php
+msgid "Campaign goals saved successfully."
+msgstr ""
+
+#: includes/admin/class-campaign-tracking-page.php
+msgid "You do not have permission to manage campaign goals."
+msgstr ""
+
+#: includes/admin/class-donation-detail-page.php
+msgid "Donation Details"
+msgstr ""
+
+#: includes/admin/class-donation-detail-page.php
+msgid "You do not have permission to resend receipts."
+msgstr ""
+
+#: includes/admin/class-donation-detail-page.php includes/admin/class-refund-controller.php includes/admin/class-subscription-controller.php includes/receipt/class-pdf-receipt-controller.php
+msgid "Donation not found."
+msgstr ""
+
+#: includes/admin/class-donation-detail-page.php templates/admin-donor-profile.php
+msgid "Created"
+msgstr ""
+
+#: includes/admin/class-donation-detail-page.php templates/admin-donor-profile.php
+msgid "Approved"
+msgstr ""
+
+#: includes/admin/class-donation-detail-page.php templates/admin-donor-profile.php
+msgid "Captured"
+msgstr ""
+
+#: includes/admin/class-donation-detail-page.php
+msgid "Pending"
+msgstr ""
+
+#: includes/admin/class-donation-detail-page.php templates/admin-donor-profile.php templates/admin-settings.php
+msgid "Completed"
+msgstr ""
+
+#: includes/admin/class-donation-detail-page.php templates/admin-donor-profile.php
+msgid "Refunded"
+msgstr ""
+
+#: includes/admin/class-donation-detail-page.php templates/admin-donor-profile.php
+msgid "Failed"
+msgstr ""
+
+#: includes/admin/class-donation-detail-page.php
+msgid "Disputed"
+msgstr ""
+
+#: includes/admin/class-donation-detail-page.php
+msgid "Subscription Active"
+msgstr ""
+
+#: includes/admin/class-donation-detail-page.php
+msgid "Subscription Paused"
+msgstr ""
+
+#: includes/admin/class-donation-detail-page.php
+msgid "Subscription Cancelled"
+msgstr ""
+
+#: includes/admin/class-donation-detail-page.php
+msgid "Subscription Failed"
+msgstr ""
+
+#: includes/admin/class-donor-profile-page.php
+msgid "Donor Profile"
+msgstr ""
+
+#: includes/admin/class-donor-profile-page.php
+msgid "A donor email address is required."
+msgstr ""
+
+#: includes/admin/class-manual-donation-page.php templates/manual-donation-form.php
+msgid "Add Manual Donation"
+msgstr ""
+
+#: includes/admin/class-manual-donation-page.php
+msgid "Add Donation"
+msgstr ""
+
+#: includes/admin/class-manual-donation-page.php
+msgid "+ Add Manual Donation"
+msgstr ""
+
+#: includes/admin/class-manual-donation-page.php
+msgid "You do not have permission to add donations."
+msgstr ""
+
+#: includes/admin/class-manual-donation-page.php
+msgid "An unknown error occurred."
+msgstr ""
+
+#: includes/admin/class-manual-donation-page.php
+msgid "A valid donation amount greater than zero is required."
+msgstr ""
+
+#: includes/admin/class-manual-donation-page.php
+msgid "A valid donor email address is required."
+msgstr ""
+
+#: includes/admin/class-refund-controller.php includes/admin/class-subscription-controller.php
+msgid "Forbidden"
+msgstr ""
+
+#: includes/admin/class-refund-controller.php includes/admin/class-subscription-controller.php
+msgid "Invalid donation ID."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Donation Suite"
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Giving Levels JSON is not valid JSON. Please fix the format — levels were not saved."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Google Sheets credentials JSON is invalid. It must contain client_email and private_key fields."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "%s API credentials could not be validated. Please check Client ID and Secret."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Sandbox"
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Live"
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "%s webhook registration failed. Please save again after confirming credentials."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Please provide both Client ID and Secret."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Could not retrieve PayPal access token. Check your Client ID and Secret."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "%s credentials are valid. Connection successful."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "No admin email address configured."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Test email sent to %s."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "wp_mail() returned false. Check your server email configuration."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "%s PayPal account disconnected."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Please provide a Zapier webhook URL."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Connection failed: %s"
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Test event sent successfully. Check your Zapier dashboard."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Zapier returned HTTP %d. Check your webhook URL."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Please provide a Slack webhook URL."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Please fill in all Twilio fields before testing."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Test SMS sent successfully. Check your phone."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Please provide both API URL and API Key."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Please provide a Brevo API key."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Please provide both credentials JSON and Spreadsheet ID."
+msgstr ""
+
+#: includes/admin/class-settings-page.php templates/admin-settings.php
+msgid "Environment & API Credentials"
+msgstr ""
+
+#: includes/admin/class-settings-page.php templates/admin-settings.php
+msgid "Donation Experience"
+msgstr ""
+
+#: includes/admin/class-settings-page.php templates/admin-settings.php
+msgid "Organization & Compliance"
+msgstr ""
+
+#: includes/admin/class-settings-page.php templates/admin-settings.php
+msgid "Advanced & Security"
+msgstr ""
+
+#: includes/admin/class-settings-page.php templates/admin-settings.php
+msgid "Integrations"
+msgstr ""
+
+#: includes/admin/class-settings-page.php templates/admin-settings.php
+msgid "Shortcode Builder"
+msgstr ""
+
+#: includes/core/class-bootstrap.php
+msgid "Once a year"
+msgstr ""
+
+#: includes/core/class-bootstrap.php templates/admin-settings.php
+msgid "Donation Suite — Setup required."
+msgstr ""
+
+#: includes/core/class-bootstrap.php templates/admin-settings.php
+msgid "Connect your PayPal account to start accepting donations."
+msgstr ""
+
+#: includes/core/class-bootstrap.php templates/admin-settings.php
+msgid "Connect PayPal"
+msgstr ""
+
+#: includes/core/class-bootstrap.php templates/admin-settings.php
+msgid "Donation Suite — Sandbox (Test Mode) active."
+msgstr ""
+
+#: includes/core/class-bootstrap.php templates/admin-settings.php
+msgid "The donation form is using PayPal sandbox credentials. No real payments will be processed."
+msgstr ""
+
+#: includes/core/class-bootstrap.php templates/admin-settings.php
+msgid "Switch to Production"
+msgstr ""
+
+#: includes/core/class-bootstrap.php
+msgid "Donation Suite:"
+msgstr ""
+
+#: includes/core/class-bootstrap.php
+msgid "The last PayPal webhook failed signature verification. Donations may not be completing."
+msgstr ""
+
+#: includes/core/class-bootstrap.php
+msgid "Check credentials"
+msgstr ""
+
+#: includes/core/class-bootstrap.php
+msgid "No verified webhook event has been received in over 24 hours. PayPal may not be reaching your site."
+msgstr ""
+
+#: includes/core/class-bootstrap.php
+msgid "Check webhook settings"
+msgstr ""
+
+#: includes/core/class-bootstrap.php
+msgid "Insufficient permissions."
+msgstr ""
+
+#: includes/donation/class-donation-post-type.php templates/admin-campaign-tracking.php
+msgid "Donations"
+msgstr ""
+
+#: includes/donation/class-donation-post-type.php templates/admin-donation-detail.php
+msgid "Donation"
+msgstr ""
+
+#: includes/donation/class-donation-post-type.php
+msgid "View details"
+msgstr ""
+
+#: includes/donation/class-donation-post-type.php
+msgid "Donor history"
+msgstr ""
+
+#: includes/donation/class-donation-post-type.php templates/admin-donation-detail.php
+msgid "Download PDF"
+msgstr ""
+
+#: includes/email/class-receipt-email-service.php
+msgid "Monthly recurring"
+msgstr ""
+
+#: includes/email/class-receipt-email-service.php
+msgid "Annual recurring"
+msgstr ""
+
+#: includes/email/class-receipt-email-service.php templates/shortcode.php
+msgid "One-time donation"
+msgstr ""
+
+#: includes/frontend/class-donor-portal-shortcode.php
+msgid "Security check failed."
+msgstr ""
+
+#: includes/frontend/class-donor-portal-shortcode.php
+msgid "Access your donation portal — %s"
+msgstr ""
+
+#: includes/frontend/class-donor-portal-shortcode.php
+msgid "Click the button below to access your donation portal and manage your recurring donations. This link expires in 30 minutes."
+msgstr ""
+
+#: includes/frontend/class-donor-portal-shortcode.php
+msgid "Access My Donation Portal"
+msgstr ""
+
+#: includes/frontend/class-donor-portal-shortcode.php
+msgid "If you did not request this link, you can safely ignore this email."
+msgstr ""
+
+#: includes/frontend/class-shortcode.php
+msgid "Make a Donation"
+msgstr ""
+
+#: includes/frontend/class-shortcode.php
+msgid "Fast and secure checkout with PayPal."
+msgstr ""
+
+#: includes/frontend/class-shortcode.php
+msgid "Campaign progress"
+msgstr ""
+
+#: includes/frontend/class-shortcode.php
+msgid "Donate with PayPal"
+msgstr ""
+
+#: includes/frontend/class-shortcode.php
+msgid "This campaign opens on %s."
+msgstr ""
+
+#: includes/frontend/class-shortcode.php
+msgid "This campaign has ended. Thank you for your interest."
+msgstr ""
+
+#: includes/frontend/class-shortcode.php
+msgid "This campaign has reached its goal. Thank you for your incredible support!"
+msgstr ""
+
+#: includes/integration/class-active-campaign.php
+msgid "ActiveCampaign connection successful."
+msgstr ""
+
+#: includes/integration/class-active-campaign.php
+msgid "Invalid API key. Please check your credentials."
+msgstr ""
+
+#: includes/integration/class-active-campaign.php
+msgid "ActiveCampaign returned HTTP %d."
+msgstr ""
+
+#: includes/integration/class-brevo.php
+msgid "Connected to Brevo account: %s"
+msgstr ""
+
+#: includes/integration/class-brevo.php
+msgid "Brevo connection successful."
+msgstr ""
+
+#: includes/integration/class-brevo.php
+msgid "Invalid API key. Please check your Brevo credentials."
+msgstr ""
+
+#: includes/integration/class-brevo.php
+msgid "Brevo returned HTTP %d."
+msgstr ""
+
+#: includes/integration/class-google-sheets.php includes/integration/class-zapier.php includes/reporting/class-admin-list.php
+msgid "Anonymous"
+msgstr ""
+
+#: includes/integration/class-google-sheets.php
+msgid "Failed to authenticate. Check your service account JSON credentials."
+msgstr ""
+
+#: includes/integration/class-google-sheets.php
+msgid "Connected to spreadsheet: %s"
+msgstr ""
+
+#: includes/integration/class-google-sheets.php
+msgid "Connection successful."
+msgstr ""
+
+#: includes/integration/class-google-sheets.php
+msgid "Spreadsheet not found. Check the Spreadsheet ID and ensure the service account has access."
+msgstr ""
+
+#: includes/integration/class-google-sheets.php
+msgid "Access denied. Share the spreadsheet with the service account email address."
+msgstr ""
+
+#: includes/integration/class-google-sheets.php
+msgid "Google API returned HTTP %d."
+msgstr ""
+
+#: includes/integration/class-slack.php
+msgid "Test notification sent successfully. Check your Slack channel."
+msgstr ""
+
+#: includes/integration/class-slack.php
+msgid "Slack returned HTTP %d. Check your webhook URL."
+msgstr ""
+
+#: includes/integration/class-twilio.php
+msgid "SMS sent successfully."
+msgstr ""
+
+#: includes/integration/class-twilio.php
+msgid "Twilio returned HTTP %d."
+msgstr ""
+
+#: includes/receipt/class-pdf-receipt-controller.php
+msgid "You do not have permission to download receipts."
+msgstr ""
+
+#: includes/reporting/class-admin-list.php templates/admin-donation-detail.php templates/admin-donor-profile.php
+msgid "Receipt #"
+msgstr ""
+
+#: includes/reporting/class-admin-list.php templates/admin-donor-profile.php templates/manual-donation-form.php templates/shortcode.php
+msgid "Amount"
+msgstr ""
+
+#: includes/reporting/class-admin-list.php templates/manual-donation-form.php templates/shortcode.php
+msgid "Currency"
+msgstr ""
+
+#: includes/reporting/class-admin-list.php templates/admin-donation-detail.php
+msgid "Type"
+msgstr ""
+
+#: includes/reporting/class-admin-list.php
+msgid "Donor"
+msgstr ""
+
+#: includes/reporting/class-admin-list.php templates/admin-donation-detail.php
+msgid "High-value donation — flagged for review"
+msgstr ""
+
+#: includes/reporting/class-admin-list.php templates/shortcode.php
+msgid "One-time"
+msgstr ""
+
+#: includes/reporting/class-admin-list.php templates/donor-portal.php templates/shortcode.php
+msgid "Monthly"
+msgstr ""
+
+#: includes/reporting/class-admin-list.php templates/donor-portal.php templates/shortcode.php
+msgid "Annual"
+msgstr ""
+
+#: includes/reporting/class-admin-list.php
+msgid "From date"
+msgstr ""
+
+#: includes/reporting/class-admin-list.php
+msgid "To date"
+msgstr ""
+
+#: includes/reporting/class-admin-list.php
+msgid "Campaign…"
+msgstr ""
+
+#: includes/reporting/class-admin-list.php
+msgid "Filter by campaign name"
+msgstr ""
+
+#: includes/reporting/class-admin-list.php includes/reporting/class-analytics-widget.php templates/admin-campaign-tracking.php
+msgid "Export CSV"
+msgstr ""
+
+#: includes/reporting/class-admin-list.php
+msgid "Resend receipts"
+msgstr ""
+
+#: includes/reporting/class-analytics-widget.php
+msgid "Donation Suite Analytics"
+msgstr ""
+
+#: includes/reporting/class-analytics-widget.php
+msgid "All-time donations"
+msgstr ""
+
+#: includes/reporting/class-analytics-widget.php
+msgid "This month"
+msgstr ""
+
+#: includes/reporting/class-analytics-widget.php
+msgid "Top campaigns"
+msgstr ""
+
+#: includes/reporting/class-analytics-widget.php templates/admin-campaign-tracking.php
+msgid "View all donations"
+msgstr ""
+
+#: includes/reporting/class-analytics-widget.php
+msgid "12-month donation trend"
+msgstr ""
+
+#: includes/reporting/class-export-controller.php
+msgid "Could not open output stream for CSV export."
+msgstr ""
+
+#: includes/reporting/class-webhook-health-widget.php
+msgid "Donation Suite Webhook Health"
+msgstr ""
+
+#: includes/reporting/class-webhook-health-widget.php
+msgid "No webhook events have been recorded yet."
+msgstr ""
+
+#: includes/reporting/class-webhook-health-widget.php
+msgid "Last event type:"
+msgstr ""
+
+#: includes/reporting/class-webhook-health-widget.php
+msgid "Last event ID:"
+msgstr ""
+
+#: includes/reporting/class-webhook-health-widget.php
+msgid "Received at:"
+msgstr ""
+
+#: includes/reporting/class-webhook-health-widget.php
+msgid "Verification:"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Campaign Fund Tracking"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Track fundraising progress for each campaign across all shortcodes and donation forms."
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Total campaigns"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Total raised"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Total donations"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Unique donors"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "No campaign donations yet. Campaigns are created automatically when you use the campaign attribute in your shortcode:"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php templates/admin-donor-profile.php
+msgid "Campaign"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Raised"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Goal"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Progress"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Donors"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Date range"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "No goal"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Set a goal to track"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "View donations"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Save campaign goals"
+msgstr ""
+
+#: templates/admin-donation-detail.php templates/admin-donor-profile.php
+msgid "← Back to donations"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "View donor history"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Resend Receipt"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Issue a PayPal refund for this donation?"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Full refund"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Refund amount (leave blank for full refund)"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Issue Refund"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Pause Subscription"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Resume Subscription"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Cancel this PayPal subscription? This cannot be undone."
+msgstr ""
+
+#: templates/admin-donation-detail.php templates/donor-portal.php
+msgid "Cancel Subscription"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Payment"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Amount (donation)"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Fee covered by donor"
+msgstr ""
+
+#: templates/admin-donation-detail.php templates/shortcode.php
+msgid "Total charged"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Giving level"
+msgstr ""
+
+#: templates/admin-donation-detail.php templates/manual-donation-form.php
+msgid "Cash"
+msgstr ""
+
+#: templates/admin-donation-detail.php templates/manual-donation-form.php
+msgid "Cheque"
+msgstr ""
+
+#: templates/admin-donation-detail.php templates/manual-donation-form.php
+msgid "Bank Transfer"
+msgstr ""
+
+#: templates/admin-donation-detail.php templates/manual-donation-form.php
+msgid "Other"
+msgstr ""
+
+#: templates/admin-donation-detail.php templates/manual-donation-form.php
+msgid "Payment Method"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Offline"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Reference / Cheque #"
+msgstr ""
+
+#: templates/admin-donation-detail.php templates/admin-settings.php
+msgid "Environment"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "PayPal Order ID"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "PayPal Capture ID"
+msgstr ""
+
+#: templates/admin-donation-detail.php templates/manual-donation-form.php templates/shortcode.php
+msgid "Campaign / Fund"
+msgstr ""
+
+#: templates/admin-donation-detail.php templates/admin-settings.php templates/manual-donation-form.php templates/shortcode.php
+msgid "Purpose"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Frequency"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Donation date"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Subscription"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Subscription ID"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Cycle"
+msgstr ""
+
+#: templates/admin-donation-detail.php templates/admin-donor-profile.php
+msgid "Status"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Next billing"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Dispute"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Dispute ID"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Reason"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "PayPal Resolution Center"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Open PayPal"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Receipt"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Not yet assigned"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Email status"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "not sent"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Sent at"
+msgstr ""
+
+#: templates/admin-donation-detail.php templates/shortcode.php
+msgid "Donor details"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Anonymous donation"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "donor requested anonymity. Details visible to admins only."
+msgstr ""
+
+#: templates/admin-donation-detail.php templates/shortcode.php
+msgid "Full name"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Not provided"
+msgstr ""
+
+#: templates/admin-donation-detail.php templates/admin-settings.php templates/shortcode.php
+msgid "Email"
+msgstr ""
+
+#: templates/admin-donation-detail.php templates/manual-donation-form.php templates/shortcode.php
+msgid "Phone"
+msgstr ""
+
+#: templates/admin-donation-detail.php templates/manual-donation-form.php templates/shortcode.php
+msgid "Company / Organization"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Address"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Message"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Tribute Donation"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "In Memory Of"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "In Honor Of"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Honoree Name"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Notification Sent To"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Webhook & events"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Last webhook event ID"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Last webhook received"
+msgstr ""
+
+#: templates/admin-donation-detail.php
+msgid "Status history"
+msgstr ""
+
+#: templates/admin-donor-profile.php
+msgid "Donor: %s"
+msgstr ""
+
+#: templates/admin-donor-profile.php
+msgid "Completed donations"
+msgstr ""
+
+#: templates/admin-donor-profile.php
+msgid "Total given"
+msgstr ""
+
+#: templates/admin-donor-profile.php
+msgid "First donation"
+msgstr ""
+
+#: templates/admin-donor-profile.php
+msgid "Latest donation"
+msgstr ""
+
+#: templates/admin-donor-profile.php
+msgid "Date"
+msgstr ""
+
+#: templates/admin-donor-profile.php
+msgid "View"
+msgstr ""
+
+#: templates/admin-donor-profile.php
+msgid "No donations found for this donor."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Setup wizard"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Tools"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Step %1$s of %2$s"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "%s%% complete"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Current step"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Upcoming"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Use sandbox for testing, then switch to live for real donations."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Choose Sandbox to test with PayPal test credentials. Switch to Production when you are ready to accept real donations."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Sandbox (Test Mode)"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Production (Live)"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Connection Status"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "PayPal Account Connected"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Connected Account: %s"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Disconnect PayPal Account"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Sandbox Client ID"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Show or hide value"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Sandbox Secret"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Sandbox Webhook ID"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Auto-generated after saving valid credentials."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Live Client ID"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Live Secret"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Live Webhook ID"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Webhook endpoint URL"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Copy"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Register this URL in your %1$sPayPal Developer Dashboard%2$s if auto-registration fails."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Test connection"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Test PayPal connection"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Verifies that the active credentials can authenticate with PayPal."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Set the default donor currency and optional quick-pick amounts."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Default donation currency"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Shown by default on the donation form."
+msgstr ""
+
+#: templates/admin-settings.php templates/shortcode.php
+msgid "Suggested donation amounts"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Comma-separated values, for example: 10,25,50,100."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Allowed currencies"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Comma-separated ISO currency codes, e.g. USD,EUR,GBP."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Allow custom amount"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Donors can type their own amount"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Minimum amount"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Maximum amount"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Recurring donations"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Enable monthly and annual recurring donations (PayPal Subscriptions API)"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Advanced Credit & Debit Card"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Enable direct credit/debit card fields on the donation form (PayPal Advanced Card Payments)"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Requires Advanced Credit and Debit Card Payments to be enabled in your PayPal account. Donors can enter card details directly without leaving your site."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Fee coverage"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Allow donors to cover the transaction fee"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Transaction fee %"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Default: 2.9. Used to calculate the donor fee-coverage amount."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Fee coverage pre-checked"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Check the \"Cover the transaction fee\" checkbox by default"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Returning donors who previously unchecked it will see it unchecked (their preference is remembered)."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Giving levels (JSON)"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "JSON array of giving levels. Example: <code>[{\"amount\":25,\"label\":\"Supporter\",\"description\":\"Feeds a family for one week\"},{\"amount\":50,\"label\":\"Champion\"}]</code>. Leave empty to use plain preset amounts."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Fraud protection thresholds. Higher values allow more flexibility; lower values add stricter checks."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "High-value flag threshold"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Donations at or above this amount are flagged for review in the admin list. Default: 5000. Set to 0 to disable."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Max donations per email / 24 h"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Block a donor email address after this many donations in 24 hours. Default: 5."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Logging"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Control diagnostic logging for troubleshooting."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Enable logging"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Enable"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Logs are written to %s with daily rotation."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Logging level"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Error"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Warn"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Info"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Debug"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Verify that your WordPress site can send emails and that receipt formatting looks correct."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Test receipt email"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Send test email"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Sends a sample receipt to the admin email address to verify delivery and formatting."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Year-End Summaries"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Send a consolidated giving summary to every donor who donated in a calendar year."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Send year-end summaries"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Send %s summaries now"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Sends one consolidated email per donor for %s. Already-sent summaries are skipped automatically."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Details shown to donors and used in receipts and policy links."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Charity name"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Registration / Tax ID"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Organization address"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Enter each line separately (e.g. street, city, postal code, country)."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Contact email"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Tax disclaimer"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Privacy URL"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Link to your privacy policy. Displayed in the donation form footer and receipt emails."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Refund URL"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Link to your refund policy. Displayed in the donation form footer and receipt emails."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Retention months"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Store raw webhook payload"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Keep raw payload for diagnostics and audit."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Cleanup data on uninstall"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Remove settings and donation records when plugin is uninstalled."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Connect analytics and email marketing services. Enable each integration to reveal its settings."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Google / GTM"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Mailchimp"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Constant Contact"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Zapier"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Slack"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Twilio SMS"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "ActiveCampaign"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Brevo"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Google Sheets"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Enable Google Analytics & Tag Manager integration"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "GA4 Measurement ID"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Your Google Analytics 4 Measurement ID. Leave blank to disable GA4 tracking."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "GTM Container ID"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Your Google Tag Manager Container ID. Leave blank to disable GTM."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Donation event tracking"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Push <code>donation_complete</code> events to the data layer"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Works with both GA4 and GTM. Passes amount, currency, and campaign as parameters."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Enable Mailchimp integration"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "API Key"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Found under <strong>Profile → Extras → API Keys</strong> in Mailchimp."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Audience (List) ID"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Found in <strong>Audience → Settings → Audience name and defaults</strong>."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Double opt-in"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Send a confirmation email before subscribing (recommended)"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Enable Constant Contact integration"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Found in your Constant Contact developer account under <strong>My Applications</strong>."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Contact List ID"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "The UUID of the contact list where donors will be added."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Enable Zapier integration"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Webhook URL"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "The <strong>Catch Hook</strong> URL from your Zapier Zap trigger. Found in the Zap editor when using \"Webhooks by Zapier\" as the trigger."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Secret Key"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Used to authenticate the sample data endpoint. Auto-generated on first use."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Sample Data URL"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Use this URL in Zapier's \"Webhooks by Zapier\" polling trigger to pull sample donation fields during Zap setup."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Save settings to generate the sample data URL."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Events to send"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Donation completed"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Donation refunded"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Donation disputed"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Choose which donation events trigger a Zapier webhook."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Send test event"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Sends a sample payload to verify your Zapier webhook is receiving data."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Enable Slack notifications"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Create an <strong>Incoming Webhook</strong> in your Slack workspace settings and paste the URL here."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Channel override"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Optional. Override the default channel set in your webhook. Leave blank to use the webhook default."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Events to notify"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Choose which donation events send a Slack notification."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Send test notification"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Sends a test message to verify your Slack webhook is working."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Enable Twilio SMS notifications"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Account SID"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Found on your <strong>Twilio Console</strong> dashboard."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Auth Token"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Found next to Account SID on your Twilio Console."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "From number"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Your Twilio phone number in E.164 format (e.g. +15551234567)."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Notify number"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "The phone number that receives donation SMS alerts in E.164 format."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Choose which donation events trigger an SMS notification."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Send test SMS"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Sends a test SMS to verify your Twilio credentials and phone numbers."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Enable ActiveCampaign integration"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "API URL"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Found in <strong>Settings → Developer</strong> in your ActiveCampaign account."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Found alongside the API URL in <strong>Settings → Developer</strong>."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "List ID"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "The numeric list ID. Found in <strong>Lists → Edit → List ID</strong> in the URL."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Verifies your API URL and key are valid."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Enable Brevo integration"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Found in <strong>Settings → SMTP & API → API Keys</strong> in your Brevo dashboard."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "The numeric list ID. Found in <strong>Contacts → Lists</strong> — click the list and check the URL."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Send a confirmation email before subscribing (recommended for GDPR compliance)"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Verifies your Brevo API key is valid."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Enable Google Sheets integration"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Spreadsheet ID"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "The long ID from your Google Sheet URL: docs.google.com/spreadsheets/d/{THIS_PART}/edit"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Sheet name"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "The tab name in your spreadsheet. Defaults to \"Sheet1\"."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Service account JSON"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Paste the full JSON key file contents from your Google Cloud service account. The service account email must be shared as an <strong>Editor</strong> on the spreadsheet."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Column order"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Add these as headers in row 1 of your sheet. Each donation appends a new row."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Verifies the service account can access your spreadsheet."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Fill in the options below to build your donation shortcode — no code needed. Copy it and paste it into any page or post."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Presentation"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Display mode"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Inline (default)"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Modal / popup"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Widget"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Full page"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "How the donation form appears on your page."
+msgstr ""
+
+#: templates/admin-settings.php templates/shortcode.php
+msgid "Donation type"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "One-time & recurring (default)"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "One-time only"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Monthly recurring only"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Annual recurring only"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Recurring options require the feature enabled in settings."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Form title"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "optional"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Leave blank for default. Set empty to hide."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Form description"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Button text"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Leave blank to use the default label."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Button color"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Pick a color"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Clear"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Hex color for the PayPal button. Leave blank for default."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Show donor details form"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Uncheck to hide name and email fields."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Campaign & Purpose"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Campaign name"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Groups and tracks donations for this campaign."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "A secondary label for the cause or fund."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Campaign start date"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Donations are blocked before this date."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Campaign end date"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Donations are blocked after this date."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Fundraising Goal"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Goal amount"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Target fundraising amount. Leave blank to hide the progress bar."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Current progress"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "None / start at zero"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Auto — pull from database"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Custom amount"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "\"Auto\" queries the database for this campaign's running total."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Custom current amount"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Progress bar label"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Label shown above the goal progress bar."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Auto-close when goal is reached"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Stops accepting donations once the goal amount is met."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "After Donation"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Thank-you page URL"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Where to send donors after a successful payment."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Redirect to thank-you page after payment"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Requires a thank-you URL above to be set."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Advanced Overrides"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "These override the global Donation Experience defaults for this specific form only. Leave blank to use site-wide settings."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Currency override"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "3-letter ISO code. Leave blank to use the site default."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Locale override"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Overrides the WordPress locale for this form only."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Preset amounts"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Comma-separated quick-pick amounts. Overrides the global default for this form."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Per-form minimum. Leave blank to use the global setting."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Per-form maximum. Leave blank to use the global setting."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Show fee coverage option"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Let donors opt-in to cover the transaction fee on this form."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Custom CSS class"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Extra class name added to the form wrapper for custom styling."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Generated shortcode"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Paste this shortcode into any page or post in the WordPress editor."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Previous step"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Save Settings"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Save & Continue →"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "This tab is a read-only tool — there are no settings to save here."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Your subscription has been cancelled successfully."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Your access link has expired. Please request a new one below."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "That subscription is not in a cancellable state."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Cancellation failed. Please contact us for assistance."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "You do not have permission to manage that subscription."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Invalid request. Please try again."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Subscription record not found. Please contact us."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "An error occurred. Please try again."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Your Recurring Donations"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Signed in as %s"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "You have no active recurring donations to manage."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Paused"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Active"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Recurring"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Campaign:"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Next billing:"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Receipt #:"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Cancel this recurring donation? This cannot be undone."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "To change your donation amount or frequency, please contact us directly."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Check your inbox"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "If we found an account for that email address, we sent you a secure access link. It will expire in 30 minutes."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Try a different email"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Manage Your Donations"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Enter your email address and we'll send you a secure link to manage your recurring donations."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Email address"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Send Access Link"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Record a cash, cheque, bank transfer, or other offline donation."
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Payment Details"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Donation Date"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Reference / Cheque Number"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Optional. Appears on the receipt."
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Donor Details"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Full Name"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Email Address"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Street Address"
+msgstr ""
+
+#: templates/manual-donation-form.php templates/shortcode.php
+msgid "City"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Postal Code"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Donor Message"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Anonymous donation — hide donor name in public views"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Options"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Send receipt email to donor"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Uses the same HTML receipt template as PayPal donations. Leave unticked if the donor should not receive an automated email."
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Save Donation"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Cancel"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Donation form"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Close donation form"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Donation goal"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "%1$s raised of %2$s."
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Choose amount"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Donation frequency"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Donation amount"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Share your information for a personalised receipt and follow-up."
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Add donor details"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Street address"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Postal code"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Message (optional)"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Donate anonymously"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Remember my details for next time"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Make this a tribute donation"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Tribute type"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "In honor of"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "In memory of"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Honoree name"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Notify family / friend (email, optional)"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "family@example.com"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Confirm and pay"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Review your details and complete payment with PayPal."
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Transaction fee (covered)"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Not included"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Cover the transaction fee"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Payment method"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "PayPal"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Credit / Debit Card"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Card number"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Expiry"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "CVV"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Name on card"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Donate with Card"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Privacy policy"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Refund policy"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Thank you for your donation!"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "A receipt has been emailed to you. We appreciate your generous support."
+msgstr ""
+
+#: includes/reporting/class-admin-list.php
+msgid "%d receipt resent successfully."
+msgid_plural "%d receipts resent successfully."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/reporting/class-admin-list.php
+msgid "%d failed (no email address on record)."
+msgid_plural "%d failed (no email address on record)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/admin-donor-profile.php
+msgid "%d donation total"
+msgid_plural "%d donations total"
+msgstr[0] ""
+msgstr[1] ""

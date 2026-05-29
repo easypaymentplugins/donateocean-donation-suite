@@ -1,0 +1,1967 @@
+# Donation Suite - Arabic Translation
+# Copyright (C) 2024 Easy Payment Plugins
+# This file is distributed under the same license as the Donation Suite package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DonateOcean Donation Suite 1.0.0\n"
+"Report-Msgid-Bugs-To: https://profiles.wordpress.org/easypayment/\n"
+"POT-Creation-Date: 2026-04-04 00:00+0000\n"
+"PO-Revision-Date: 2026-03-28 00:00+0000\n"
+"Last-Translator: easypayment <https://profiles.wordpress.org/easypayment/>\n"
+"Language-Team: Arabic\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5);\n"
+
+msgid "You do not have permission to view this page."
+msgstr "ليس لديك صلاحية لعرض هذه الصفحة."
+
+msgid "You do not have permission to resend receipts."
+msgstr "ليس لديك صلاحية لإعادة إرسال الإيصالات."
+
+msgid "Donation not found."
+msgstr "لم يتم العثور على التبرع."
+
+msgid "A donor email address is required."
+msgstr "يجب إدخال عنوان البريد الإلكتروني للمتبرع."
+
+msgid "Insufficient permissions."
+msgstr "صلاحيات غير كافية."
+
+msgid "Donation form"
+msgstr "نموذج التبرع"
+
+msgid "Close donation form"
+msgstr "إغلاق نموذج التبرع"
+
+msgid "Make a Donation"
+msgstr "قدِّم تبرعاً"
+
+msgid "Fast and secure checkout with PayPal."
+msgstr "دفع سريع وآمن عبر PayPal."
+
+msgid "Donation goal"
+msgstr "هدف التبرع"
+
+msgid "%1$s raised of %2$s."
+msgstr "تم جمع %1$s من أصل %2$s."
+
+msgid "Campaign progress"
+msgstr "تقدم الحملة"
+
+msgid "Choose amount"
+msgstr "اختر المبلغ"
+
+msgid "Donation frequency"
+msgstr "تكرار التبرع"
+
+msgid "One-time"
+msgstr "مرة واحدة"
+
+msgid "Monthly"
+msgstr "شهري"
+
+msgid "Annual"
+msgstr "سنوي"
+
+msgid "Suggested donation amounts"
+msgstr "المبالغ المقترحة للتبرع"
+
+msgid "Amount"
+msgstr "المبلغ"
+
+msgid "Donation amount"
+msgstr "مبلغ التبرع"
+
+msgid "Currency"
+msgstr "العملة"
+
+msgid "Campaign / Fund"
+msgstr "الحملة / الصندوق"
+
+msgid "Purpose"
+msgstr "الغرض"
+
+msgid "Donor details"
+msgstr "بيانات المتبرع"
+
+msgid "Share your information for a personalised receipt and follow-up."
+msgstr "شارك بياناتك للحصول على إيصال مخصص ومتابعة."
+
+msgid "Add donor details"
+msgstr "إضافة بيانات المتبرع"
+
+msgid "Full name"
+msgstr "الاسم الكامل"
+
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+msgid "Phone"
+msgstr "رقم الهاتف"
+
+msgid "Company / Organization"
+msgstr "الشركة / المنظمة"
+
+msgid "Street address"
+msgstr "العنوان"
+
+msgid "City"
+msgstr "المدينة"
+
+msgid "Postal code"
+msgstr "الرمز البريدي"
+
+msgid "Message (optional)"
+msgstr "رسالة (اختياري)"
+
+msgid "Donate anonymously"
+msgstr "التبرع بشكل مجهول"
+
+msgid "Make this a tribute donation"
+msgstr "اجعل هذا التبرع تكريماً"
+
+msgid "Tribute type"
+msgstr "نوع التكريم"
+
+msgid "In honor of"
+msgstr "تكريماً لـ"
+
+msgid "In memory of"
+msgstr "في ذكرى"
+
+msgid "Honoree name"
+msgstr "اسم المُكرَّم"
+
+msgid "Notify family / friend (email, optional)"
+msgstr "إبلاغ أحد أفراد الأسرة / الأصدقاء (البريد الإلكتروني، اختياري)"
+
+msgid "Confirm and pay"
+msgstr "تأكيد والدفع"
+
+msgid "Review your details and complete payment with PayPal."
+msgstr "راجع بياناتك وأكمل الدفع عبر PayPal."
+
+msgid "Transaction fee (covered)"
+msgstr "رسوم المعاملة (مُغطَّاة)"
+
+msgid "Total charged"
+msgstr "الإجمالي المحصَّل"
+
+msgid "Donation type"
+msgstr "نوع التبرع"
+
+msgid "One-time donation"
+msgstr "تبرع لمرة واحدة"
+
+msgid "Not included"
+msgstr "غير مشمول"
+
+msgid "Cover the transaction fee"
+msgstr "تغطية رسوم المعاملة"
+
+msgid "Thank you for your donation!"
+msgstr "شكراً لتبرعك!"
+
+msgid "A receipt has been emailed to you. We appreciate your generous support."
+msgstr "تم إرسال إيصال إلى بريدك الإلكتروني. نقدر دعمك الكريم."
+
+msgid "Privacy policy"
+msgstr "سياسة الخصوصية"
+
+msgid "Refund policy"
+msgstr "سياسة الاسترداد"
+
+msgid "This campaign opens on %s."
+msgstr "تبدأ هذه الحملة في %s."
+
+msgid "This campaign has ended. Thank you for your interest."
+msgstr "انتهت هذه الحملة. شكراً لاهتمامك."
+
+msgid "This campaign has reached its goal. Thank you for your incredible support!"
+msgstr "وصلت هذه الحملة إلى هدفها. شكراً لدعمك الرائع!"
+
+msgid "Donate with PayPal"
+msgstr "تبرع عبر PayPal"
+
+msgid "Donation Suite — Sandbox mode active."
+msgstr "Donation Suite — وضع الاختبار نشط."
+
+msgid "The donation form is using PayPal sandbox credentials. No real payments will be processed."
+msgstr "نموذج التبرع يستخدم بيانات اعتماد PayPal للاختبار. لن تتم معالجة أي مدفوعات حقيقية."
+
+msgid "Switch to live mode"
+msgstr "التبديل إلى الوضع المباشر"
+
+msgid "Donation Suite:"
+msgstr "Donation Suite:"
+
+msgid "The last PayPal webhook failed signature verification. Donations may not be completing."
+msgstr "فشل التحقق من توقيع آخر webhook من PayPal. قد لا تكتمل التبرعات."
+
+msgid "Check credentials"
+msgstr "التحقق من بيانات الاعتماد"
+
+msgid "No verified webhook event has been received in over 24 hours. PayPal may not be reaching your site."
+msgstr "لم يتم استلام أي حدث webhook موثق منذ أكثر من 24 ساعة. قد لا تتمكن PayPal من الوصول إلى موقعك."
+
+msgid "Check webhook settings"
+msgstr "التحقق من إعدادات webhook"
+
+msgid "Receipt #"
+msgstr "إيصال #"
+
+msgid "Type"
+msgstr "النوع"
+
+msgid "Donor"
+msgstr "المتبرع"
+
+msgid "Created"
+msgstr "تم الإنشاء"
+
+msgid "Approved"
+msgstr "تمت الموافقة"
+
+msgid "Captured"
+msgstr "تم الالتقاط"
+
+msgid "Pending"
+msgstr "معلق"
+
+msgid "Completed"
+msgstr "مكتمل"
+
+msgid "Refunded"
+msgstr "تم الاسترداد"
+
+msgid "Failed"
+msgstr "فشل"
+
+msgid "Disputed"
+msgstr "متنازع عليه"
+
+msgid "Subscription Active"
+msgstr "الاشتراك نشط"
+
+msgid "Subscription Paused"
+msgstr "الاشتراك متوقف مؤقتًا"
+
+msgid "Subscription Cancelled"
+msgstr "الاشتراك ملغى"
+
+msgid "Subscription Failed"
+msgstr "فشل الاشتراك"
+
+msgid "Resend receipts"
+msgstr "إعادة إرسال الإيصالات"
+
+msgid "%d receipt resent successfully."
+msgid_plural "%d receipts resent successfully."
+msgstr[0] "تمت إعادة إرسال %d إيصال بنجاح."
+msgstr[1] "تمت إعادة إرسال %d إيصالات بنجاح."
+
+msgid "%d failed (no email address on record)."
+msgid_plural "%d failed (no email address on record)."
+msgstr[0] "%d فشل (لا يوجد عنوان بريد إلكتروني مسجل)."
+msgstr[1] "%d فشل (لا يوجد عنوان بريد إلكتروني مسجل)."
+
+msgid "Add Manual Donation"
+msgstr "إضافة تبرع يدوي"
+
+msgid "Add Donation"
+msgstr "إضافة تبرع"
+
+msgid "You do not have permission to add donations."
+msgstr "ليس لديك إذن لإضافة التبرعات."
+
+msgid "A valid donation amount greater than zero is required."
+msgstr "مبلغ تبرع صالح أكبر من الصفر مطلوب."
+
+msgid "A valid donor email address is required."
+msgstr "عنوان بريد إلكتروني صالح للمتبرع مطلوب."
+
+msgid "An unknown error occurred."
+msgstr "حدث خطأ غير معروف."
+
+msgid "+ Add Manual Donation"
+msgstr "+ إضافة تبرع يدوي"
+
+
+msgid "Donation Suite"
+msgstr "لوحة التبرعات"
+
+msgid "Environment & API Credentials"
+msgstr "البيئة وبيانات اعتماد API"
+
+msgid "Donation Experience"
+msgstr "تجربة التبرع"
+
+msgid "Organization & Compliance"
+msgstr "المنظمة والامتثال"
+
+msgid "Advanced & Security"
+msgstr "متقدم والأمان"
+
+msgid "Sandbox"
+msgstr "بيئة الاختبار"
+
+msgid "Live"
+msgstr "مباشر"
+
+msgid "%s API credentials could not be validated. Please check Client ID and Secret."
+msgstr "تعذّر التحقق من بيانات اعتماد %s API. يرجى التحقق من معرّف العميل والسر."
+
+msgid "%s webhook registration failed. Please save again after confirming credentials."
+msgstr "فشل تسجيل Webhook لـ %s. يرجى الحفظ مرةً أخرى بعد التحقق من البيانات."
+
+msgid "Giving Levels JSON is not valid JSON. Please fix the format — levels were not saved."
+msgstr "صيغة JSON لمستويات التبرع غير صالحة. يرجى إصلاح التنسيق — لم يتم حفظ المستويات."
+
+msgid "Could not retrieve PayPal access token. Check your Client ID and Secret."
+msgstr "تعذّر استرداد رمز وصول PayPal. تحقق من معرّف العميل والسر."
+
+msgid "%s credentials are valid. Connection successful."
+msgstr "بيانات اعتماد %s صالحة. تم الاتصال بنجاح."
+
+msgid "No admin email address configured."
+msgstr "لم يتم تكوين عنوان بريد إلكتروني للمسؤول."
+
+msgid "Test email sent to %s."
+msgstr "تم إرسال البريد الإلكتروني التجريبي إلى %s."
+
+msgid "wp_mail() returned false. Check your server email configuration."
+msgstr "أعادت wp_mail()‎ قيمة false. تحقق من تكوين البريد الإلكتروني لخادمك."
+
+msgid "Forbidden"
+msgstr "ممنوع"
+
+msgid "Invalid donation ID."
+msgstr "معرّف التبرع غير صالح."
+
+msgid "Export CSV"
+msgstr "تصدير CSV"
+
+msgid "Once a year"
+msgstr "مرة في السنة"
+
+msgid "Donations"
+msgstr "التبرعات"
+
+msgid "Donation"
+msgstr "تبرع"
+
+msgid "View details"
+msgstr "عرض التفاصيل"
+
+msgid "Donor history"
+msgstr "سجل المتبرع"
+
+msgid "Print receipt"
+msgstr "طباعة الإيصال"
+
+msgid "Donation Suite Analytics"
+msgstr "تحليلات تبرعات PP"
+
+msgid "All-time donations"
+msgstr "إجمالي التبرعات"
+
+msgid "This month"
+msgstr "هذا الشهر"
+
+msgid "Top campaigns"
+msgstr "أبرز الحملات"
+
+msgid "12-month donation trend"
+msgstr "اتجاه التبرعات خلال 12 شهرًا"
+
+msgid "View all donations"
+msgstr "عرض جميع التبرعات"
+
+msgid "Donation Suite Webhook Health"
+msgstr "صحة Webhook تبرعات PP"
+
+msgid "No webhook events have been recorded yet."
+msgstr "لم يتم تسجيل أي أحداث Webhook بعد."
+
+msgid "Last event type:"
+msgstr "نوع الحدث الأخير:"
+
+msgid "Last event ID:"
+msgstr "معرّف الحدث الأخير:"
+
+msgid "Received at:"
+msgstr "تم الاستلام في:"
+
+msgid "Verification:"
+msgstr "التحقق:"
+
+msgid "Monthly recurring"
+msgstr "شهري متكرر"
+
+msgid "Annual recurring"
+msgstr "سنوي متكرر"
+
+msgid "Settings"
+msgstr "الإعدادات"
+
+msgid "Setup wizard"
+msgstr "معالج الإعداد"
+
+msgid "Tools"
+msgstr "الأدوات"
+
+msgid "Step %1$s of %2$s"
+msgstr "الخطوة %1$s من %2$s"
+
+msgid "%s%% complete"
+msgstr "%s%% مكتمل"
+
+msgid "Current step"
+msgstr "الخطوة الحالية"
+
+msgid "Upcoming"
+msgstr "قادمة"
+
+msgid "Use sandbox for testing, then switch to live for real donations."
+msgstr "استخدم بيئة الاختبار للتجربة، ثم انتقل إلى الوضع المباشر للتبرعات الحقيقية."
+
+msgid "Environment"
+msgstr "البيئة"
+
+msgid "Choose Sandbox to test with PayPal test credentials. Switch to Production when you are ready to accept real donations."
+msgstr "اختر بيئة الاختبار للتجربة باستخدام بيانات PayPal التجريبية. انتقل إلى الإنتاج عندما تكون مستعدًا لقبول التبرعات الحقيقية."
+
+msgid "Sandbox (Test Mode)"
+msgstr "بيئة الاختبار (وضع التجربة)"
+
+msgid "Production (Live)"
+msgstr "الإنتاج (مباشر)"
+
+msgid "Connection Status"
+msgstr "حالة الاتصال"
+
+msgid "PayPal Account Connected"
+msgstr "تم ربط حساب PayPal"
+
+msgid "Connected Account: %s"
+msgstr "الحساب المتصل: %s"
+
+msgid "Disconnect PayPal Account"
+msgstr "فصل حساب PayPal"
+
+msgid "Sandbox Client ID"
+msgstr "معرّف العميل للاختبار"
+
+msgid "Sandbox Secret"
+msgstr "المفتاح السري للاختبار"
+
+msgid "Sandbox Webhook ID"
+msgstr "معرّف Webhook للاختبار"
+
+msgid "Auto-generated after saving valid credentials."
+msgstr "يتم إنشاؤه تلقائيًا بعد حفظ بيانات اعتماد صالحة."
+
+msgid "Live Client ID"
+msgstr "معرّف العميل المباشر"
+
+msgid "Live Secret"
+msgstr "المفتاح السري المباشر"
+
+msgid "Live Webhook ID"
+msgstr "معرّف Webhook المباشر"
+
+msgid "Webhook endpoint URL"
+msgstr "رابط نقطة نهاية Webhook"
+
+msgid "Copy"
+msgstr "نسخ"
+
+msgid "Register this URL in your %sPayPal Developer Dashboard%s if auto-registration fails."
+msgstr "سجّل هذا الرابط في %sلوحة تحكم مطوري PayPal%s إذا فشل التسجيل التلقائي."
+
+msgid "Test connection"
+msgstr "اختبار الاتصال"
+
+msgid "Test PayPal connection"
+msgstr "اختبار اتصال PayPal"
+
+msgid "Verifies that the active credentials can authenticate with PayPal."
+msgstr "يتحقق من أن بيانات الاعتماد النشطة يمكنها المصادقة مع PayPal."
+
+msgid "Set the default donor currency and optional quick-pick amounts."
+msgstr "حدد عملة المتبرع الافتراضية والمبالغ السريعة الاختيارية."
+
+msgid "Default donation currency"
+msgstr "عملة التبرع الافتراضية"
+
+msgid "Shown by default on the donation form."
+msgstr "تظهر بشكل افتراضي في نموذج التبرع."
+
+msgid "Comma-separated values, for example: 10,25,50,100."
+msgstr "قيم مفصولة بفواصل، مثال: 10,25,50,100."
+
+msgid "Allowed currencies"
+msgstr "العملات المسموحة"
+
+msgid "Comma-separated ISO currency codes, e.g. USD,EUR,GBP."
+msgstr "رموز عملات ISO مفصولة بفواصل، مثل USD,EUR,GBP."
+
+msgid "Allow custom amount"
+msgstr "السماح بمبلغ مخصص"
+
+msgid "Donors can type their own amount"
+msgstr "يمكن للمتبرعين إدخال المبلغ الخاص بهم"
+
+msgid "Minimum amount"
+msgstr "الحد الأدنى للمبلغ"
+
+msgid "Maximum amount"
+msgstr "الحد الأقصى للمبلغ"
+
+msgid "Enable logging"
+msgstr "تفعيل السجلات"
+
+msgid "Enable"
+msgstr "تفعيل"
+
+msgid "Logs are written to %s with daily rotation."
+msgstr "تُكتب السجلات في %s مع تدوير يومي."
+
+msgid "Logging level"
+msgstr "مستوى التسجيل"
+
+msgid "Error"
+msgstr "خطأ"
+
+msgid "Warn"
+msgstr "تحذير"
+
+msgid "Info"
+msgstr "معلومات"
+
+msgid "Debug"
+msgstr "تصحيح"
+
+msgid "Recurring donations"
+msgstr "التبرعات المتكررة"
+
+msgid "Enable monthly and annual recurring donations (PayPal Subscriptions API)"
+msgstr "تفعيل التبرعات المتكررة الشهرية والسنوية (واجهة اشتراكات PayPal)"
+
+msgid "Fee coverage"
+msgstr "تغطية الرسوم"
+
+msgid "Allow donors to cover the transaction fee"
+msgstr "السماح للمتبرعين بتغطية رسوم المعاملة"
+
+msgid "Transaction fee %"
+msgstr "نسبة رسوم المعاملة %"
+
+msgid "Default: 2.9. Used to calculate the donor fee-coverage amount."
+msgstr "الافتراضي: 2.9. يُستخدم لحساب مبلغ تغطية الرسوم من المتبرع."
+
+msgid "Giving levels (JSON)"
+msgstr "مستويات العطاء (JSON)"
+
+msgid "Fraud protection thresholds. Higher values allow more flexibility; lower values add stricter checks."
+msgstr "حدود الحماية من الاحتيال. القيم الأعلى تتيح مرونة أكبر؛ القيم الأقل تضيف فحوصات أكثر صرامة."
+
+msgid "High-value flag threshold"
+msgstr "حد تنبيه القيمة العالية"
+
+msgid "Donations at or above this amount are flagged for review in the admin list. Default: 5000. Set to 0 to disable."
+msgstr "يتم تمييز التبرعات التي تساوي أو تتجاوز هذا المبلغ للمراجعة في قائمة الإدارة. الافتراضي: 5000. اضبط على 0 للتعطيل."
+
+msgid "Max donations per email / 24 h"
+msgstr "الحد الأقصى للتبرعات لكل بريد / 24 ساعة"
+
+msgid "Block a donor email address after this many donations in 24 hours. Default: 5."
+msgstr "حظر عنوان بريد المتبرع بعد هذا العدد من التبرعات في 24 ساعة. الافتراضي: 5."
+
+msgid "Verify that your WordPress site can send emails and that receipt formatting looks correct."
+msgstr "تحقق من أن موقع WordPress يمكنه إرسال رسائل البريد الإلكتروني وأن تنسيق الإيصالات صحيح."
+
+msgid "Test receipt email"
+msgstr "بريد إيصال تجريبي"
+
+msgid "Send test email"
+msgstr "إرسال بريد تجريبي"
+
+msgid "Sends a sample receipt to the admin email address to verify delivery and formatting."
+msgstr "يرسل إيصالًا نموذجيًا إلى عنوان البريد الإلكتروني للمسؤول للتحقق من التسليم والتنسيق."
+
+msgid "Year-End Summaries"
+msgstr "ملخصات نهاية العام"
+
+msgid "Send a consolidated giving summary to every donor who donated in a calendar year."
+msgstr "إرسال ملخص موحد للعطاء لكل متبرع تبرع خلال سنة تقويمية."
+
+msgid "Send year-end summaries"
+msgstr "إرسال ملخصات نهاية العام"
+
+msgid "Send %s summaries now"
+msgstr "إرسال ملخصات %s الآن"
+
+msgid "Sends one consolidated email per donor for %s. Already-sent summaries are skipped automatically."
+msgstr "يرسل بريدًا إلكترونيًا موحدًا واحدًا لكل متبرع لعام %s. يتم تخطي الملخصات المرسلة مسبقًا تلقائيًا."
+
+msgid "Details shown to donors and used in receipts and policy links."
+msgstr "التفاصيل المعروضة للمتبرعين والمستخدمة في الإيصالات وروابط السياسات."
+
+msgid "Charity name"
+msgstr "اسم المؤسسة الخيرية"
+
+msgid "Registration / Tax ID"
+msgstr "رقم التسجيل / المعرّف الضريبي"
+
+msgid "Organization address"
+msgstr "عنوان المؤسسة"
+
+msgid "Enter each line separately (e.g. street, city, postal code, country)."
+msgstr "أدخل كل سطر على حدة (مثل الشارع، المدينة، الرمز البريدي، البلد)."
+
+msgid "Contact email"
+msgstr "البريد الإلكتروني للتواصل"
+
+msgid "Tax disclaimer"
+msgstr "إخلاء المسؤولية الضريبية"
+
+msgid "Privacy URL"
+msgstr "رابط الخصوصية"
+
+msgid "Refund URL"
+msgstr "رابط الاسترداد"
+
+msgid "Retention months"
+msgstr "أشهر الاحتفاظ"
+
+msgid "Store raw webhook payload"
+msgstr "تخزين بيانات webhook الأولية"
+
+msgid "Keep raw payload for diagnostics and audit."
+msgstr "الاحتفاظ بالبيانات الأولية للتشخيص والتدقيق."
+
+msgid "Cleanup data on uninstall"
+msgstr "تنظيف البيانات عند إلغاء التثبيت"
+
+msgid "Remove settings and donation records when plugin is uninstalled."
+msgstr "إزالة الإعدادات وسجلات التبرعات عند إلغاء تثبيت الإضافة."
+
+msgid "Integrations"
+msgstr "التكاملات"
+
+msgid "Connect analytics and email marketing services. Enable each integration to reveal its settings."
+msgstr "ربط خدمات التحليلات والتسويق عبر البريد الإلكتروني. فعّل كل تكامل لإظهار إعداداته."
+
+msgid "Google / GTM"
+msgstr "Google / GTM"
+
+msgid "Mailchimp"
+msgstr "Mailchimp"
+
+msgid "Constant Contact"
+msgstr "Constant Contact"
+
+msgid "Enable Google Analytics & Tag Manager integration"
+msgstr "تفعيل تكامل Google Analytics و Tag Manager"
+
+msgid "GA4 Measurement ID"
+msgstr "معرّف قياس GA4"
+
+msgid "Your Google Analytics 4 Measurement ID. Leave blank to disable GA4 tracking."
+msgstr "معرّف قياس Google Analytics 4 الخاص بك. اتركه فارغًا لتعطيل تتبع GA4."
+
+msgid "GTM Container ID"
+msgstr "معرّف حاوية GTM"
+
+msgid "Your Google Tag Manager Container ID. Leave blank to disable GTM."
+msgstr "معرّف حاوية Google Tag Manager الخاص بك. اتركه فارغًا لتعطيل GTM."
+
+msgid "Donation event tracking"
+msgstr "تتبع أحداث التبرع"
+
+msgid "Works with both GA4 and GTM. Passes amount, currency, and campaign as parameters."
+msgstr "يعمل مع GA4 و GTM. يمرر المبلغ والعملة والحملة كمعاملات."
+
+msgid "Enable Mailchimp integration"
+msgstr "تفعيل تكامل Mailchimp"
+
+msgid "API Key"
+msgstr "مفتاح API"
+
+msgid "Audience (List) ID"
+msgstr "معرّف الجمهور (القائمة)"
+
+msgid "Double opt-in"
+msgstr "تأكيد مزدوج"
+
+msgid "Send a confirmation email before subscribing (recommended)"
+msgstr "إرسال بريد تأكيد قبل الاشتراك (مُوصى به)"
+
+msgid "Enable Constant Contact integration"
+msgstr "تفعيل تكامل Constant Contact"
+
+msgid "Contact List ID"
+msgstr "معرّف قائمة جهات الاتصال"
+
+msgid "The UUID of the contact list where donors will be added."
+msgstr "معرّف UUID لقائمة جهات الاتصال حيث سيتم إضافة المتبرعين."
+
+msgid "Shortcode Builder"
+msgstr "منشئ الرمز القصير"
+
+msgid "Presentation"
+msgstr "العرض"
+
+msgid "Display mode"
+msgstr "وضع العرض"
+
+msgid "Inline (default)"
+msgstr "مضمّن (افتراضي)"
+
+msgid "Modal / popup"
+msgstr "نافذة منبثقة"
+
+msgid "Widget"
+msgstr "أداة مصغرة"
+
+msgid "Full page"
+msgstr "صفحة كاملة"
+
+msgid "How the donation form appears on your page."
+msgstr "كيف يظهر نموذج التبرع في صفحتك."
+
+msgid "One-time & recurring (default)"
+msgstr "مرة واحدة ومتكرر (افتراضي)"
+
+msgid "One-time only"
+msgstr "مرة واحدة فقط"
+
+msgid "Monthly recurring only"
+msgstr "متكرر شهريًا فقط"
+
+msgid "Annual recurring only"
+msgstr "متكرر سنويًا فقط"
+
+msgid "Form title"
+msgstr "عنوان النموذج"
+
+msgid "optional"
+msgstr "اختياري"
+
+msgid "Leave blank for default. Set empty to hide."
+msgstr "اتركه فارغًا للافتراضي. اضبطه فارغًا للإخفاء."
+
+msgid "Form description"
+msgstr "وصف النموذج"
+
+msgid "Button text"
+msgstr "نص الزر"
+
+msgid "Button color"
+msgstr "لون الزر"
+
+msgid "Pick a color"
+msgstr "اختر لونًا"
+
+msgid "Clear"
+msgstr "مسح"
+
+msgid "Show donor details form"
+msgstr "إظهار نموذج بيانات المتبرع"
+
+msgid "Campaign & Purpose"
+msgstr "الحملة والغرض"
+
+msgid "Campaign name"
+msgstr "اسم الحملة"
+
+msgid "Campaign start date"
+msgstr "تاريخ بدء الحملة"
+
+msgid "Campaign end date"
+msgstr "تاريخ انتهاء الحملة"
+
+msgid "Fundraising Goal"
+msgstr "هدف جمع التبرعات"
+
+msgid "Goal amount"
+msgstr "المبلغ المستهدف"
+
+msgid "Current progress"
+msgstr "التقدم الحالي"
+
+msgid "None / start at zero"
+msgstr "لا شيء / البدء من الصفر"
+
+msgid "Auto — pull from database"
+msgstr "تلقائي — السحب من قاعدة البيانات"
+
+msgid "Custom amount"
+msgstr "مبلغ مخصص"
+
+msgid "Custom current amount"
+msgstr "المبلغ الحالي المخصص"
+
+msgid "Progress bar label"
+msgstr "تسمية شريط التقدم"
+
+msgid "Auto-close when goal is reached"
+msgstr "الإغلاق التلقائي عند بلوغ الهدف"
+
+msgid "After Donation"
+msgstr "بعد التبرع"
+
+msgid "Thank-you page URL"
+msgstr "رابط صفحة الشكر"
+
+msgid "Redirect to thank-you page after payment"
+msgstr "إعادة التوجيه إلى صفحة الشكر بعد الدفع"
+
+msgid "Advanced Overrides"
+msgstr "تجاوزات متقدمة"
+
+msgid "Currency override"
+msgstr "تجاوز العملة"
+
+msgid "Locale override"
+msgstr "تجاوز اللغة المحلية"
+
+msgid "Preset amounts"
+msgstr "المبالغ المحددة مسبقًا"
+
+msgid "Show fee coverage option"
+msgstr "إظهار خيار تغطية الرسوم"
+
+msgid "Custom CSS class"
+msgstr "فئة CSS مخصصة"
+
+msgid "Generated shortcode"
+msgstr "الرمز القصير المُنشأ"
+
+msgid "Previous step"
+msgstr "الخطوة السابقة"
+
+msgid "Save Settings"
+msgstr "حفظ الإعدادات"
+
+msgid "Save & Continue →"
+msgstr "حفظ ومتابعة →"
+
+msgid "This tab is a read-only tool — there are no settings to save here."
+msgstr "هذا التبويب أداة للقراءة فقط — لا توجد إعدادات لحفظها هنا."
+
+msgid "Donor: %s"
+msgstr "المتبرع: %s"
+
+msgid "%d donation total"
+msgid_plural "%d donations total"
+msgstr[0] "%d تبرع إجمالاً"
+msgstr[1] "%d تبرعات إجمالاً"
+
+msgid "← Back to donations"
+msgstr "← العودة إلى التبرعات"
+
+msgid "Completed donations"
+msgstr "التبرعات المكتملة"
+
+msgid "Total given"
+msgstr "إجمالي التبرعات"
+
+msgid "First donation"
+msgstr "أول تبرع"
+
+msgid "Latest donation"
+msgstr "آخر تبرع"
+
+msgid "Date"
+msgstr "التاريخ"
+
+msgid "Campaign"
+msgstr "الحملة"
+
+msgid "Status"
+msgstr "الحالة"
+
+msgid "View"
+msgstr "عرض"
+
+msgid "No donations found for this donor."
+msgstr "لم يتم العثور على تبرعات لهذا المتبرع."
+
+msgid "Download PDF"
+msgstr "تحميل PDF"
+
+msgid "View donor history"
+msgstr "عرض سجل المتبرع"
+
+msgid "Resend Receipt"
+msgstr "إعادة إرسال الإيصال"
+
+msgid "Issue a PayPal refund for this donation?"
+msgstr "إصدار استرداد PayPal لهذا التبرع؟"
+
+msgid "Full refund"
+msgstr "استرداد كامل"
+
+msgid "Refund amount (leave blank for full refund)"
+msgstr "مبلغ الاسترداد (اتركه فارغًا للاسترداد الكامل)"
+
+msgid "Issue Refund"
+msgstr "إصدار استرداد"
+
+msgid "Pause Subscription"
+msgstr "إيقاف الاشتراك مؤقتًا"
+
+msgid "Resume Subscription"
+msgstr "استئناف الاشتراك"
+
+msgid "Cancel this PayPal subscription? This cannot be undone."
+msgstr "إلغاء اشتراك PayPal هذا؟ لا يمكن التراجع عن ذلك."
+
+msgid "Cancel Subscription"
+msgstr "إلغاء الاشتراك"
+
+msgid "Payment"
+msgstr "الدفع"
+
+msgid "High-value donation — flagged for review"
+msgstr "تبرع عالي القيمة — مُعلّم للمراجعة"
+
+msgid "Amount (donation)"
+msgstr "المبلغ (التبرع)"
+
+msgid "Fee covered by donor"
+msgstr "الرسوم التي يتحملها المتبرع"
+
+msgid "Giving level"
+msgstr "مستوى العطاء"
+
+msgid "Payment Method"
+msgstr "طريقة الدفع"
+
+msgid "Cash"
+msgstr "نقدي"
+
+msgid "Cheque"
+msgstr "شيك"
+
+msgid "Bank Transfer"
+msgstr "تحويل بنكي"
+
+msgid "Other"
+msgstr "أخرى"
+
+msgid "Offline"
+msgstr "غير متصل"
+
+msgid "Reference / Cheque #"
+msgstr "المرجع / رقم الشيك"
+
+msgid "PayPal Order ID"
+msgstr "معرّف طلب PayPal"
+
+msgid "PayPal Capture ID"
+msgstr "معرّف تسجيل PayPal"
+
+msgid "Frequency"
+msgstr "التكرار"
+
+msgid "Donation date"
+msgstr "تاريخ التبرع"
+
+msgid "Subscription"
+msgstr "الاشتراك"
+
+msgid "Subscription ID"
+msgstr "معرّف الاشتراك"
+
+msgid "Cycle"
+msgstr "الدورة"
+
+msgid "Next billing"
+msgstr "الفوترة التالية"
+
+msgid "Dispute"
+msgstr "النزاع"
+
+msgid "Dispute ID"
+msgstr "معرّف النزاع"
+
+msgid "Reason"
+msgstr "السبب"
+
+msgid "PayPal Resolution Center"
+msgstr "مركز حل النزاعات في PayPal"
+
+msgid "Open PayPal"
+msgstr "فتح PayPal"
+
+msgid "Receipt"
+msgstr "الإيصال"
+
+msgid "Not yet assigned"
+msgstr "لم يُعيَّن بعد"
+
+msgid "Email status"
+msgstr "حالة البريد الإلكتروني"
+
+msgid "not sent"
+msgstr "لم يُرسل"
+
+msgid "Sent at"
+msgstr "أُرسل في"
+
+msgid "Anonymous donation"
+msgstr "تبرع مجهول"
+
+msgid "donor requested anonymity. Details visible to admins only."
+msgstr "طلب المتبرع عدم الكشف عن هويته. التفاصيل مرئية للمسؤولين فقط."
+
+msgid "Not provided"
+msgstr "غير متوفر"
+
+msgid "Address"
+msgstr "العنوان"
+
+msgid "Message"
+msgstr "الرسالة"
+
+msgid "Tribute Donation"
+msgstr "تبرع تكريمي"
+
+msgid "In Memory Of"
+msgstr "في ذكرى"
+
+msgid "In Honor Of"
+msgstr "تكريمًا لـ"
+
+msgid "Honoree Name"
+msgstr "اسم المُكرَّم"
+
+msgid "Notification Sent To"
+msgstr "أُرسل الإشعار إلى"
+
+msgid "Webhook & events"
+msgstr "Webhook والأحداث"
+
+msgid "Last webhook event ID"
+msgstr "معرّف آخر حدث webhook"
+
+msgid "Last webhook received"
+msgstr "آخر webhook مستلم"
+
+msgid "Status history"
+msgstr "سجل الحالة"
+
+msgid "Anonymous"
+msgstr "مجهول"
+
+msgid "From date"
+msgstr "من تاريخ"
+
+msgid "To date"
+msgstr "إلى تاريخ"
+
+msgid "Campaign…"
+msgstr "الحملة…"
+
+msgid "Filter by campaign name"
+msgstr "تصفية حسب اسم الحملة"
+
+msgid "Show or hide value"
+msgstr "إظهار أو إخفاء القيمة"
+
+# --- New entries (untranslated) ---
+
+#: donateocean-donation-suite.php
+msgid "Donation Suite requires PHP 7.4 or later."
+msgstr ""
+
+#: donateocean-donation-suite.php
+msgid "Donation Suite requires WordPress 6.0 or later."
+msgstr ""
+
+#: donateocean-donation-suite.php
+msgid "Donation History"
+msgstr ""
+
+#: includes/admin/class-campaign-tracking-page.php
+msgid "Campaign Tracking"
+msgstr ""
+
+#: includes/admin/class-campaign-tracking-page.php
+msgid "Campaign goals saved successfully."
+msgstr ""
+
+#: includes/admin/class-campaign-tracking-page.php
+msgid "You do not have permission to manage campaign goals."
+msgstr ""
+
+#: includes/admin/class-donation-detail-page.php
+msgid "Donation Details"
+msgstr ""
+
+#: includes/admin/class-donor-profile-page.php
+msgid "Donor Profile"
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Google Sheets credentials JSON is invalid. It must contain client_email and private_key fields."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Please provide both Client ID and Secret."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "%s PayPal account disconnected."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Please provide a Zapier webhook URL."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Connection failed: %s"
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Test event sent successfully. Check your Zapier dashboard."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Zapier returned HTTP %d. Check your webhook URL."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Please provide a Slack webhook URL."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Please fill in all Twilio fields before testing."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Test SMS sent successfully. Check your phone."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Please provide both API URL and API Key."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Please provide a Brevo API key."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Please provide both credentials JSON and Spreadsheet ID."
+msgstr ""
+
+#: includes/core/class-bootstrap.php templates/admin-settings.php
+msgid "Donation Suite — Setup required."
+msgstr ""
+
+#: includes/core/class-bootstrap.php templates/admin-settings.php
+msgid "Connect your PayPal account to start accepting donations."
+msgstr ""
+
+#: includes/core/class-bootstrap.php templates/admin-settings.php
+msgid "Connect PayPal"
+msgstr ""
+
+#: includes/core/class-bootstrap.php templates/admin-settings.php
+msgid "Donation Suite — Sandbox (Test Mode) active."
+msgstr ""
+
+#: includes/core/class-bootstrap.php templates/admin-settings.php
+msgid "Switch to Production"
+msgstr ""
+
+#: includes/frontend/class-donor-portal-shortcode.php
+msgid "Security check failed."
+msgstr ""
+
+#: includes/frontend/class-donor-portal-shortcode.php
+msgid "Access your donation portal — %s"
+msgstr ""
+
+#: includes/frontend/class-donor-portal-shortcode.php
+msgid "Click the button below to access your donation portal and manage your recurring donations. This link expires in 30 minutes."
+msgstr ""
+
+#: includes/frontend/class-donor-portal-shortcode.php
+msgid "Access My Donation Portal"
+msgstr ""
+
+#: includes/frontend/class-donor-portal-shortcode.php
+msgid "If you did not request this link, you can safely ignore this email."
+msgstr ""
+
+#: includes/integration/class-active-campaign.php
+msgid "ActiveCampaign connection successful."
+msgstr ""
+
+#: includes/integration/class-active-campaign.php
+msgid "Invalid API key. Please check your credentials."
+msgstr ""
+
+#: includes/integration/class-active-campaign.php
+msgid "ActiveCampaign returned HTTP %d."
+msgstr ""
+
+#: includes/integration/class-brevo.php
+msgid "Connected to Brevo account: %s"
+msgstr ""
+
+#: includes/integration/class-brevo.php
+msgid "Brevo connection successful."
+msgstr ""
+
+#: includes/integration/class-brevo.php
+msgid "Invalid API key. Please check your Brevo credentials."
+msgstr ""
+
+#: includes/integration/class-brevo.php
+msgid "Brevo returned HTTP %d."
+msgstr ""
+
+#: includes/integration/class-google-sheets.php
+msgid "Failed to authenticate. Check your service account JSON credentials."
+msgstr ""
+
+#: includes/integration/class-google-sheets.php
+msgid "Connected to spreadsheet: %s"
+msgstr ""
+
+#: includes/integration/class-google-sheets.php
+msgid "Connection successful."
+msgstr ""
+
+#: includes/integration/class-google-sheets.php
+msgid "Spreadsheet not found. Check the Spreadsheet ID and ensure the service account has access."
+msgstr ""
+
+#: includes/integration/class-google-sheets.php
+msgid "Access denied. Share the spreadsheet with the service account email address."
+msgstr ""
+
+#: includes/integration/class-google-sheets.php
+msgid "Google API returned HTTP %d."
+msgstr ""
+
+#: includes/integration/class-slack.php
+msgid "Test notification sent successfully. Check your Slack channel."
+msgstr ""
+
+#: includes/integration/class-slack.php
+msgid "Slack returned HTTP %d. Check your webhook URL."
+msgstr ""
+
+#: includes/integration/class-twilio.php
+msgid "SMS sent successfully."
+msgstr ""
+
+#: includes/integration/class-twilio.php
+msgid "Twilio returned HTTP %d."
+msgstr ""
+
+#: includes/receipt/class-pdf-receipt-controller.php
+msgid "You do not have permission to download receipts."
+msgstr ""
+
+#: includes/reporting/class-export-controller.php
+msgid "Could not open output stream for CSV export."
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Campaign Fund Tracking"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Track fundraising progress for each campaign across all shortcodes and donation forms."
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Total campaigns"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Total raised"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Total donations"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Unique donors"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "No campaign donations yet. Campaigns are created automatically when you use the campaign attribute in your shortcode:"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Raised"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Goal"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Progress"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Donors"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Date range"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "No goal"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Set a goal to track"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "View donations"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Save campaign goals"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Register this URL in your %1$sPayPal Developer Dashboard%2$s if auto-registration fails."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Advanced Credit & Debit Card"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Enable direct credit/debit card fields on the donation form (PayPal Advanced Card Payments)"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Requires Advanced Credit and Debit Card Payments to be enabled in your PayPal account. Donors can enter card details directly without leaving your site."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Fee coverage pre-checked"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Check the \"Cover the transaction fee\" checkbox by default"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Returning donors who previously unchecked it will see it unchecked (their preference is remembered)."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "JSON array of giving levels. Example: <code>[{\"amount\":25,\"label\":\"Supporter\",\"description\":\"Feeds a family for one week\"},{\"amount\":50,\"label\":\"Champion\"}]</code>. Leave empty to use plain preset amounts."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Logging"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Control diagnostic logging for troubleshooting."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Link to your privacy policy. Displayed in the donation form footer and receipt emails."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Link to your refund policy. Displayed in the donation form footer and receipt emails."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Zapier"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Slack"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Twilio SMS"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "ActiveCampaign"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Brevo"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Google Sheets"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Push <code>donation_complete</code> events to the data layer"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Found under <strong>Profile → Extras → API Keys</strong> in Mailchimp."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Found in <strong>Audience → Settings → Audience name and defaults</strong>."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Found in your Constant Contact developer account under <strong>My Applications</strong>."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Enable Zapier integration"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Webhook URL"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "The <strong>Catch Hook</strong> URL from your Zapier Zap trigger. Found in the Zap editor when using \"Webhooks by Zapier\" as the trigger."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Secret Key"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Used to authenticate the sample data endpoint. Auto-generated on first use."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Sample Data URL"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Use this URL in Zapier's \"Webhooks by Zapier\" polling trigger to pull sample donation fields during Zap setup."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Save settings to generate the sample data URL."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Events to send"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Donation completed"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Donation refunded"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Donation disputed"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Choose which donation events trigger a Zapier webhook."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Send test event"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Sends a sample payload to verify your Zapier webhook is receiving data."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Enable Slack notifications"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Create an <strong>Incoming Webhook</strong> in your Slack workspace settings and paste the URL here."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Channel override"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Optional. Override the default channel set in your webhook. Leave blank to use the webhook default."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Events to notify"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Choose which donation events send a Slack notification."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Send test notification"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Sends a test message to verify your Slack webhook is working."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Enable Twilio SMS notifications"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Account SID"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Found on your <strong>Twilio Console</strong> dashboard."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Auth Token"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Found next to Account SID on your Twilio Console."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "From number"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Your Twilio phone number in E.164 format (e.g. +15551234567)."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Notify number"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "The phone number that receives donation SMS alerts in E.164 format."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Choose which donation events trigger an SMS notification."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Send test SMS"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Sends a test SMS to verify your Twilio credentials and phone numbers."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Enable ActiveCampaign integration"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "API URL"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Found in <strong>Settings → Developer</strong> in your ActiveCampaign account."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Found alongside the API URL in <strong>Settings → Developer</strong>."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "List ID"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "The numeric list ID. Found in <strong>Lists → Edit → List ID</strong> in the URL."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Verifies your API URL and key are valid."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Enable Brevo integration"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Found in <strong>Settings → SMTP & API → API Keys</strong> in your Brevo dashboard."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "The numeric list ID. Found in <strong>Contacts → Lists</strong> — click the list and check the URL."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Send a confirmation email before subscribing (recommended for GDPR compliance)"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Verifies your Brevo API key is valid."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Enable Google Sheets integration"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Spreadsheet ID"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "The long ID from your Google Sheet URL: docs.google.com/spreadsheets/d/{THIS_PART}/edit"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Sheet name"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "The tab name in your spreadsheet. Defaults to \"Sheet1\"."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Service account JSON"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Paste the full JSON key file contents from your Google Cloud service account. The service account email must be shared as an <strong>Editor</strong> on the spreadsheet."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Column order"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Add these as headers in row 1 of your sheet. Each donation appends a new row."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Verifies the service account can access your spreadsheet."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Fill in the options below to build your donation shortcode — no code needed. Copy it and paste it into any page or post."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Recurring options require the feature enabled in settings."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Leave blank to use the default label."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Hex color for the PayPal button. Leave blank for default."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Uncheck to hide name and email fields."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Groups and tracks donations for this campaign."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "A secondary label for the cause or fund."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Donations are blocked before this date."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Donations are blocked after this date."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Target fundraising amount. Leave blank to hide the progress bar."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "\"Auto\" queries the database for this campaign's running total."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Label shown above the goal progress bar."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Stops accepting donations once the goal amount is met."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Where to send donors after a successful payment."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Requires a thank-you URL above to be set."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "These override the global Donation Experience defaults for this specific form only. Leave blank to use site-wide settings."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "3-letter ISO code. Leave blank to use the site default."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Overrides the WordPress locale for this form only."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Comma-separated quick-pick amounts. Overrides the global default for this form."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Per-form minimum. Leave blank to use the global setting."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Per-form maximum. Leave blank to use the global setting."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Let donors opt-in to cover the transaction fee on this form."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Extra class name added to the form wrapper for custom styling."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Paste this shortcode into any page or post in the WordPress editor."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Your subscription has been cancelled successfully."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Your access link has expired. Please request a new one below."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "That subscription is not in a cancellable state."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Cancellation failed. Please contact us for assistance."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "You do not have permission to manage that subscription."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Invalid request. Please try again."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Subscription record not found. Please contact us."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "An error occurred. Please try again."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Your Recurring Donations"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Signed in as %s"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "You have no active recurring donations to manage."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Paused"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Active"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Recurring"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Campaign:"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Next billing:"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Receipt #:"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Cancel this recurring donation? This cannot be undone."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "To change your donation amount or frequency, please contact us directly."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Check your inbox"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "If we found an account for that email address, we sent you a secure access link. It will expire in 30 minutes."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Try a different email"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Manage Your Donations"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Enter your email address and we'll send you a secure link to manage your recurring donations."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Email address"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Send Access Link"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Record a cash, cheque, bank transfer, or other offline donation."
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Payment Details"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Donation Date"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Reference / Cheque Number"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Optional. Appears on the receipt."
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Donor Details"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Full Name"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Email Address"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Street Address"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Postal Code"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Donor Message"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Anonymous donation — hide donor name in public views"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Options"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Send receipt email to donor"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Uses the same HTML receipt template as PayPal donations. Leave unticked if the donor should not receive an automated email."
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Save Donation"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Cancel"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Remember my details for next time"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "family@example.com"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Payment method"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "PayPal"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Credit / Debit Card"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Card number"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Expiry"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "CVV"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Name on card"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Donate with Card"
+msgstr ""

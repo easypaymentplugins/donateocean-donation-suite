@@ -1,0 +1,1940 @@
+# Donation Suite - Simplified Chinese Translation
+# Copyright (C) 2024 Easy Payment Plugins
+# This file is distributed under the same license as the Donation Suite package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: DonateOcean Donation Suite 1.0.0\n"
+"Report-Msgid-Bugs-To: https://profiles.wordpress.org/easypayment/\n"
+"POT-Creation-Date: 2026-04-04 00:00+0000\n"
+"PO-Revision-Date: 2026-03-28 00:00+0000\n"
+"Last-Translator: easypayment <https://profiles.wordpress.org/easypayment/>\n"
+"Language-Team: Chinese (Simplified)\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "You do not have permission to view this page."
+msgstr "您没有权限查看此页面。"
+
+msgid "You do not have permission to resend receipts."
+msgstr "您没有权限重新发送收据。"
+
+msgid "Donation not found."
+msgstr "未找到捐款记录。"
+
+msgid "A donor email address is required."
+msgstr "捐款者电子邮件地址为必填项。"
+
+msgid "Insufficient permissions."
+msgstr "权限不足。"
+
+msgid "Donation form"
+msgstr "捐款表单"
+
+msgid "Close donation form"
+msgstr "关闭捐款表单"
+
+msgid "Make a Donation"
+msgstr "进行捐款"
+
+msgid "Fast and secure checkout with PayPal."
+msgstr "通过 PayPal 快速安全付款。"
+
+msgid "Donation goal"
+msgstr "捐款目标"
+
+msgid "%1$s raised of %2$s."
+msgstr "已筹集 %1$s，目标为 %2$s。"
+
+msgid "Campaign progress"
+msgstr "活动进展"
+
+msgid "Choose amount"
+msgstr "选择金额"
+
+msgid "Donation frequency"
+msgstr "捐款频率"
+
+msgid "One-time"
+msgstr "一次性"
+
+msgid "Monthly"
+msgstr "每月"
+
+msgid "Annual"
+msgstr "每年"
+
+msgid "Suggested donation amounts"
+msgstr "建议捐款金额"
+
+msgid "Amount"
+msgstr "金额"
+
+msgid "Donation amount"
+msgstr "捐款金额"
+
+msgid "Currency"
+msgstr "货币"
+
+msgid "Campaign / Fund"
+msgstr "活动 / 基金"
+
+msgid "Purpose"
+msgstr "用途"
+
+msgid "Donor details"
+msgstr "捐款者信息"
+
+msgid "Share your information for a personalised receipt and follow-up."
+msgstr "请提供您的信息，以便获取个性化收据及后续跟进。"
+
+msgid "Add donor details"
+msgstr "添加捐款者信息"
+
+msgid "Full name"
+msgstr "姓名"
+
+msgid "Email"
+msgstr "电子邮件"
+
+msgid "Phone"
+msgstr "电话"
+
+msgid "Company / Organization"
+msgstr "公司 / 组织"
+
+msgid "Street address"
+msgstr "详细地址"
+
+msgid "City"
+msgstr "城市"
+
+msgid "Postal code"
+msgstr "邮政编码"
+
+msgid "Message (optional)"
+msgstr "留言（选填）"
+
+msgid "Donate anonymously"
+msgstr "匿名捐款"
+
+msgid "Make this a tribute donation"
+msgstr "设为纪念捐款"
+
+msgid "Tribute type"
+msgstr "纪念类型"
+
+msgid "In honor of"
+msgstr "致敬"
+
+msgid "In memory of"
+msgstr "纪念"
+
+msgid "Honoree name"
+msgstr "被纪念者姓名"
+
+msgid "Notify family / friend (email, optional)"
+msgstr "通知家人 / 朋友（电子邮件，选填）"
+
+msgid "Confirm and pay"
+msgstr "确认并付款"
+
+msgid "Review your details and complete payment with PayPal."
+msgstr "请检查您的信息并通过 PayPal 完成付款。"
+
+msgid "Transaction fee (covered)"
+msgstr "交易手续费（已覆盖）"
+
+msgid "Total charged"
+msgstr "实际收费"
+
+msgid "Donation type"
+msgstr "捐款类型"
+
+msgid "One-time donation"
+msgstr "一次性捐款"
+
+msgid "Not included"
+msgstr "未填写"
+
+msgid "Cover the transaction fee"
+msgstr "承担交易手续费"
+
+msgid "Thank you for your donation!"
+msgstr "感谢您的捐款！"
+
+msgid "A receipt has been emailed to you. We appreciate your generous support."
+msgstr "收据已发送至您的电子邮件。感谢您慷慨的支持。"
+
+msgid "Privacy policy"
+msgstr "隐私政策"
+
+msgid "Refund policy"
+msgstr "退款政策"
+
+msgid "This campaign opens on %s."
+msgstr "本活动将于 %s 开放。"
+
+msgid "This campaign has ended. Thank you for your interest."
+msgstr "本活动已结束。感谢您的关注。"
+
+msgid "This campaign has reached its goal. Thank you for your incredible support!"
+msgstr "本活动已达成目标。感谢您的鼎力支持！"
+
+msgid "Donate with PayPal"
+msgstr "通过 PayPal 捐款"
+
+msgid "Donation Suite — Sandbox mode active."
+msgstr "Donation Suite — 沙盒模式已启用。"
+
+msgid "The donation form is using PayPal sandbox credentials. No real payments will be processed."
+msgstr "捐款表单正在使用PayPal沙盒凭据。将不会处理真实付款。"
+
+msgid "Switch to live mode"
+msgstr "切换到实时模式"
+
+msgid "Donation Suite:"
+msgstr "Donation Suite："
+
+msgid "The last PayPal webhook failed signature verification. Donations may not be completing."
+msgstr "最近一次PayPal Webhook签名验证失败。捐款可能未能完成。"
+
+msgid "Check credentials"
+msgstr "检查凭据"
+
+msgid "No verified webhook event has been received in over 24 hours. PayPal may not be reaching your site."
+msgstr "超过24小时未收到经过验证的Webhook事件。PayPal可能无法访问您的网站。"
+
+msgid "Check webhook settings"
+msgstr "检查Webhook设置"
+
+msgid "Receipt #"
+msgstr "收据 #"
+
+msgid "Type"
+msgstr "类型"
+
+msgid "Donor"
+msgstr "捐款人"
+
+msgid "Created"
+msgstr "已创建"
+
+msgid "Approved"
+msgstr "已批准"
+
+msgid "Captured"
+msgstr "已捕获"
+
+msgid "Pending"
+msgstr "待处理"
+
+msgid "Completed"
+msgstr "已完成"
+
+msgid "Refunded"
+msgstr "已退款"
+
+msgid "Failed"
+msgstr "失败"
+
+msgid "Disputed"
+msgstr "争议中"
+
+msgid "Subscription Active"
+msgstr "订阅有效"
+
+msgid "Subscription Paused"
+msgstr "订阅已暂停"
+
+msgid "Subscription Cancelled"
+msgstr "订阅已取消"
+
+msgid "Subscription Failed"
+msgstr "订阅失败"
+
+msgid "Resend receipts"
+msgstr "重新发送收据"
+
+msgid "%d receipt resent successfully."
+msgid_plural "%d receipts resent successfully."
+msgstr[0] "已成功重新发送 %d 张收据。"
+msgstr[1] "已成功重新发送 %d 张收据。"
+
+msgid "%d failed (no email address on record)."
+msgid_plural "%d failed (no email address on record)."
+msgstr[0] "%d 次失败（无电子邮件地址记录）。"
+msgstr[1] "%d 次失败（无电子邮件地址记录）。"
+
+msgid "Add Manual Donation"
+msgstr "添加手动捐款"
+
+msgid "Add Donation"
+msgstr "添加捐款"
+
+msgid "You do not have permission to add donations."
+msgstr "您没有添加捐款的权限。"
+
+msgid "A valid donation amount greater than zero is required."
+msgstr "需要大于零的有效捐款金额。"
+
+msgid "A valid donor email address is required."
+msgstr "需要捐款人的有效电子邮件地址。"
+
+msgid "An unknown error occurred."
+msgstr "发生未知错误。"
+
+msgid "+ Add Manual Donation"
+msgstr "+ 添加手动捐款"
+
+
+msgid "Donation Suite"
+msgstr "Donation Suite"
+
+msgid "Environment & API Credentials"
+msgstr "环境与 API 凭证"
+
+msgid "Donation Experience"
+msgstr "捐款体验"
+
+msgid "Organization & Compliance"
+msgstr "组织与合规"
+
+msgid "Advanced & Security"
+msgstr "高级与安全"
+
+msgid "Sandbox"
+msgstr "沙盒"
+
+msgid "Live"
+msgstr "正式"
+
+msgid "%s API credentials could not be validated. Please check Client ID and Secret."
+msgstr "无法验证 %s API 凭证。请检查客户端 ID 和密钥。"
+
+msgid "%s webhook registration failed. Please save again after confirming credentials."
+msgstr "%s webhook 注册失败。请确认凭证后重新保存。"
+
+msgid "Giving Levels JSON is not valid JSON. Please fix the format — levels were not saved."
+msgstr "捐款层级 JSON 格式无效。请修正格式——层级未保存。"
+
+msgid "Could not retrieve PayPal access token. Check your Client ID and Secret."
+msgstr "无法获取 PayPal 访问令牌。请检查您的客户端 ID 和密钥。"
+
+msgid "%s credentials are valid. Connection successful."
+msgstr "%s 凭证有效。连接成功。"
+
+msgid "No admin email address configured."
+msgstr "未配置管理员电子邮件地址。"
+
+msgid "Test email sent to %s."
+msgstr "测试邮件已发送至 %s。"
+
+msgid "wp_mail() returned false. Check your server email configuration."
+msgstr "wp_mail() 返回 false。请检查您的服务器邮件配置。"
+
+msgid "Forbidden"
+msgstr "禁止访问"
+
+msgid "Invalid donation ID."
+msgstr "无效的捐款 ID。"
+
+msgid "Export CSV"
+msgstr "导出 CSV"
+
+msgid "Once a year"
+msgstr "每年一次"
+
+msgid "Donations"
+msgstr "捐款记录"
+
+msgid "Donation"
+msgstr "捐款"
+
+msgid "View details"
+msgstr "查看详情"
+
+msgid "Donor history"
+msgstr "捐款人历史"
+
+msgid "Print receipt"
+msgstr "打印收据"
+
+msgid "Donation Suite Analytics"
+msgstr "Donation Suite分析"
+
+msgid "All-time donations"
+msgstr "历史捐款总计"
+
+msgid "This month"
+msgstr "本月"
+
+msgid "Top campaigns"
+msgstr "热门活动"
+
+msgid "12-month donation trend"
+msgstr "12 个月捐款趋势"
+
+msgid "View all donations"
+msgstr "查看所有捐款"
+
+msgid "Donation Suite Webhook Health"
+msgstr "Donation Suite Webhook 健康状态"
+
+msgid "No webhook events have been recorded yet."
+msgstr "尚未记录任何 webhook 事件。"
+
+msgid "Last event type:"
+msgstr "最近事件类型："
+
+msgid "Last event ID:"
+msgstr "最近事件 ID："
+
+msgid "Received at:"
+msgstr "接收时间："
+
+msgid "Verification:"
+msgstr "验证状态："
+
+msgid "Monthly recurring"
+msgstr "每月定期"
+
+msgid "Annual recurring"
+msgstr "每年定期"
+
+msgid "Settings"
+msgstr "设置"
+
+msgid "Setup wizard"
+msgstr "设置向导"
+
+msgid "Tools"
+msgstr "工具"
+
+msgid "Step %1$s of %2$s"
+msgstr "第 %1$s 步，共 %2$s 步"
+
+msgid "%s%% complete"
+msgstr "已完成 %s%%"
+
+msgid "Current step"
+msgstr "当前步骤"
+
+msgid "Upcoming"
+msgstr "即将进行"
+
+msgid "Use sandbox for testing, then switch to live for real donations."
+msgstr "使用沙盒进行测试，然后切换到正式环境以接受真实捐款。"
+
+msgid "Environment"
+msgstr "环境"
+
+msgid "Choose Sandbox to test with PayPal test credentials. Switch to Production when you are ready to accept real donations."
+msgstr "选择沙盒以使用 PayPal 测试凭证进行测试。准备好接受真实捐款时切换到正式环境。"
+
+msgid "Sandbox (Test Mode)"
+msgstr "沙盒（测试模式）"
+
+msgid "Production (Live)"
+msgstr "正式环境（上线）"
+
+msgid "Connection Status"
+msgstr "连接状态"
+
+msgid "PayPal Account Connected"
+msgstr "PayPal 账户已连接"
+
+msgid "Connected Account: %s"
+msgstr "已连接账户：%s"
+
+msgid "Disconnect PayPal Account"
+msgstr "断开 PayPal 账户"
+
+msgid "Sandbox Client ID"
+msgstr "沙盒客户端 ID"
+
+msgid "Sandbox Secret"
+msgstr "沙盒密钥"
+
+msgid "Sandbox Webhook ID"
+msgstr "沙盒 Webhook ID"
+
+msgid "Auto-generated after saving valid credentials."
+msgstr "保存有效凭证后自动生成。"
+
+msgid "Live Client ID"
+msgstr "正式客户端 ID"
+
+msgid "Live Secret"
+msgstr "正式密钥"
+
+msgid "Live Webhook ID"
+msgstr "正式 Webhook ID"
+
+msgid "Webhook endpoint URL"
+msgstr "Webhook 端点 URL"
+
+msgid "Copy"
+msgstr "复制"
+
+msgid "Register this URL in your %sPayPal Developer Dashboard%s if auto-registration fails."
+msgstr "如果自动注册失败，请在您的 %sPayPal 开发者面板%s 中注册此 URL。"
+
+msgid "Test connection"
+msgstr "测试连接"
+
+msgid "Test PayPal connection"
+msgstr "测试 PayPal 连接"
+
+msgid "Verifies that the active credentials can authenticate with PayPal."
+msgstr "验证当前凭证是否可以通过 PayPal 认证。"
+
+msgid "Set the default donor currency and optional quick-pick amounts."
+msgstr "设置默认捐款货币和可选的快速选择金额。"
+
+msgid "Default donation currency"
+msgstr "默认捐款货币"
+
+msgid "Shown by default on the donation form."
+msgstr "默认显示在捐款表单上。"
+
+msgid "Comma-separated values, for example: 10,25,50,100."
+msgstr "逗号分隔的值，例如：10,25,50,100。"
+
+msgid "Allowed currencies"
+msgstr "允许的货币"
+
+msgid "Comma-separated ISO currency codes, e.g. USD,EUR,GBP."
+msgstr "逗号分隔的 ISO 货币代码，例如 USD,EUR,GBP。"
+
+msgid "Allow custom amount"
+msgstr "允许自定义金额"
+
+msgid "Donors can type their own amount"
+msgstr "捐款者可以输入自己的金额"
+
+msgid "Minimum amount"
+msgstr "最低金额"
+
+msgid "Maximum amount"
+msgstr "最高金额"
+
+msgid "Enable logging"
+msgstr "启用日志"
+
+msgid "Enable"
+msgstr "启用"
+
+msgid "Logs are written to %s with daily rotation."
+msgstr "日志每日轮转写入 %s。"
+
+msgid "Logging level"
+msgstr "日志级别"
+
+msgid "Error"
+msgstr "错误"
+
+msgid "Warn"
+msgstr "警告"
+
+msgid "Info"
+msgstr "信息"
+
+msgid "Debug"
+msgstr "调试"
+
+msgid "Recurring donations"
+msgstr "定期捐款"
+
+msgid "Enable monthly and annual recurring donations (PayPal Subscriptions API)"
+msgstr "启用每月和每年的定期捐款（PayPal Subscriptions API）"
+
+msgid "Fee coverage"
+msgstr "手续费承担"
+
+msgid "Allow donors to cover the transaction fee"
+msgstr "允许捐款者承担交易手续费"
+
+msgid "Transaction fee %"
+msgstr "交易手续费 %"
+
+msgid "Default: 2.9. Used to calculate the donor fee-coverage amount."
+msgstr "默认：2.9。用于计算捐款者承担的手续费金额。"
+
+msgid "Giving levels (JSON)"
+msgstr "捐款层级 (JSON)"
+
+msgid "Fraud protection thresholds. Higher values allow more flexibility; lower values add stricter checks."
+msgstr "反欺诈保护阈值。较高的值提供更多灵活性；较低的值增加更严格的检查。"
+
+msgid "High-value flag threshold"
+msgstr "高额标记阈值"
+
+msgid "Donations at or above this amount are flagged for review in the admin list. Default: 5000. Set to 0 to disable."
+msgstr "达到或超过此金额的捐款将在管理列表中标记待审核。默认：5000。设为 0 以禁用。"
+
+msgid "Max donations per email / 24 h"
+msgstr "每个邮箱的最大捐款次数 / 24小时"
+
+msgid "Block a donor email address after this many donations in 24 hours. Default: 5."
+msgstr "在 24 小时内超过此捐款次数后阻止该捐款者邮箱。默认：5。"
+
+msgid "Verify that your WordPress site can send emails and that receipt formatting looks correct."
+msgstr "验证您的 WordPress 网站能否发送邮件以及收据格式是否正确。"
+
+msgid "Test receipt email"
+msgstr "测试收据邮件"
+
+msgid "Send test email"
+msgstr "发送测试邮件"
+
+msgid "Sends a sample receipt to the admin email address to verify delivery and formatting."
+msgstr "向管理员邮箱发送示例收据以验证投递和格式。"
+
+msgid "Year-End Summaries"
+msgstr "年度汇总"
+
+msgid "Send a consolidated giving summary to every donor who donated in a calendar year."
+msgstr "向在该日历年度内捐款的每位捐款者发送合并捐款汇总。"
+
+msgid "Send year-end summaries"
+msgstr "发送年度汇总"
+
+msgid "Send %s summaries now"
+msgstr "立即发送 %s 汇总"
+
+msgid "Sends one consolidated email per donor for %s. Already-sent summaries are skipped automatically."
+msgstr "为 %s 的每位捐款者发送一封合并邮件。已发送的汇总将自动跳过。"
+
+msgid "Details shown to donors and used in receipts and policy links."
+msgstr "向捐款者展示的信息，用于收据和政策链接。"
+
+msgid "Charity name"
+msgstr "慈善机构名称"
+
+msgid "Registration / Tax ID"
+msgstr "注册号 / 税号"
+
+msgid "Organization address"
+msgstr "机构地址"
+
+msgid "Enter each line separately (e.g. street, city, postal code, country)."
+msgstr "请逐行输入（例如：街道、城市、邮政编码、国家）。"
+
+msgid "Contact email"
+msgstr "联系邮箱"
+
+msgid "Tax disclaimer"
+msgstr "税务免责声明"
+
+msgid "Privacy URL"
+msgstr "隐私政策 URL"
+
+msgid "Refund URL"
+msgstr "退款政策 URL"
+
+msgid "Retention months"
+msgstr "数据保留月数"
+
+msgid "Store raw webhook payload"
+msgstr "存储 Webhook 原始数据"
+
+msgid "Keep raw payload for diagnostics and audit."
+msgstr "保留原始数据用于诊断和审计。"
+
+msgid "Cleanup data on uninstall"
+msgstr "卸载时清除数据"
+
+msgid "Remove settings and donation records when plugin is uninstalled."
+msgstr "卸载插件时删除设置和捐款记录。"
+
+msgid "Integrations"
+msgstr "集成"
+
+msgid "Connect analytics and email marketing services. Enable each integration to reveal its settings."
+msgstr "连接分析和邮件营销服务。启用每个集成以显示其设置。"
+
+msgid "Google / GTM"
+msgstr "Google / GTM"
+
+msgid "Mailchimp"
+msgstr "Mailchimp"
+
+msgid "Constant Contact"
+msgstr "Constant Contact"
+
+msgid "Enable Google Analytics & Tag Manager integration"
+msgstr "启用 Google Analytics 和 Tag Manager 集成"
+
+msgid "GA4 Measurement ID"
+msgstr "GA4 衡量 ID"
+
+msgid "Your Google Analytics 4 Measurement ID. Leave blank to disable GA4 tracking."
+msgstr "您的 Google Analytics 4 衡量 ID。留空以禁用 GA4 跟踪。"
+
+msgid "GTM Container ID"
+msgstr "GTM 容器 ID"
+
+msgid "Your Google Tag Manager Container ID. Leave blank to disable GTM."
+msgstr "您的 Google Tag Manager 容器 ID。留空以禁用 GTM。"
+
+msgid "Donation event tracking"
+msgstr "捐款事件跟踪"
+
+msgid "Push <code>donation_complete</code> events to the data layer"
+msgstr "将 <code>donation_complete</code> 事件推送到数据层"
+
+msgid "Works with both GA4 and GTM. Passes amount, currency, and campaign as parameters."
+msgstr "兼容 GA4 和 GTM。将金额、货币和活动作为参数传递。"
+
+msgid "Enable Mailchimp integration"
+msgstr "启用 Mailchimp 集成"
+
+msgid "API Key"
+msgstr "API 密钥"
+
+msgid "Found under <strong>Profile → Extras → API Keys</strong> in Mailchimp."
+msgstr "在 Mailchimp 的 <strong>个人资料 → 附加功能 → API 密钥</strong> 中查找。"
+
+msgid "Audience (List) ID"
+msgstr "受众（列表）ID"
+
+msgid "Found in <strong>Audience → Settings → Audience name and defaults</strong>."
+msgstr "在 <strong>受众 → 设置 → 受众名称和默认值</strong> 中查找。"
+
+msgid "Double opt-in"
+msgstr "双重确认"
+
+msgid "Send a confirmation email before subscribing (recommended)"
+msgstr "订阅前发送确认邮件（推荐）"
+
+msgid "Enable Constant Contact integration"
+msgstr "启用 Constant Contact 集成"
+
+msgid "Contact List ID"
+msgstr "联系人列表 ID"
+
+msgid "The UUID of the contact list where donors will be added."
+msgstr "捐款者将被添加到的联系人列表的 UUID。"
+
+msgid "Shortcode Builder"
+msgstr "简码生成器"
+
+msgid "Fill in the options below to build your donation shortcode — no code needed. Copy it and paste it into any page or post."
+msgstr "填写以下选项来生成您的捐款简码——无需编写代码。复制后粘贴到任意页面或文章中。"
+
+msgid "Presentation"
+msgstr "展示方式"
+
+msgid "Display mode"
+msgstr "显示模式"
+
+msgid "Inline (default)"
+msgstr "内联（默认）"
+
+msgid "Modal / popup"
+msgstr "模态框 / 弹窗"
+
+msgid "Widget"
+msgstr "小工具"
+
+msgid "Full page"
+msgstr "整页"
+
+msgid "How the donation form appears on your page."
+msgstr "捐款表单在页面上的显示方式。"
+
+msgid "One-time & recurring (default)"
+msgstr "一次性和定期（默认）"
+
+msgid "One-time only"
+msgstr "仅一次性"
+
+msgid "Monthly recurring only"
+msgstr "仅每月定期"
+
+msgid "Annual recurring only"
+msgstr "仅每年定期"
+
+msgid "Recurring options require the feature enabled in settings."
+msgstr "定期选项需要在设置中启用此功能。"
+
+msgid "Form title"
+msgstr "表单标题"
+
+msgid "optional"
+msgstr "可选"
+
+msgid "Leave blank for default. Set empty to hide."
+msgstr "留空使用默认值。设为空以隐藏。"
+
+msgid "Form description"
+msgstr "表单描述"
+
+msgid "Button text"
+msgstr "按钮文本"
+
+msgid "Leave blank to use the default label."
+msgstr "留空以使用默认标签。"
+
+msgid "Button color"
+msgstr "按钮颜色"
+
+msgid "Pick a color"
+msgstr "选择颜色"
+
+msgid "Clear"
+msgstr "清除"
+
+msgid "Hex color for the PayPal button. Leave blank for default."
+msgstr "PayPal 按钮的十六进制颜色。留空使用默认值。"
+
+msgid "Show donor details form"
+msgstr "显示捐款者信息表单"
+
+msgid "Uncheck to hide name and email fields."
+msgstr "取消勾选以隐藏姓名和邮箱字段。"
+
+msgid "Campaign & Purpose"
+msgstr "活动与用途"
+
+msgid "Campaign name"
+msgstr "活动名称"
+
+msgid "Groups and tracks donations for this campaign."
+msgstr "对此活动的捐款进行分组和跟踪。"
+
+msgid "A secondary label for the cause or fund."
+msgstr "用途或基金的辅助标签。"
+
+msgid "Campaign start date"
+msgstr "活动开始日期"
+
+msgid "Donations are blocked before this date."
+msgstr "在此日期之前不接受捐款。"
+
+msgid "Campaign end date"
+msgstr "活动结束日期"
+
+msgid "Donations are blocked after this date."
+msgstr "在此日期之后不接受捐款。"
+
+msgid "Fundraising Goal"
+msgstr "筹款目标"
+
+msgid "Goal amount"
+msgstr "目标金额"
+
+msgid "Target fundraising amount. Leave blank to hide the progress bar."
+msgstr "目标筹款金额。留空以隐藏进度条。"
+
+msgid "Current progress"
+msgstr "当前进度"
+
+msgid "None / start at zero"
+msgstr "无 / 从零开始"
+
+msgid "Auto — pull from database"
+msgstr "自动 — 从数据库获取"
+
+msgid "Custom amount"
+msgstr "自定义金额"
+
+msgid "\"Auto\" queries the database for this campaign's running total."
+msgstr ""自动"从数据库查询该活动的累计总额。"
+
+msgid "Custom current amount"
+msgstr "自定义当前金额"
+
+msgid "Progress bar label"
+msgstr "进度条标签"
+
+msgid "Label shown above the goal progress bar."
+msgstr "显示在目标进度条上方的标签。"
+
+msgid "Auto-close when goal is reached"
+msgstr "达到目标时自动关闭"
+
+msgid "Stops accepting donations once the goal amount is met."
+msgstr "达到目标金额后停止接受捐款。"
+
+msgid "After Donation"
+msgstr "捐款之后"
+
+msgid "Thank-you page URL"
+msgstr "感谢页面 URL"
+
+msgid "Where to send donors after a successful payment."
+msgstr "成功付款后将捐款者重定向到的页面。"
+
+msgid "Redirect to thank-you page after payment"
+msgstr "付款后重定向到感谢页面"
+
+msgid "Requires a thank-you URL above to be set."
+msgstr "需要设置上方的感谢页面 URL。"
+
+msgid "Advanced Overrides"
+msgstr "高级覆盖"
+
+msgid "These override the global Donation Experience defaults for this specific form only. Leave blank to use site-wide settings."
+msgstr "以下设置仅覆盖此特定表单的全局捐款体验默认值。留空以使用全站设置。"
+
+msgid "Currency override"
+msgstr "货币覆盖"
+
+msgid "3-letter ISO code. Leave blank to use the site default."
+msgstr "3 位 ISO 代码。留空以使用站点默认值。"
+
+msgid "Locale override"
+msgstr "区域设置覆盖"
+
+msgid "Overrides the WordPress locale for this form only."
+msgstr "仅覆盖此表单的 WordPress 区域设置。"
+
+msgid "Preset amounts"
+msgstr "预设金额"
+
+msgid "Comma-separated quick-pick amounts. Overrides the global default for this form."
+msgstr "逗号分隔的快速选择金额。覆盖此表单的全局默认值。"
+
+msgid "Per-form minimum. Leave blank to use the global setting."
+msgstr "单表单最低金额。留空以使用全局设置。"
+
+msgid "Per-form maximum. Leave blank to use the global setting."
+msgstr "单表单最高金额。留空以使用全局设置。"
+
+msgid "Show fee coverage option"
+msgstr "显示手续费承担选项"
+
+msgid "Let donors opt-in to cover the transaction fee on this form."
+msgstr "允许捐款者在此表单中选择承担交易手续费。"
+
+msgid "Custom CSS class"
+msgstr "自定义 CSS 类"
+
+msgid "Extra class name added to the form wrapper for custom styling."
+msgstr "添加到表单包裹元素的额外类名，用于自定义样式。"
+
+msgid "Generated shortcode"
+msgstr "生成的简码"
+
+msgid "Paste this shortcode into any page or post in the WordPress editor."
+msgstr "将此简码粘贴到 WordPress 编辑器中的任意页面或文章中。"
+
+msgid "Previous step"
+msgstr "上一步"
+
+msgid "Save Settings"
+msgstr "保存设置"
+
+msgid "Save & Continue →"
+msgstr "保存并继续 →"
+
+msgid "This tab is a read-only tool — there are no settings to save here."
+msgstr "此选项卡为只读工具——此处没有可保存的设置。"
+
+msgid "Donor: %s"
+msgstr "捐款人：%s"
+
+msgid "%d donation total"
+msgid_plural "%d donations total"
+msgstr[0] "共 %d 笔捐款"
+
+msgid "← Back to donations"
+msgstr "← 返回捐款列表"
+
+msgid "Completed donations"
+msgstr "已完成的捐款"
+
+msgid "Total given"
+msgstr "捐款总额"
+
+msgid "First donation"
+msgstr "首次捐款"
+
+msgid "Latest donation"
+msgstr "最近捐款"
+
+msgid "Date"
+msgstr "日期"
+
+msgid "Campaign"
+msgstr "活动"
+
+msgid "Status"
+msgstr "状态"
+
+msgid "View"
+msgstr "查看"
+
+msgid "No donations found for this donor."
+msgstr "未找到该捐款人的捐款记录。"
+
+msgid "Download PDF"
+msgstr "下载 PDF"
+
+msgid "View donor history"
+msgstr "查看捐款人历史"
+
+msgid "Resend Receipt"
+msgstr "重新发送收据"
+
+msgid "Issue a PayPal refund for this donation?"
+msgstr "是否对此捐款发起 PayPal 退款？"
+
+msgid "Full refund"
+msgstr "全额退款"
+
+msgid "Refund amount (leave blank for full refund)"
+msgstr "退款金额（留空为全额退款）"
+
+msgid "Issue Refund"
+msgstr "发起退款"
+
+msgid "Pause Subscription"
+msgstr "暂停订阅"
+
+msgid "Resume Subscription"
+msgstr "恢复订阅"
+
+msgid "Cancel this PayPal subscription? This cannot be undone."
+msgstr "取消此 PayPal 订阅？此操作无法撤销。"
+
+msgid "Cancel Subscription"
+msgstr "取消订阅"
+
+msgid "Payment"
+msgstr "付款"
+
+msgid "High-value donation — flagged for review"
+msgstr "高额捐款——已标记待审核"
+
+msgid "Amount (donation)"
+msgstr "金额（捐款）"
+
+msgid "Fee covered by donor"
+msgstr "捐款者承担的手续费"
+
+msgid "Giving level"
+msgstr "捐款层级"
+
+msgid "Payment Method"
+msgstr "付款方式"
+
+msgid "Cash"
+msgstr "现金"
+
+msgid "Cheque"
+msgstr "支票"
+
+msgid "Bank Transfer"
+msgstr "银行转账"
+
+msgid "Other"
+msgstr "其他"
+
+msgid "Offline"
+msgstr "线下"
+
+msgid "Reference / Cheque #"
+msgstr "参考号 / 支票号"
+
+msgid "PayPal Order ID"
+msgstr "PayPal 订单 ID"
+
+msgid "PayPal Capture ID"
+msgstr "PayPal 捕获 ID"
+
+msgid "Frequency"
+msgstr "频率"
+
+msgid "Donation date"
+msgstr "捐款日期"
+
+msgid "Subscription"
+msgstr "订阅"
+
+msgid "Subscription ID"
+msgstr "订阅 ID"
+
+msgid "Cycle"
+msgstr "周期"
+
+msgid "Next billing"
+msgstr "下次扣款"
+
+msgid "Dispute"
+msgstr "争议"
+
+msgid "Dispute ID"
+msgstr "争议 ID"
+
+msgid "Reason"
+msgstr "原因"
+
+msgid "PayPal Resolution Center"
+msgstr "PayPal 解决中心"
+
+msgid "Open PayPal"
+msgstr "打开 PayPal"
+
+msgid "Receipt"
+msgstr "收据"
+
+msgid "Not yet assigned"
+msgstr "尚未分配"
+
+msgid "Email status"
+msgstr "邮件状态"
+
+msgid "not sent"
+msgstr "未发送"
+
+msgid "Sent at"
+msgstr "发送时间"
+
+msgid "Anonymous donation"
+msgstr "匿名捐款"
+
+msgid "donor requested anonymity. Details visible to admins only."
+msgstr "捐款者要求匿名。详细信息仅管理员可见。"
+
+msgid "Not provided"
+msgstr "未提供"
+
+msgid "Address"
+msgstr "地址"
+
+msgid "Message"
+msgstr "留言"
+
+msgid "Tribute Donation"
+msgstr "纪念捐款"
+
+msgid "In Memory Of"
+msgstr "缅怀"
+
+msgid "In Honor Of"
+msgstr "致敬"
+
+msgid "Honoree Name"
+msgstr "被纪念者姓名"
+
+msgid "Notification Sent To"
+msgstr "通知已发送至"
+
+msgid "Webhook & events"
+msgstr "Webhook 与事件"
+
+msgid "Last webhook event ID"
+msgstr "最近 Webhook 事件 ID"
+
+msgid "Last webhook received"
+msgstr "最近 Webhook 接收时间"
+
+msgid "Status history"
+msgstr "状态历史"
+
+msgid "Anonymous"
+msgstr "匿名"
+
+msgid "From date"
+msgstr "起始日期"
+
+msgid "To date"
+msgstr "截止日期"
+
+msgid "Campaign…"
+msgstr "活动…"
+
+msgid "Filter by campaign name"
+msgstr "按活动名称筛选"
+
+# --- New entries (untranslated) ---
+
+#: donateocean-donation-suite.php
+msgid "Donation Suite requires PHP 7.4 or later."
+msgstr ""
+
+#: donateocean-donation-suite.php
+msgid "Donation Suite requires WordPress 6.0 or later."
+msgstr ""
+
+#: donateocean-donation-suite.php
+msgid "Donation History"
+msgstr ""
+
+#: includes/admin/class-campaign-tracking-page.php
+msgid "Campaign Tracking"
+msgstr ""
+
+#: includes/admin/class-campaign-tracking-page.php
+msgid "Campaign goals saved successfully."
+msgstr ""
+
+#: includes/admin/class-campaign-tracking-page.php
+msgid "You do not have permission to manage campaign goals."
+msgstr ""
+
+#: includes/admin/class-donation-detail-page.php
+msgid "Donation Details"
+msgstr ""
+
+#: includes/admin/class-donor-profile-page.php
+msgid "Donor Profile"
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Google Sheets credentials JSON is invalid. It must contain client_email and private_key fields."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Please provide both Client ID and Secret."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "%s PayPal account disconnected."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Please provide a Zapier webhook URL."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Connection failed: %s"
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Test event sent successfully. Check your Zapier dashboard."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Zapier returned HTTP %d. Check your webhook URL."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Please provide a Slack webhook URL."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Please fill in all Twilio fields before testing."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Test SMS sent successfully. Check your phone."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Please provide both API URL and API Key."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Please provide a Brevo API key."
+msgstr ""
+
+#: includes/admin/class-settings-page.php
+msgid "Please provide both credentials JSON and Spreadsheet ID."
+msgstr ""
+
+#: includes/core/class-bootstrap.php templates/admin-settings.php
+msgid "Donation Suite — Setup required."
+msgstr ""
+
+#: includes/core/class-bootstrap.php templates/admin-settings.php
+msgid "Connect your PayPal account to start accepting donations."
+msgstr ""
+
+#: includes/core/class-bootstrap.php templates/admin-settings.php
+msgid "Connect PayPal"
+msgstr ""
+
+#: includes/core/class-bootstrap.php templates/admin-settings.php
+msgid "Donation Suite — Sandbox (Test Mode) active."
+msgstr ""
+
+#: includes/core/class-bootstrap.php templates/admin-settings.php
+msgid "Switch to Production"
+msgstr ""
+
+#: includes/frontend/class-donor-portal-shortcode.php
+msgid "Security check failed."
+msgstr ""
+
+#: includes/frontend/class-donor-portal-shortcode.php
+msgid "Access your donation portal — %s"
+msgstr ""
+
+#: includes/frontend/class-donor-portal-shortcode.php
+msgid "Click the button below to access your donation portal and manage your recurring donations. This link expires in 30 minutes."
+msgstr ""
+
+#: includes/frontend/class-donor-portal-shortcode.php
+msgid "Access My Donation Portal"
+msgstr ""
+
+#: includes/frontend/class-donor-portal-shortcode.php
+msgid "If you did not request this link, you can safely ignore this email."
+msgstr ""
+
+#: includes/integration/class-active-campaign.php
+msgid "ActiveCampaign connection successful."
+msgstr ""
+
+#: includes/integration/class-active-campaign.php
+msgid "Invalid API key. Please check your credentials."
+msgstr ""
+
+#: includes/integration/class-active-campaign.php
+msgid "ActiveCampaign returned HTTP %d."
+msgstr ""
+
+#: includes/integration/class-brevo.php
+msgid "Connected to Brevo account: %s"
+msgstr ""
+
+#: includes/integration/class-brevo.php
+msgid "Brevo connection successful."
+msgstr ""
+
+#: includes/integration/class-brevo.php
+msgid "Invalid API key. Please check your Brevo credentials."
+msgstr ""
+
+#: includes/integration/class-brevo.php
+msgid "Brevo returned HTTP %d."
+msgstr ""
+
+#: includes/integration/class-google-sheets.php
+msgid "Failed to authenticate. Check your service account JSON credentials."
+msgstr ""
+
+#: includes/integration/class-google-sheets.php
+msgid "Connected to spreadsheet: %s"
+msgstr ""
+
+#: includes/integration/class-google-sheets.php
+msgid "Connection successful."
+msgstr ""
+
+#: includes/integration/class-google-sheets.php
+msgid "Spreadsheet not found. Check the Spreadsheet ID and ensure the service account has access."
+msgstr ""
+
+#: includes/integration/class-google-sheets.php
+msgid "Access denied. Share the spreadsheet with the service account email address."
+msgstr ""
+
+#: includes/integration/class-google-sheets.php
+msgid "Google API returned HTTP %d."
+msgstr ""
+
+#: includes/integration/class-slack.php
+msgid "Test notification sent successfully. Check your Slack channel."
+msgstr ""
+
+#: includes/integration/class-slack.php
+msgid "Slack returned HTTP %d. Check your webhook URL."
+msgstr ""
+
+#: includes/integration/class-twilio.php
+msgid "SMS sent successfully."
+msgstr ""
+
+#: includes/integration/class-twilio.php
+msgid "Twilio returned HTTP %d."
+msgstr ""
+
+#: includes/receipt/class-pdf-receipt-controller.php
+msgid "You do not have permission to download receipts."
+msgstr ""
+
+#: includes/reporting/class-export-controller.php
+msgid "Could not open output stream for CSV export."
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Campaign Fund Tracking"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Track fundraising progress for each campaign across all shortcodes and donation forms."
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Total campaigns"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Total raised"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Total donations"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Unique donors"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "No campaign donations yet. Campaigns are created automatically when you use the campaign attribute in your shortcode:"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Raised"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Goal"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Progress"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Donors"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Date range"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "No goal"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Set a goal to track"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "View donations"
+msgstr ""
+
+#: templates/admin-campaign-tracking.php
+msgid "Save campaign goals"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Show or hide value"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Register this URL in your %1$sPayPal Developer Dashboard%2$s if auto-registration fails."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Advanced Credit & Debit Card"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Enable direct credit/debit card fields on the donation form (PayPal Advanced Card Payments)"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Requires Advanced Credit and Debit Card Payments to be enabled in your PayPal account. Donors can enter card details directly without leaving your site."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Fee coverage pre-checked"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Check the \"Cover the transaction fee\" checkbox by default"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Returning donors who previously unchecked it will see it unchecked (their preference is remembered)."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "JSON array of giving levels. Example: <code>[{\"amount\":25,\"label\":\"Supporter\",\"description\":\"Feeds a family for one week\"},{\"amount\":50,\"label\":\"Champion\"}]</code>. Leave empty to use plain preset amounts."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Logging"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Control diagnostic logging for troubleshooting."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Link to your privacy policy. Displayed in the donation form footer and receipt emails."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Link to your refund policy. Displayed in the donation form footer and receipt emails."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Zapier"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Slack"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Twilio SMS"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "ActiveCampaign"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Brevo"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Google Sheets"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Found in your Constant Contact developer account under <strong>My Applications</strong>."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Enable Zapier integration"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Webhook URL"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "The <strong>Catch Hook</strong> URL from your Zapier Zap trigger. Found in the Zap editor when using \"Webhooks by Zapier\" as the trigger."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Secret Key"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Used to authenticate the sample data endpoint. Auto-generated on first use."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Sample Data URL"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Use this URL in Zapier's \"Webhooks by Zapier\" polling trigger to pull sample donation fields during Zap setup."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Save settings to generate the sample data URL."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Events to send"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Donation completed"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Donation refunded"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Donation disputed"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Choose which donation events trigger a Zapier webhook."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Send test event"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Sends a sample payload to verify your Zapier webhook is receiving data."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Enable Slack notifications"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Create an <strong>Incoming Webhook</strong> in your Slack workspace settings and paste the URL here."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Channel override"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Optional. Override the default channel set in your webhook. Leave blank to use the webhook default."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Events to notify"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Choose which donation events send a Slack notification."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Send test notification"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Sends a test message to verify your Slack webhook is working."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Enable Twilio SMS notifications"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Account SID"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Found on your <strong>Twilio Console</strong> dashboard."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Auth Token"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Found next to Account SID on your Twilio Console."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "From number"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Your Twilio phone number in E.164 format (e.g. +15551234567)."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Notify number"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "The phone number that receives donation SMS alerts in E.164 format."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Choose which donation events trigger an SMS notification."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Send test SMS"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Sends a test SMS to verify your Twilio credentials and phone numbers."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Enable ActiveCampaign integration"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "API URL"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Found in <strong>Settings → Developer</strong> in your ActiveCampaign account."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Found alongside the API URL in <strong>Settings → Developer</strong>."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "List ID"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "The numeric list ID. Found in <strong>Lists → Edit → List ID</strong> in the URL."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Verifies your API URL and key are valid."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Enable Brevo integration"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Found in <strong>Settings → SMTP & API → API Keys</strong> in your Brevo dashboard."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "The numeric list ID. Found in <strong>Contacts → Lists</strong> — click the list and check the URL."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Send a confirmation email before subscribing (recommended for GDPR compliance)"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Verifies your Brevo API key is valid."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Enable Google Sheets integration"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Spreadsheet ID"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "The long ID from your Google Sheet URL: docs.google.com/spreadsheets/d/{THIS_PART}/edit"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Sheet name"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "The tab name in your spreadsheet. Defaults to \"Sheet1\"."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Service account JSON"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Paste the full JSON key file contents from your Google Cloud service account. The service account email must be shared as an <strong>Editor</strong> on the spreadsheet."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Column order"
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Add these as headers in row 1 of your sheet. Each donation appends a new row."
+msgstr ""
+
+#: templates/admin-settings.php
+msgid "Verifies the service account can access your spreadsheet."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Your subscription has been cancelled successfully."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Your access link has expired. Please request a new one below."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "That subscription is not in a cancellable state."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Cancellation failed. Please contact us for assistance."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "You do not have permission to manage that subscription."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Invalid request. Please try again."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Subscription record not found. Please contact us."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "An error occurred. Please try again."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Your Recurring Donations"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Signed in as %s"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "You have no active recurring donations to manage."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Paused"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Active"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Recurring"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Campaign:"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Next billing:"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Receipt #:"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Cancel this recurring donation? This cannot be undone."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "To change your donation amount or frequency, please contact us directly."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Check your inbox"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "If we found an account for that email address, we sent you a secure access link. It will expire in 30 minutes."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Try a different email"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Manage Your Donations"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Enter your email address and we'll send you a secure link to manage your recurring donations."
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Email address"
+msgstr ""
+
+#: templates/donor-portal.php
+msgid "Send Access Link"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Record a cash, cheque, bank transfer, or other offline donation."
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Payment Details"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Donation Date"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Reference / Cheque Number"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Optional. Appears on the receipt."
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Donor Details"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Full Name"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Email Address"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Street Address"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Postal Code"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Donor Message"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Anonymous donation — hide donor name in public views"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Options"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Send receipt email to donor"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Uses the same HTML receipt template as PayPal donations. Leave unticked if the donor should not receive an automated email."
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Save Donation"
+msgstr ""
+
+#: templates/manual-donation-form.php
+msgid "Cancel"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Remember my details for next time"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "family@example.com"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Payment method"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "PayPal"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Credit / Debit Card"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Card number"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Expiry"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "CVV"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Name on card"
+msgstr ""
+
+#: templates/shortcode.php
+msgid "Donate with Card"
+msgstr ""

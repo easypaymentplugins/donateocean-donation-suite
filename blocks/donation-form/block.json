@@ -1,0 +1,113 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "donadosu/donation-form",
+    "version": "1.0.2",
+    "title": "Donation Suite Form",
+    "category": "widgets",
+    "icon": "heart",
+    "description": "Embed a PayPal donation form anywhere on your site.",
+    "keywords": ["donation", "donate", "paypal", "charity", "fundraise"],
+    "textDomain": "donateocean-donation-suite",
+    "editorScript": "file:./index.js",
+    "style": "file:../../assets/css/donate.css",
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"],
+        "spacing": {
+            "margin": true
+        }
+    },
+    "attributes": {
+        "campaign": {
+            "type": "string",
+            "default": ""
+        },
+        "purpose": {
+            "type": "string",
+            "default": ""
+        },
+        "currency": {
+            "type": "string",
+            "default": ""
+        },
+        "donorFields": {
+            "type": "boolean",
+            "default": true
+        },
+        "displayMode": {
+            "type": "string",
+            "default": "inline",
+            "enum": ["inline", "modal", "widget", "page"]
+        },
+        "goalAmount": {
+            "type": "number",
+            "default": 0
+        },
+        "goalCurrent": {
+            "type": "string",
+            "default": ""
+        },
+        "goalLabel": {
+            "type": "string",
+            "default": "Campaign progress"
+        },
+        "buttonText": {
+            "type": "string",
+            "default": "Donate with PayPal"
+        },
+        "buttonColor": {
+            "type": "string",
+            "default": ""
+        },
+        "thankYouUrl": {
+            "type": "string",
+            "default": ""
+        },
+        "redirectOnSuccess": {
+            "type": "boolean",
+            "default": false
+        },
+        "donationMode": {
+            "type": "string",
+            "default": "both",
+            "enum": ["one_time", "monthly", "annual", "both"]
+        },
+        "amounts": {
+            "type": "string",
+            "default": ""
+        },
+        "locale": {
+            "type": "string",
+            "default": ""
+        },
+        "campaignStart": {
+            "type": "string",
+            "default": ""
+        },
+        "campaignEnd": {
+            "type": "string",
+            "default": ""
+        },
+        "goalClose": {
+            "type": "boolean",
+            "default": false
+        },
+        "minAmount": {
+            "type": "string",
+            "default": ""
+        },
+        "maxAmount": {
+            "type": "string",
+            "default": ""
+        },
+        "feeCoverage": {
+            "type": "boolean",
+            "default": false
+        },
+        "cssClass": {
+            "type": "string",
+            "default": ""
+        }
+    }
+}

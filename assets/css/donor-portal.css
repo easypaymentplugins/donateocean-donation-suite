@@ -1,0 +1,28 @@
+/**
+ * Donation Suite — donor self-service portal stylesheet.
+ */
+.donadosu-portal { max-width: 540px; margin: 0 auto; font-family: Inter, -apple-system, sans-serif; color: #111; }
+.donadosu-portal h2 { font-size: 20px; margin: 0 0 6px; }
+.donadosu-portal p.sub { color: #525252; font-size: 14px; margin: 0 0 24px; }
+.donadosu-portal-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 28px; }
+.donadosu-portal-notice { padding: 12px 16px; border-radius: 8px; font-size: 14px; margin-bottom: 18px; }
+.donadosu-portal-notice--success { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+.donadosu-portal-notice--error   { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
+.donadosu-portal-notice--info    { background: #dbeafe; color: #1d4ed8; border: 1px solid #bfdbfe; }
+.donadosu-portal input[type=email] { width: 100%; padding: 9px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 14px; box-sizing: border-box; }
+.donadosu-portal input[type=email]:focus { outline: none; border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99, 102, 241, .15); }
+.donadosu-portal button.donadosu-btn { display: block; width: 100%; margin-top: 12px; padding: 10px; background: #111; color: #fff; border: 0; border-radius: 7px; font-size: 14px; font-weight: 600; cursor: pointer; }
+.donadosu-portal button.donadosu-btn:hover { background: #222; }
+.donadosu-sub-item { border: 1px solid #e5e7eb; border-radius: 8px; padding: 18px 20px; margin-bottom: 14px; }
+.donadosu-sub-item:last-child { margin-bottom: 0; }
+.donadosu-sub-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+.donadosu-sub-amount { font-size: 22px; font-weight: 700; color: #111; }
+.donadosu-sub-cycle { font-size: 13px; color: #6b7280; margin-top: 2px; }
+.donadosu-sub-badge { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+.donadosu-sub-badge--active { background: #dcfce7; color: #15803d; }
+.donadosu-sub-badge--paused { background: #fef9c3; color: #854d0e; }
+.donadosu-sub-meta { font-size: 12px; color: #6b7280; margin-bottom: 14px; line-height: 1.7; }
+.donadosu-btn-cancel { padding: 6px 14px; background: #fff; color: #b91c1c; border: 1px solid #fca5a5; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; }
+.donadosu-btn-cancel:hover { background: #fff1f2; }
+.donadosu-no-subs { color: #6b7280; font-size: 14px; text-align: center; padding: 20px 0; }
+.donadosu-portal-footer-note { margin-top: 18px; font-size: 12px; color: #9ca3af; text-align: center; }

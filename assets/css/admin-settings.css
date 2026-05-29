@@ -1,0 +1,2264 @@
+.donadosu-admin-wrap {
+    --donadosu-bg: #ffffff;
+    --donadosu-muted-bg: #f6f6f7;
+    --donadosu-border: #d2d5d8;
+    --donadosu-border-strong: #8a8f98;
+    --donadosu-text: #202223;
+    --donadosu-subtle: #616467;
+    --donadosu-focus: #111111;
+    --donadosu-accent: #111111;
+    --donadosu-accent-soft: #f3f3f3;
+    --donadosu-shadow-soft: 0 1px 0 rgba(22, 29, 37, 0.04);
+    --donadosu-shadow-card: 0 1px 3px rgba(22, 29, 37, 0.1);
+    --donadosu-shadow-glow: 0 0 0 1px rgba(17, 17, 17, 0.18);
+    --donadosu-input-shadow: none;
+    --donadosu-sidebar-width: 290px;
+    --donadosu-radius: 10px;
+    max-width: 1100px;
+    color: var(--donadosu-text);
+}
+
+.donadosu-page-header {
+    margin: 6px 0 12px;
+    padding: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.donadosu-page-header h1 {
+    margin: 0;
+    font-size: clamp(1.2rem, 1.6vw, 1.45rem);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    font-weight: 650;
+}
+
+.donadosu-eyebrow {
+    display: inline-flex;
+    margin: 10px 0 0;
+    padding: 3px 9px;
+    border-radius: 999px;
+    border: 1px solid #aeb4bb;
+    background: var(--donadosu-accent-soft);
+    color: #3d4148;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 10px;
+}
+
+.donadosu-tabs {
+    margin: 0 0 14px;
+    border-bottom: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.donadosu-tabs .nav-tab {
+    margin: 0;
+    border: 1px solid var(--donadosu-border);
+    border-radius: 8px;
+    background: #fff;
+    color: #3d4148;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 1.2;
+    padding: 8px 14px;
+    transition: all 160ms ease;
+}
+
+.donadosu-tabs .nav-tab:hover {
+    background: #f6f6f7;
+    border-color: #8a8f98;
+    color: #202223;
+}
+
+.donadosu-tabs .nav-tab.nav-tab-active,
+.donadosu-tabs .nav-tab.nav-tab-active:hover {
+    border-color: var(--donadosu-accent);
+    background: var(--donadosu-accent);
+    color: #fff;
+    box-shadow: 0 1px 2px rgba(22, 29, 37, 0.18);
+}
+
+.donadosu-inline-notice {
+    display: block;
+    margin: -4px 0 14px;
+    padding: 10px 16px;
+    border-left: 4px solid #787c82;
+    background: #fff;
+    border-radius: 0 4px 4px 0;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+    font-size: 13px;
+    line-height: 1.5;
+    max-width: 100%;
+}
+
+.donadosu-inline-notice p {
+    margin: 0;
+}
+
+.donadosu-inline-notice--info {
+    border-left-color: #72aee6;
+}
+
+.donadosu-inline-notice--warning {
+    border-left-color: #dba617;
+}
+
+.donadosu-inline-notice--error {
+    border-left-color: #d63638;
+    background: #fcf0f1;
+}
+
+.donadosu-inline-notice[hidden] {
+    display: none;
+}
+
+#donadosu-sc-recurring-warning {
+    margin: 6px 0 0;
+    padding: 8px 12px;
+    font-size: 12px;
+    line-height: 1.4;
+    box-shadow: none;
+}
+
+.donadosu-settings-layout {
+    display: grid;
+    grid-template-columns: minmax(var(--donadosu-sidebar-width), max-content) minmax(0, 1fr);
+    gap: 16px;
+    align-items: start;
+}
+
+.donadosu-setup-wizard {
+    border: 1px solid var(--donadosu-border);
+    border-radius: var(--donadosu-radius);
+    background: #ffffff;
+    padding: 14px 14px 16px;
+    box-shadow: var(--donadosu-shadow-card);
+    position: sticky;
+    top: 32px;
+    overflow: hidden;
+}
+
+.donadosu-setup-wizard__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.donadosu-setup-wizard__eyebrow {
+    margin: 0 0 3px;
+    color: var(--donadosu-subtle);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.donadosu-setup-wizard h2 {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    font-weight: 650;
+    color: #111111;
+}
+
+.donadosu-setup-wizard__progress-value {
+    margin: 0;
+    color: var(--donadosu-subtle);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+
+.donadosu-setup-wizard__progress {
+    height: 5px;
+    width: 100%;
+    border-radius: 999px;
+    background: #e8e8e8;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.donadosu-setup-wizard__progress-fill {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #000000 0%, #2d2d2d 100%);
+    box-shadow: var(--donadosu-shadow-glow);
+}
+
+.donadosu-setup-wizard__steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3px;
+}
+
+.donadosu-step-item {
+    min-width: 0;
+}
+
+.donadosu-step-item__link {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+    padding: 7px 9px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    text-decoration: none;
+    background: transparent;
+    transition: border-color 140ms ease, background-color 140ms ease;
+}
+
+.donadosu-step-item__link:hover {
+    border-color: #d2d5d8;
+    background: #f9f9fa;
+}
+
+.donadosu-step-item__index {
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    border: 1.5px solid #c0c0c0;
+    color: #555555;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    background: #f5f5f5;
+    flex: 0 0 auto;
+    transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease;
+}
+
+.donadosu-step-item__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+}
+
+.donadosu-step-item__label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #3d4148;
+    line-height: 1.3;
+}
+
+.donadosu-step-item__status {
+    font-size: 10px;
+    color: #8a8f98;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.donadosu-step-item.is-active .donadosu-step-item__link {
+    border-color: #d0d0d0;
+    background: #f3f3f3;
+}
+
+.donadosu-step-item.is-active .donadosu-step-item__label {
+    color: #111111;
+}
+
+.donadosu-step-item.is-active .donadosu-step-item__index {
+    border-color: var(--donadosu-accent);
+    background: var(--donadosu-accent);
+    color: #fff;
+}
+
+.donadosu-step-item.is-active .donadosu-step-item__status {
+    color: #555555;
+}
+
+.donadosu-step-item.is-complete .donadosu-step-item__link {
+    border-color: transparent;
+    background: transparent;
+}
+
+.donadosu-step-item.is-complete .donadosu-step-item__index {
+    border-color: #555555;
+    color: #ffffff;
+    background: #555555;
+    font-size: 10px;
+}
+
+.donadosu-step-item.is-complete .donadosu-step-item__label {
+    color: #616467;
+}
+
+.donadosu-step-item.is-complete .donadosu-step-item__status {
+    color: #8a8f98;
+}
+
+.donadosu-setup-wizard__note {
+    margin: 10px 2px 0;
+    font-size: 11px;
+    color: var(--donadosu-subtle);
+    line-height: 1.45;
+}
+
+/* Divider between steps and tools */
+.donadosu-setup-wizard__divider {
+    height: 1px;
+    background: var(--donadosu-border);
+    margin: 10px 0;
+    border: none;
+}
+
+/* Tools section in sidebar */
+.donadosu-setup-wizard__tools {
+    margin-top: 0;
+}
+
+.donadosu-setup-wizard__tools-label {
+    margin: 0 2px 4px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--donadosu-subtle);
+}
+
+.donadosu-setup-wizard__tool-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 2px;
+}
+
+.donadosu-tool-item__link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: transparent;
+    text-decoration: none;
+    color: #3d4148;
+    font-size: 12px;
+    font-weight: 600;
+    transition: border-color 140ms, background 140ms, color 140ms;
+}
+
+.donadosu-tool-item__icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: #f0f0f1;
+    border: 1px solid #e0e0e0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    color: #6b7280;
+    transition: background 140ms, border-color 140ms, color 140ms;
+}
+
+.donadosu-tool-item__link:hover .donadosu-tool-item__icon {
+    background: #e8e8ea;
+    border-color: #d2d5d8;
+    color: #4b5563;
+}
+
+.donadosu-tool-item.is-active .donadosu-tool-item__icon {
+    background: #e5e7eb;
+    border-color: #d0d0d0;
+    color: #374151;
+}
+
+.donadosu-tool-item__link:hover {
+    border-color: #d2d5d8;
+    background: #f9f9fa;
+    color: var(--donadosu-text);
+}
+
+.donadosu-tool-item.is-active .donadosu-tool-item__link {
+    border-color: #d0d0d0;
+    background: #f3f3f3;
+    color: #111111;
+}
+
+/* Note shown in actions bar on tool tabs */
+.donadosu-tool-note {
+    margin: 0;
+    font-style: italic;
+    color: var(--donadosu-subtle);
+}
+
+.donadosu-settings-card {
+    background: var(--donadosu-bg);
+    border: 1px solid var(--donadosu-border);
+    border-radius: var(--donadosu-radius) var(--donadosu-radius) 0 0;
+    padding: 20px 22px;
+    box-shadow: var(--donadosu-shadow-card);
+}
+
+.donadosu-settings-card h2 {
+    margin: 0;
+    font-size: clamp(1.25rem, 1.6vw, 1.45rem);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    font-weight: 650;
+}
+
+.donadosu-settings-card .description {
+    margin-top: 6px;
+    color: var(--donadosu-subtle);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.donadosu-settings-card .form-table {
+    margin-top: 14px;
+    border-collapse: separate;
+    border-spacing: 0 4px;
+}
+
+.donadosu-settings-card .form-table tr {
+    vertical-align: top;
+}
+
+.donadosu-settings-card .form-table th {
+    width: 210px;
+    padding: 11px 14px 0 0;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #111111;
+    font-weight: 600;
+}
+
+.donadosu-settings-card .form-table td {
+    padding: 6px 0 8px;
+}
+
+.donadosu-settings-card input[type="text"],
+.donadosu-settings-card input[type="password"],
+.donadosu-settings-card input[type="email"],
+.donadosu-settings-card input[type="url"],
+.donadosu-settings-card input[type="number"],
+.donadosu-settings-card textarea,
+.donadosu-settings-card select {
+    width: min(30em, 100%);
+    min-height: 38px;
+    border: 1px solid var(--donadosu-border);
+    border-radius: 7px;
+    padding: 7px 11px;
+    font-size: 13px;
+    line-height: 1.45;
+    color: #111111;
+    background: #ffffff;
+    box-shadow: var(--donadosu-input-shadow);
+    transition: border-color 140ms ease, box-shadow 140ms ease, background-color 140ms ease;
+}
+
+.donadosu-settings-card select {
+    padding-right: 34px;
+}
+
+.donadosu-settings-card textarea.large-text {
+    width: min(46em, 100%);
+    min-height: 110px;
+}
+
+.donadosu-settings-card input[readonly]:not([type="password"]) {
+    background: #f4f4f4;
+    color: #475569;
+}
+
+.donadosu-settings-card input[type="checkbox"] {
+    margin-top: -2px;
+}
+
+.donadosu-settings-card input:focus,
+.donadosu-settings-card textarea:focus,
+.donadosu-settings-card select:focus {
+    border-color: var(--donadosu-focus);
+    box-shadow: 0 0 0 1px var(--donadosu-focus), 0 0 0 3px rgba(17, 17, 17, 0.18);
+    outline: none;
+}
+
+.donadosu-credentials-guide {
+    margin: 14px 0 4px;
+    border: 1px solid var(--donadosu-border);
+    border-radius: 8px;
+    background: var(--donadosu-muted-bg);
+    box-shadow: var(--donadosu-shadow-soft);
+    overflow: hidden;
+}
+
+.donadosu-credentials-guide__summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--donadosu-text);
+    user-select: none;
+    transition: background-color 140ms ease;
+}
+
+.donadosu-credentials-guide__summary:hover,
+.donadosu-credentials-guide[open] .donadosu-credentials-guide__summary {
+    background: rgba(17, 17, 17, 0.04);
+}
+
+.donadosu-credentials-guide__summary:focus-visible {
+    outline: 2px solid var(--donadosu-focus);
+    outline-offset: -2px;
+}
+
+.donadosu-credentials-guide__summary::-webkit-details-marker {
+    display: none;
+}
+
+.donadosu-credentials-guide__summary::after {
+    content: "";
+    margin-left: auto;
+    flex: 0 0 auto;
+    width: 7px;
+    height: 7px;
+    border-right: 2px solid var(--donadosu-subtle);
+    border-bottom: 2px solid var(--donadosu-subtle);
+    transform: rotate(45deg) translate(-2px, -2px);
+    transition: transform 160ms ease;
+}
+
+.donadosu-credentials-guide[open] .donadosu-credentials-guide__summary::after {
+    transform: rotate(-135deg) translate(-2px, -2px);
+}
+
+.donadosu-credentials-guide__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #8a8f98;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.donadosu-credentials-guide__title {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.donadosu-credentials-guide__body {
+    padding: 2px 16px 14px 42px;
+    color: var(--donadosu-text);
+    font-size: 13px;
+    line-height: 1.55;
+    border-top: 1px solid var(--donadosu-border);
+    background: #ffffff;
+}
+
+.donadosu-credentials-guide__body > p:first-child {
+    margin-top: 12px;
+}
+
+.donadosu-credentials-guide__body p {
+    margin: 0 0 10px;
+}
+
+.donadosu-credentials-guide__steps {
+    margin: 0 0 10px;
+    padding-left: 18px;
+    counter-reset: donadosu-step;
+}
+
+.donadosu-credentials-guide__steps li {
+    margin-bottom: 6px;
+    padding-left: 2px;
+}
+
+.donadosu-credentials-guide__steps li::marker {
+    color: var(--donadosu-subtle);
+    font-weight: 600;
+}
+
+.donadosu-credentials-guide__steps a {
+    color: #111111;
+    text-decoration: underline;
+}
+
+.donadosu-credentials-guide__steps a:hover {
+    text-decoration: none;
+}
+
+.donadosu-credentials-guide__note {
+    margin: 12px 0 0;
+    padding-top: 10px;
+    border-top: 1px dashed var(--donadosu-border);
+    color: var(--donadosu-subtle);
+    font-size: 12px;
+    font-style: italic;
+}
+
+.donadosu-actions-bar {
+    padding: 12px 16px;
+    border: 1px solid var(--donadosu-border);
+    border-top: none;
+    border-radius: 0 0 var(--donadosu-radius) var(--donadosu-radius);
+    background: #ffffff;
+    box-shadow: none;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.donadosu-actions-bar .button-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    border-radius: 7px;
+    padding-inline: 20px;
+    line-height: 1.2;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.01em;
+}
+
+.donadosu-actions-bar .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+    border-radius: 7px;
+    padding-inline: 14px;
+    font-size: 13px;
+    line-height: 1.2;
+}
+
+.donadosu-button-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid #9a9a9a !important;
+    background: #ffffff !important;
+    color: #111111 !important;
+    font-weight: 600;
+    font-size: 13px;
+    min-height: 36px !important;
+    padding-inline: 14px !important;
+    border-radius: 7px !important;
+    box-shadow: none;
+    transition: transform 120ms ease, box-shadow 140ms ease, border-color 140ms ease, color 140ms ease, background-color 140ms ease;
+}
+
+.donadosu-button-back .donadosu-button-back__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    background: #efefef;
+    color: #222222;
+    font-size: 11px;
+    line-height: 1;
+    transform: translateX(0);
+    transition: transform 120ms ease, background-color 120ms ease;
+}
+
+.donadosu-button-back:hover,
+.donadosu-button-back:focus {
+    border-color: #111111 !important;
+    color: #111111 !important;
+    background: #f2f2f2 !important;
+    transform: translateY(-1px);
+    box-shadow: none;
+}
+
+.donadosu-button-back:hover .donadosu-button-back__icon,
+.donadosu-button-back:focus .donadosu-button-back__icon {
+    transform: translateX(-1px);
+    background: #e1e1e1;
+}
+
+.donadosu-button-back:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(17, 17, 17, 0.25);
+}
+
+.donadosu-button-back:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.donadosu-actions-bar .button-primary,
+.donadosu-actions-bar .button-secondary {
+    border-color: #111111 !important;
+    background: #111111 !important;
+    color: #ffffff !important;
+}
+
+.donadosu-actions-bar .button-secondary {
+    background: #ffffff !important;
+    color: #3d4148 !important;
+    border-color: #8a8f98 !important;
+}
+
+.donadosu-actions-bar .button-primary:hover,
+.donadosu-actions-bar .button-primary:focus {
+    border-color: #000000 !important;
+    background: #000000 !important;
+    color: #ffffff !important;
+}
+
+.donadosu-actions-bar .button-secondary:hover,
+.donadosu-actions-bar .button-secondary:focus {
+    border-color: #3d4148 !important;
+    background: #f3f3f3 !important;
+    color: #111111 !important;
+}
+
+
+.donadosu-settings-card .donadosu-settings-card__section-h2 {
+    margin-top: 24px;
+}
+
+.donadosu-settings-card .form-table td .description {
+    margin: 8px 0 0;
+    font-size: 13px;
+    color: #667085;
+}
+
+.donadosu-settings-section-title {
+    margin: 20px 0 2px;
+    padding: 0 0 8px;
+    border-bottom: 1px solid var(--donadosu-border);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--donadosu-text);
+}
+
+.donadosu-settings-section-title:first-of-type {
+    margin-top: 16px;
+}
+
+/* ── Integration sub-tabs ───────────────────────────────────────────────── */
+.donadosu-integration-tabs {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    margin: 0 0 16px;
+}
+
+.donadosu-integration-tab-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border: 1px solid var(--donadosu-border);
+    border-radius: 7px;
+    background: #fafafa;
+    color: #3d4148;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 140ms ease;
+    line-height: 1.3;
+}
+
+.donadosu-integration-tab-btn:hover {
+    border-color: #8a8f98;
+    background: #f4f4f5;
+    color: var(--donadosu-text);
+}
+
+.donadosu-integration-tab-btn.is-active {
+    border-color: var(--donadosu-accent);
+    background: var(--donadosu-accent);
+    color: #ffffff;
+}
+
+.donadosu-integration-tab-btn.is-active:hover {
+    background: #222222;
+    border-color: #222222;
+}
+
+.donadosu-integration-tab-btn__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.4;
+    flex: 0 0 auto;
+}
+
+.donadosu-integration-tab-btn.is-active .donadosu-integration-tab-btn__dot {
+    opacity: 0.7;
+}
+
+.donadosu-integration-tab-btn.is-enabled .donadosu-integration-tab-btn__dot {
+    background: #16a34a;
+    opacity: 1;
+}
+
+.donadosu-integration-panel {
+    display: none;
+}
+
+.donadosu-integration-panel.is-active {
+    display: block;
+}
+
+/* ── Integration enable toggle row ─────────────────────────────────────── */
+.donadosu-integration-enable-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border: 1px solid var(--donadosu-border);
+    border-radius: 8px;
+    background: var(--donadosu-muted-bg);
+    margin-bottom: 2px;
+}
+
+.donadosu-integration-enable-row label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--donadosu-text);
+    cursor: pointer;
+    flex: 1;
+}
+
+.donadosu-integration-fields {
+    margin-top: 4px;
+}
+
+.donadosu-integration-fields[hidden] {
+    display: none;
+}
+
+.donadosu-settings-card input[type="checkbox"] {
+    border-radius: 4px;
+}
+
+.donadosu-settings-card label {
+    color: #1f2937;
+}
+
+/* ── Password field with show/hide toggle ──────────────────────────────── */
+.donadosu-password-field {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.donadosu-password-field input[type="text"],
+.donadosu-password-field input[type="password"] {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.donadosu-toggle-visibility {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px !important;
+    min-width: 38px;
+    padding: 0 8px !important;
+    border-radius: 7px !important;
+    color: #616467;
+    cursor: pointer;
+}
+
+.donadosu-toggle-visibility:hover {
+    color: #111111;
+}
+
+.donadosu-toggle-visibility .dashicons {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+}
+
+/* ── Tooltip (? icon) ──────────────────────────────────────────────────── */
+.donadosu-tooltip {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    margin-left: 4px;
+    cursor: help;
+}
+
+.donadosu-tooltip__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #8a8f98;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.donadosu-tooltip::after {
+    content: attr(aria-label);
+    position: absolute;
+    left: calc(100% + 8px);
+    top: 50%;
+    transform: translateY(-50%);
+    background: #1e1e1e;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.45;
+    padding: 8px 12px;
+    border-radius: 6px;
+    white-space: normal;
+    width: 260px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 140ms ease;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.donadosu-tooltip:hover::after,
+.donadosu-tooltip:focus::after {
+    opacity: 1;
+}
+
+/* ── Copy-field row ─────────────────────────────────────────────────────── */
+.donadosu-copy-field {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.donadosu-copy-field input[type="text"] {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+/* ── Inline AJAX result badge ───────────────────────────────────────────── */
+.donadosu-inline-result {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #3d4148;
+}
+
+.donadosu-inline-result--success {
+    color: #166534;
+}
+
+.donadosu-inline-result--error {
+    color: #991b1b;
+}
+
+/* ── Shortcode builder card ─────────────────────────────────────────────── */
+.donadosu-optional {
+    font-weight: 400;
+    color: #6b7280;
+    font-size: 12px;
+}
+
+.donadosu-shortcode-builder {
+    margin-top: 22px;
+    display: grid;
+    gap: 0;
+}
+
+/* Group wrapper */
+.donadosu-sc-group {
+    border-top: 1px solid var(--donadosu-border);
+    padding: 20px 0;
+}
+
+.donadosu-sc-group:first-child {
+    border-top: none;
+    padding-top: 0;
+}
+
+.donadosu-sc-group__title {
+    margin: 0 0 14px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #3a3a3a;
+}
+
+/* Fields grid */
+.donadosu-sc-fields {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px 20px;
+    align-items: start;
+}
+
+/* Honor the [hidden] attribute on the fields grid — `display: grid` above
+   would otherwise override the browser's default `display: none` for
+   [hidden] elements. */
+.donadosu-sc-fields[hidden] {
+    display: none;
+}
+
+/* Master toggle row that hides/shows a whole group's fields */
+.donadosu-sc-group__toggle {
+    margin-bottom: 14px;
+}
+
+/* Individual field */
+.donadosu-sc-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* Full-width modifier — makes a single field span every column of the
+   .donadosu-sc-fields grid (auto-fill columns of 220px minimum). */
+.donadosu-sc-field--full {
+    grid-column: 1 / -1;
+}
+
+.donadosu-sc-field label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #111111;
+    line-height: 1.4;
+}
+
+.donadosu-sc-field select,
+.donadosu-sc-field input[type="text"],
+.donadosu-sc-field input[type="number"],
+.donadosu-sc-field input[type="url"],
+.donadosu-sc-field input[type="date"] {
+    width: 100%;
+    min-height: 40px;
+    border: 1px solid var(--donadosu-border);
+    border-radius: 7px;
+    padding: 8px 12px;
+    font-size: 13px;
+    color: #111111;
+    background: #ffffff;
+    transition: border-color 140ms ease, box-shadow 140ms ease;
+    box-sizing: border-box;
+}
+
+.donadosu-sc-field select:focus,
+.donadosu-sc-field input:focus {
+    border-color: var(--donadosu-focus);
+    box-shadow: 0 0 0 1px var(--donadosu-focus);
+    outline: none;
+}
+
+.donadosu-sc-hint {
+    font-size: 12px;
+    color: #667085;
+    line-height: 1.45;
+}
+
+/* Disabled-field state (driven by JS dependency gating) */
+.donadosu-sc-field--disabled label,
+.donadosu-sc-field--disabled .donadosu-sc-hint {
+    opacity: 0.55;
+}
+
+/* Checkbox variant */
+.donadosu-sc-field--checkbox {
+    justify-content: center;
+    padding-top: 4px;
+}
+
+.donadosu-sc-field--checkbox label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.donadosu-sc-field--checkbox input[type="checkbox"] {
+    flex: 0 0 auto;
+    margin: 0;
+}
+
+/* Color picker row */
+.donadosu-sc-color-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.donadosu-sc-color-row input[type="color"] {
+    width: 42px;
+    height: 40px;
+    padding: 2px;
+    border: 1px solid var(--donadosu-border);
+    border-radius: 7px;
+    background: #fff;
+    cursor: pointer;
+    flex: 0 0 auto;
+}
+
+/* Picker is purely cosmetic until a hex is entered in the text input —
+   dim it so the user knows the shortcode is not emitting a button_color. */
+.donadosu-sc-color-row input[type="color"].donadosu-sc-color-picker--inactive {
+    opacity: 0.45;
+    filter: grayscale(0.7);
+}
+
+/* Invalid-format flag for free-text overrides (e.g. locale). */
+.donadosu-sc-field input.donadosu-sc-input--invalid {
+    border-color: #d63638;
+    box-shadow: 0 0 0 1px #d63638;
+}
+
+.donadosu-sc-color-text {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.donadosu-sc-clear-btn {
+    flex: 0 0 auto;
+    min-height: 40px !important;
+    padding-inline: 12px !important;
+    border-radius: 7px !important;
+    font-size: 13px !important;
+}
+
+/* Uppercase input */
+.donadosu-sc-uppercase {
+    text-transform: uppercase;
+}
+
+/* Output row */
+.donadosu-sc-output {
+    border-top: 1px solid var(--donadosu-border);
+    padding-top: 20px;
+    margin-top: 4px;
+    display: grid;
+    gap: 8px;
+}
+
+.donadosu-sc-output__label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #111111;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.donadosu-sc-output .donadosu-copy-field input[type="text"] {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 13px;
+    background: #f8f8f8;
+    color: #111111;
+}
+
+.donadosu-sc-output .description {
+    margin: 0;
+    font-size: 12px;
+    color: #667085;
+}
+
+/* When the Generated shortcode block lives inside the actions bar, drop the
+   card-style top border/padding and let it fill the row instead of clinging
+   to the bar's flex-end. */
+.donadosu-actions-bar .donadosu-sc-output {
+    border-top: 0;
+    padding-top: 0;
+    margin-top: 0;
+    flex: 1;
+    min-width: 0;
+}
+
+@media (max-width: 782px) {
+    .donadosu-sc-fields {
+        grid-template-columns: 1fr;
+    }
+
+    .donadosu-sc-color-row {
+        flex-wrap: wrap;
+    }
+}
+
+/* ── Connection status box ──────────────────────────────────────────────── */
+.donadosu-connection-box {
+    border: 1px solid var(--donadosu-border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    background: #fafafa;
+}
+
+.donadosu-connection-box--connected {
+    border-color: #bbf7d0;
+    background: #f0fdf4;
+}
+
+.donadosu-connection-box--disconnected {
+    border-color: var(--donadosu-border);
+    background: var(--donadosu-muted-bg);
+}
+
+.donadosu-connection-box__header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.donadosu-connection-box__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 700;
+    flex: 0 0 auto;
+    line-height: 1;
+}
+
+.donadosu-connection-box__icon--success {
+    background: #16a34a;
+    color: #ffffff;
+}
+
+.donadosu-connection-box__icon--inactive {
+    background: #9ca3af;
+    color: #ffffff;
+}
+
+.donadosu-connection-box__title {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.donadosu-connection-box--connected .donadosu-connection-box__title {
+    color: #15803d;
+}
+
+.donadosu-connection-box--disconnected .donadosu-connection-box__title {
+    color: #6b7280;
+}
+
+.donadosu-connection-box__detail {
+    margin: 6px 0 0 30px;
+    font-size: 13px;
+    color: #374151;
+    line-height: 1.5;
+}
+
+.donadosu-connection-box--disconnected .donadosu-connection-box__detail {
+    color: #6b7280;
+    margin-left: 30px;
+}
+
+.donadosu-connection-box__actions {
+    margin-top: 14px;
+}
+
+.donadosu-disconnect-btn {
+    border: 1px solid var(--donadosu-border) !important;
+    background: #ffffff !important;
+    color: #374151 !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    padding: 6px 16px !important;
+    min-height: 36px !important;
+    border-radius: 7px !important;
+    cursor: pointer;
+    transition: border-color 140ms ease, color 140ms ease, background 140ms ease;
+}
+
+.donadosu-disconnect-btn:hover {
+    border-color: #dc2626 !important;
+    color: #dc2626 !important;
+    background: #fef2f2 !important;
+}
+
+.donadosu-disconnect-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+@media (max-width: 1060px) {
+    .donadosu-settings-layout {
+        grid-template-columns: minmax(270px, max-content) minmax(0, 1fr);
+    }
+
+}
+
+@media (max-width: 900px) {
+    .donadosu-settings-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .donadosu-setup-wizard {
+        position: static;
+        overflow: visible;
+    }
+
+    .donadosu-setup-wizard__steps {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 782px) {
+    .donadosu-page-header {
+        padding: 10px 0;
+    }
+
+    .donadosu-tabs {
+        gap: 4px;
+    }
+
+    .donadosu-tabs .nav-tab {
+        font-size: 12px;
+        padding: 7px 11px;
+    }
+
+    .donadosu-setup-wizard__steps {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .donadosu-settings-card {
+        padding: 16px;
+    }
+
+    .donadosu-settings-card .form-table,
+    .donadosu-settings-card .form-table tbody,
+    .donadosu-settings-card .form-table tr,
+    .donadosu-settings-card .form-table th,
+    .donadosu-settings-card .form-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .donadosu-settings-card .form-table th {
+        padding: 8px 0 3px;
+    }
+
+    .donadosu-settings-card .form-table td {
+        margin-top: 0;
+        padding: 0 0 6px;
+    }
+
+    .donadosu-settings-card input[type="text"],
+    .donadosu-settings-card input[type="password"],
+    .donadosu-settings-card input[type="email"],
+    .donadosu-settings-card input[type="url"],
+    .donadosu-settings-card input[type="number"],
+    .donadosu-settings-card textarea,
+    .donadosu-settings-card select,
+    .donadosu-settings-card textarea.large-text {
+        width: 100%;
+    }
+
+    .donadosu-sc-fields {
+        grid-template-columns: 1fr;
+    }
+
+    .donadosu-sc-color-row {
+        flex-wrap: wrap;
+    }
+}
+
+/* ============================================================================
+   UI POLISH LAYER
+   Pixel-level refinements layered on top of the existing styles. Tokenizes
+   spacing/sizing, harmonizes input rhythm, modernizes the integration toggle,
+   and tightens focus / hover / responsive states. No structural changes.
+   ============================================================================ */
+.donadosu-admin-wrap {
+    --donadosu-space-1: 4px;
+    --donadosu-space-2: 8px;
+    --donadosu-space-3: 12px;
+    --donadosu-space-4: 16px;
+    --donadosu-space-5: 20px;
+    --donadosu-space-6: 24px;
+    --donadosu-control-h: 38px;
+    --donadosu-control-radius: 8px;
+    --donadosu-control-pad-x: 12px;
+    --donadosu-ring: 0 0 0 1px var(--donadosu-focus), 0 0 0 4px rgba(17, 17, 17, 0.14);
+    -webkit-font-smoothing: antialiased;
+}
+
+.donadosu-page-header {
+    margin: var(--donadosu-space-2) 0 var(--donadosu-space-4);
+    padding: 0;
+    gap: var(--donadosu-space-3);
+}
+
+.donadosu-page-header h1 {
+    font-weight: 600;
+    letter-spacing: -0.015em;
+}
+
+.donadosu-tabs {
+    margin: 0 0 var(--donadosu-space-4);
+    gap: var(--donadosu-space-1);
+}
+
+.donadosu-tabs .nav-tab {
+    border-radius: var(--donadosu-control-radius);
+    padding: 9px 14px;
+    min-height: var(--donadosu-control-h);
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+    transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease, box-shadow 140ms ease;
+}
+
+.donadosu-tabs .nav-tab:focus-visible {
+    outline: none;
+    box-shadow: var(--donadosu-ring);
+}
+
+.donadosu-settings-card {
+    padding: var(--donadosu-space-6) var(--donadosu-space-6) var(--donadosu-space-5);
+}
+
+.donadosu-settings-card h2 {
+    font-weight: 600;
+    letter-spacing: -0.015em;
+}
+
+.donadosu-settings-card .description {
+    margin-top: var(--donadosu-space-1);
+    color: var(--donadosu-subtle);
+    line-height: 1.55;
+}
+
+.donadosu-settings-card .form-table {
+    margin-top: var(--donadosu-space-5);
+    border-spacing: 0;
+}
+
+.donadosu-settings-card .form-table th {
+    width: 220px;
+    padding: 14px var(--donadosu-space-4) 14px 0;
+    font-weight: 600;
+    color: var(--donadosu-text);
+    line-height: 1.5;
+}
+
+.donadosu-settings-card .form-table td {
+    padding: 10px 0 14px;
+    line-height: 1.5;
+}
+
+.donadosu-settings-card .form-table tr + tr > th,
+.donadosu-settings-card .form-table tr + tr > td {
+    border-top: 1px solid #eef0f2;
+}
+
+.donadosu-settings-card .form-table td .description {
+    margin: var(--donadosu-space-2) 0 0;
+    font-size: 12.5px;
+    color: var(--donadosu-subtle);
+    line-height: 1.5;
+}
+
+.donadosu-settings-card input[type="text"],
+.donadosu-settings-card input[type="password"],
+.donadosu-settings-card input[type="email"],
+.donadosu-settings-card input[type="url"],
+.donadosu-settings-card input[type="number"],
+.donadosu-settings-card select {
+    min-height: var(--donadosu-control-h);
+    height: var(--donadosu-control-h);
+    border-radius: var(--donadosu-control-radius);
+    padding: 0 var(--donadosu-control-pad-x);
+    font-size: 13px;
+    box-shadow: 0 1px 0 rgba(22, 29, 37, 0.02);
+}
+
+.donadosu-settings-card textarea {
+    border-radius: var(--donadosu-control-radius);
+    padding: 9px var(--donadosu-control-pad-x);
+    font-size: 13px;
+    box-shadow: 0 1px 0 rgba(22, 29, 37, 0.02);
+}
+
+.donadosu-settings-card input:hover:not(:focus):not([readonly]),
+.donadosu-settings-card select:hover:not(:focus),
+.donadosu-settings-card textarea:hover:not(:focus) {
+    border-color: var(--donadosu-border-strong);
+}
+
+.donadosu-settings-card input:focus,
+.donadosu-settings-card textarea:focus,
+.donadosu-settings-card select:focus {
+    box-shadow: var(--donadosu-ring);
+}
+
+.donadosu-settings-card input[disabled],
+.donadosu-settings-card select[disabled],
+.donadosu-settings-card textarea[disabled] {
+    background: #f4f4f5;
+    color: #9aa0a6;
+    cursor: not-allowed;
+}
+
+.donadosu-settings-card .form-table td > label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--donadosu-space-2);
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--donadosu-text);
+}
+
+.donadosu-settings-card input[type="checkbox"] {
+    margin: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    border: 1px solid var(--donadosu-border-strong);
+    transition: border-color 140ms ease, background-color 140ms ease, box-shadow 140ms ease;
+}
+
+.donadosu-settings-card input[type="checkbox"]:focus-visible {
+    box-shadow: var(--donadosu-ring);
+    outline: none;
+}
+
+.donadosu-settings-section-title {
+    margin: var(--donadosu-space-6) 0 var(--donadosu-space-2);
+    padding-bottom: var(--donadosu-space-2);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--donadosu-subtle);
+}
+
+.donadosu-actions-bar {
+    padding: var(--donadosu-space-3) var(--donadosu-space-5);
+    gap: var(--donadosu-space-2);
+}
+
+.donadosu-actions-bar .button,
+.donadosu-actions-bar .button-primary,
+.donadosu-actions-bar .button-secondary {
+    height: var(--donadosu-control-h);
+    min-height: var(--donadosu-control-h);
+    border-radius: var(--donadosu-control-radius);
+    padding-inline: var(--donadosu-space-5);
+    font-weight: 600;
+    line-height: 1;
+    transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease, box-shadow 140ms ease, transform 120ms ease;
+}
+
+.donadosu-actions-bar .button-primary:focus-visible,
+.donadosu-actions-bar .button-secondary:focus-visible,
+.donadosu-actions-bar .button:focus-visible {
+    box-shadow: var(--donadosu-ring);
+    outline: none;
+}
+
+.donadosu-actions-bar .button-primary:active {
+    transform: translateY(1px);
+}
+
+/* Modern toggle for the integration enable row checkbox (CSS only) */
+.donadosu-integration-enable-row {
+    padding: var(--donadosu-space-3) var(--donadosu-space-4);
+    border-radius: var(--donadosu-control-radius);
+    gap: var(--donadosu-space-3);
+}
+
+.donadosu-integration-enable-row label {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: var(--donadosu-space-3);
+}
+
+.donadosu-integration-enable-row input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    position: relative;
+    width: 36px;
+    height: 20px;
+    border-radius: 999px;
+    background: #cbd0d6;
+    border: none;
+    cursor: pointer;
+    transition: background-color 160ms ease, box-shadow 160ms ease;
+    flex: 0 0 auto;
+}
+
+/* Suppress WordPress core's default blue checkmark (::before) on the custom toggle */
+.donadosu-integration-enable-row input[type="checkbox"]::before,
+.donadosu-integration-enable-row input[type="checkbox"]:checked::before {
+    content: none;
+    display: none;
+    background: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+}
+
+.donadosu-integration-enable-row input[type="checkbox"]::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    transition: transform 160ms ease;
+}
+
+.donadosu-integration-enable-row input[type="checkbox"]:checked {
+    background: #16a34a;
+}
+
+.donadosu-integration-enable-row input[type="checkbox"]:checked::after {
+    transform: translateX(16px);
+}
+
+.donadosu-integration-enable-row input[type="checkbox"]:focus-visible {
+    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.25);
+    outline: none;
+}
+
+/* Shortcode builder: align field heights with the global control rhythm */
+.donadosu-sc-field select,
+.donadosu-sc-field input[type="text"],
+.donadosu-sc-field input[type="number"],
+.donadosu-sc-field input[type="url"],
+.donadosu-sc-field input[type="date"] {
+    min-height: var(--donadosu-control-h);
+    height: var(--donadosu-control-h);
+    border-radius: var(--donadosu-control-radius);
+    padding: 0 var(--donadosu-control-pad-x);
+}
+
+.donadosu-sc-field select:focus,
+.donadosu-sc-field input:focus {
+    box-shadow: var(--donadosu-ring);
+}
+
+.donadosu-sc-color-row input[type="color"] {
+    width: var(--donadosu-control-h);
+    height: var(--donadosu-control-h);
+    border-radius: var(--donadosu-control-radius);
+}
+
+.donadosu-sc-clear-btn {
+    height: var(--donadosu-control-h) !important;
+    min-height: var(--donadosu-control-h) !important;
+    border-radius: var(--donadosu-control-radius) !important;
+}
+
+.donadosu-sc-fields {
+    gap: var(--donadosu-space-4) var(--donadosu-space-5);
+}
+
+.donadosu-toggle-visibility {
+    height: var(--donadosu-control-h);
+    min-height: var(--donadosu-control-h) !important;
+    min-width: var(--donadosu-control-h);
+    border-radius: var(--donadosu-control-radius) !important;
+}
+
+.donadosu-toggle-visibility:focus-visible {
+    box-shadow: var(--donadosu-ring);
+    outline: none;
+}
+
+.donadosu-setup-wizard {
+    padding: var(--donadosu-space-4);
+}
+
+.donadosu-step-item__link,
+.donadosu-tool-item__link {
+    border-radius: var(--donadosu-control-radius);
+}
+
+.donadosu-step-item__link:focus-visible,
+.donadosu-tool-item__link:focus-visible {
+    outline: none;
+    box-shadow: var(--donadosu-ring);
+}
+
+.donadosu-connection-box {
+    border-radius: var(--donadosu-control-radius);
+    padding: var(--donadosu-space-4) var(--donadosu-space-5);
+}
+
+.donadosu-connection-box__header {
+    gap: var(--donadosu-space-3);
+}
+
+.donadosu-connection-box__detail {
+    margin-left: calc(22px + var(--donadosu-space-3));
+}
+
+@media (max-width: 960px) {
+    .donadosu-settings-card .form-table th {
+        width: 180px;
+        padding-right: var(--donadosu-space-3);
+    }
+}
+
+@media (max-width: 782px) {
+    .donadosu-settings-card {
+        padding: var(--donadosu-space-4);
+    }
+
+    .donadosu-settings-card .form-table tr + tr > th,
+    .donadosu-settings-card .form-table tr + tr > td {
+        border-top: none;
+    }
+
+    .donadosu-actions-bar {
+        padding: var(--donadosu-space-3) var(--donadosu-space-4);
+    }
+
+    .donadosu-actions-bar .button,
+    .donadosu-actions-bar .button-primary,
+    .donadosu-actions-bar .button-secondary {
+        flex: 1 1 auto;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .donadosu-admin-wrap *,
+    .donadosu-admin-wrap *::before,
+    .donadosu-admin-wrap *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* ============================================================================
+   GOLD POLISH — Enterprise / high-volume merchant pass
+   Sub-pixel typography, true vertical centering of form rows, consistent
+   control heights across every interactive element, tighter visual hierarchy,
+   keyboard-accessible color picker, hardened responsive behavior.
+   ============================================================================ */
+.donadosu-admin-wrap {
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "kern", "liga", "calt", "ss01";
+}
+
+/* Vertically center labels with their inputs (kills the "label floats above"
+   look that the original 11px-top-padding produced). */
+.donadosu-settings-card .form-table tr {
+    vertical-align: middle;
+}
+
+.donadosu-settings-card .form-table th {
+    vertical-align: middle;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.donadosu-settings-card .form-table td {
+    vertical-align: middle;
+}
+
+/* When a row contains a description, switch back to top alignment so the
+   description sits below the input rather than centered against the label. */
+.donadosu-settings-card .form-table tr:has(td .description),
+.donadosu-settings-card .form-table tr:has(td textarea) {
+    vertical-align: top;
+}
+
+.donadosu-settings-card .form-table tr:has(td .description) > th,
+.donadosu-settings-card .form-table tr:has(td textarea) > th {
+    padding-top: 16px;
+}
+
+/* Eyebrow: collapse the duplicate margin-top declaration cleanly */
+.donadosu-eyebrow {
+    margin: 0;
+    align-self: center;
+}
+
+/* Inline notice: align with new spacing scale */
+.donadosu-inline-notice {
+    margin: 0 0 var(--donadosu-space-4);
+    padding: var(--donadosu-space-3) var(--donadosu-space-4);
+    border-radius: 0 var(--donadosu-control-radius) var(--donadosu-control-radius) 0;
+}
+
+/* Integration sub-tabs: match global control height & focus ring */
+.donadosu-integration-tabs {
+    margin: 0 0 var(--donadosu-space-4);
+    gap: var(--donadosu-space-1);
+}
+
+.donadosu-integration-tab-btn {
+    min-height: var(--donadosu-control-h);
+    padding: 0 14px;
+    border-radius: var(--donadosu-control-radius);
+    line-height: 1;
+}
+
+.donadosu-integration-tab-btn:focus-visible {
+    outline: none;
+    box-shadow: var(--donadosu-ring);
+}
+
+.donadosu-integration-tab-btn__dot {
+    width: 8px;
+    height: 8px;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6);
+}
+
+.donadosu-integration-tab-btn.is-enabled .donadosu-integration-tab-btn__dot {
+    box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.18);
+}
+
+/* Password field — perfect height + alignment with the toggle button */
+.donadosu-password-field {
+    gap: var(--donadosu-space-2);
+}
+
+.donadosu-password-field .button {
+    height: var(--donadosu-control-h);
+    min-height: var(--donadosu-control-h) !important;
+    border-radius: var(--donadosu-control-radius) !important;
+}
+
+/* Copy field — same rhythm */
+.donadosu-copy-field {
+    gap: var(--donadosu-space-2);
+}
+
+.donadosu-copy-field .button {
+    height: var(--donadosu-control-h);
+    min-height: var(--donadosu-control-h) !important;
+    border-radius: var(--donadosu-control-radius) !important;
+    padding-inline: var(--donadosu-space-4);
+    font-weight: 600;
+}
+
+/* Inline AJAX result — vertically aligned next to buttons */
+.donadosu-inline-result {
+    display: inline-flex;
+    align-items: center;
+    height: var(--donadosu-control-h);
+    margin-left: var(--donadosu-space-3);
+    font-weight: 600;
+}
+
+.donadosu-inline-result--success::before,
+.donadosu-inline-result--error::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.donadosu-inline-result--success::before {
+    background: #16a34a;
+}
+.donadosu-inline-result--error::before {
+    background: #dc2626;
+}
+
+/* Setup wizard — sharper progress bar with subtle shine */
+.donadosu-setup-wizard__progress {
+    height: 6px;
+    background: #ececee;
+}
+
+.donadosu-setup-wizard__progress-fill {
+    background: linear-gradient(90deg, #111111 0%, #2d2d2d 100%);
+    transition: width 320ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Step item refinements */
+.donadosu-step-item__link {
+    padding: var(--donadosu-space-2) var(--donadosu-space-3);
+}
+
+.donadosu-step-item.is-active .donadosu-step-item__index {
+    box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.08);
+}
+
+/* Tooltip — add a subtle arrow for clearer attribution */
+.donadosu-tooltip::before {
+    content: "";
+    position: absolute;
+    left: calc(100% + 2px);
+    top: 50%;
+    transform: translateY(-50%);
+    border: 6px solid transparent;
+    border-right-color: #1e1e1e;
+    opacity: 0;
+    transition: opacity 140ms ease;
+    pointer-events: none;
+    z-index: 101;
+}
+
+.donadosu-tooltip:hover::before,
+.donadosu-tooltip:focus::before {
+    opacity: 1;
+}
+
+/* Color picker — a real focus ring (was completely missing) */
+.donadosu-sc-color-row input[type="color"]:focus-visible {
+    outline: none;
+    box-shadow: var(--donadosu-ring);
+    border-color: var(--donadosu-focus);
+}
+
+/* Connection box — crisper hierarchy */
+.donadosu-connection-box {
+    box-shadow: var(--donadosu-shadow-soft);
+}
+
+.donadosu-connection-box--connected {
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+}
+
+.donadosu-connection-box__icon {
+    width: 24px;
+    height: 24px;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.65);
+}
+
+.donadosu-connection-box__detail {
+    margin-left: calc(24px + var(--donadosu-space-3));
+}
+
+/* Disconnect button — match the global control rhythm */
+.donadosu-disconnect-btn {
+    height: var(--donadosu-control-h) !important;
+    min-height: var(--donadosu-control-h) !important;
+    padding: 0 var(--donadosu-space-4) !important;
+    border-radius: var(--donadosu-control-radius) !important;
+    font-weight: 600 !important;
+}
+
+.donadosu-disconnect-btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.18);
+}
+
+/* Card edge: when followed by an actions bar, kill the rounded bottom seam */
+.donadosu-settings-card + .donadosu-actions-bar {
+    border-top: 1px solid #eef0f2;
+}
+
+/* Section title: when it's the first child of a card, no extra top margin */
+.donadosu-settings-card > .donadosu-settings-section-title:first-child {
+    margin-top: 0;
+}
+
+/* Hardened responsive behavior */
+@media (max-width: 1200px) {
+    .donadosu-admin-wrap {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .donadosu-integration-enable-row {
+        flex-wrap: wrap;
+    }
+
+    .donadosu-page-header h1 {
+        font-size: 1.15rem;
+    }
+
+    .donadosu-tabs .nav-tab {
+        flex: 1 1 auto;
+        justify-content: center;
+    }
+
+    .donadosu-copy-field,
+    .donadosu-password-field {
+        flex-wrap: wrap;
+    }
+
+    .donadosu-copy-field input[type="text"],
+    .donadosu-password-field input {
+        width: 100%;
+        flex-basis: 100%;
+    }
+}
+
+/* High-DPI: hairline borders that hold up on retina */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .donadosu-settings-card,
+    .donadosu-actions-bar,
+    .donadosu-setup-wizard,
+    .donadosu-connection-box {
+        border-color: #d8dadd;
+    }
+}
+
+/* Forced-colors mode (Windows High Contrast) — keep controls visible */
+@media (forced-colors: active) {
+    .donadosu-tabs .nav-tab,
+    .donadosu-actions-bar .button,
+    .donadosu-actions-bar .button-primary,
+    .donadosu-integration-tab-btn,
+    .donadosu-settings-card input,
+    .donadosu-settings-card select,
+    .donadosu-settings-card textarea {
+        border: 1px solid CanvasText;
+    }
+
+    .donadosu-integration-enable-row input[type="checkbox"] {
+        forced-color-adjust: none;
+    }
+}
+
+/* ============================================================================
+   PRODUCTION TUNING — Final pass
+   Cross-browser placeholder styling, custom select chevron, consistent
+   text selection, no-layout-shift hover, browser-specific number-spinner
+   normalization, print styles, and iOS Safari fixes.
+   ============================================================================ */
+
+/* Consistent placeholder color across all browsers */
+.donadosu-admin-wrap ::placeholder {
+    color: #9aa0a6;
+    opacity: 1;
+}
+
+.donadosu-admin-wrap ::-webkit-input-placeholder {
+    color: #9aa0a6;
+}
+.donadosu-admin-wrap ::-moz-placeholder {
+    color: #9aa0a6;
+    opacity: 1;
+}
+.donadosu-admin-wrap :-ms-input-placeholder {
+    color: #9aa0a6;
+}
+
+/* Branded text selection */
+.donadosu-admin-wrap ::selection {
+    background: rgba(17, 17, 17, 0.92);
+    color: #ffffff;
+}
+
+/* Custom select chevron — replaces the native arrow with one that
+   matches the rest of the UI and respects our 38px height. */
+.donadosu-settings-card select,
+.donadosu-sc-field select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23616467' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M4 6l4 4 4-4'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 14px 14px;
+    padding-right: 36px;
+}
+
+.donadosu-settings-card select:focus,
+.donadosu-sc-field select:focus {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23111111' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M4 6l4 4 4-4'/></svg>");
+}
+
+/* No-layout-shift hover: pre-allocate the focus border width via inset shadow */
+.donadosu-settings-card input,
+.donadosu-settings-card select,
+.donadosu-settings-card textarea {
+    background-clip: padding-box;
+}
+
+/* Normalize number input spinners — keep them visible but quieter */
+.donadosu-settings-card input[type="number"]::-webkit-outer-spin-button,
+.donadosu-settings-card input[type="number"]::-webkit-inner-spin-button {
+    opacity: 0.6;
+    height: var(--donadosu-control-h);
+}
+
+.donadosu-settings-card input[type="number"]:hover::-webkit-inner-spin-button,
+.donadosu-settings-card input[type="number"]:focus::-webkit-inner-spin-button {
+    opacity: 1;
+}
+
+/* iOS Safari: prevent input zoom on focus by ensuring 16px on small screens */
+@media (max-width: 600px) {
+    .donadosu-settings-card input[type="text"],
+    .donadosu-settings-card input[type="password"],
+    .donadosu-settings-card input[type="email"],
+    .donadosu-settings-card input[type="url"],
+    .donadosu-settings-card input[type="number"],
+    .donadosu-settings-card textarea,
+    .donadosu-settings-card select,
+    .donadosu-sc-field input,
+    .donadosu-sc-field select {
+        font-size: 16px;
+    }
+}
+
+/* Color picker — strip native chrome for a flush look */
+.donadosu-sc-color-row input[type="color"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 0;
+    overflow: hidden;
+}
+
+.donadosu-sc-color-row input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 3px;
+    border-radius: var(--donadosu-control-radius);
+}
+
+.donadosu-sc-color-row input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 5px;
+}
+
+.donadosu-sc-color-row input[type="color"]::-moz-color-swatch {
+    border: none;
+    border-radius: 5px;
+}
+
+/* Buttons: prevent focus ring layout shift, normalize tap highlight */
+.donadosu-admin-wrap button,
+.donadosu-admin-wrap .button {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Progress bar accessibility: respect aria-valuenow visually with smooth fill */
+.donadosu-setup-wizard__progress-fill {
+    will-change: width;
+}
+
+/* Subtle separator above the actions bar so the card "lifts" off it */
+.donadosu-actions-bar {
+    background: linear-gradient(180deg, #fafafb 0%, #ffffff 100%);
+}
+
+/* Sticky actions bar on tall settings cards (desktop only) */
+@media (min-width: 901px) {
+    .donadosu-actions-bar {
+        position: sticky;
+        bottom: 0;
+        z-index: 5;
+        backdrop-filter: saturate(140%) blur(6px);
+        -webkit-backdrop-filter: saturate(140%) blur(6px);
+    }
+}
+
+/* Section title — subtle leading rule for clearer grouping */
+.donadosu-settings-section-title {
+    display: flex;
+    align-items: center;
+    gap: var(--donadosu-space-3);
+    border-bottom: none;
+}
+
+.donadosu-settings-section-title::after {
+    content: "";
+    flex: 1 1 auto;
+    height: 1px;
+    background: #eef0f2;
+}
+
+/* Tooltip icon — softer shape, visible focus */
+.donadosu-tooltip:focus-visible .donadosu-tooltip__icon {
+    box-shadow: var(--donadosu-ring);
+    outline: none;
+}
+
+/* Disabled toggle clarity */
+.donadosu-integration-enable-row input[type="checkbox"][disabled] {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+/* Scrollbar (WebKit) — quieter, on-brand */
+.donadosu-admin-wrap textarea::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.donadosu-admin-wrap textarea::-webkit-scrollbar-thumb {
+    background: #d2d5d8;
+    border-radius: 8px;
+    border: 2px solid #ffffff;
+}
+
+.donadosu-admin-wrap textarea::-webkit-scrollbar-thumb:hover {
+    background: #8a8f98;
+}
+
+/* Print: clean, paper-friendly export of settings page */
+@media print {
+    .donadosu-admin-wrap {
+        max-width: 100%;
+        color: #000000;
+    }
+
+    .donadosu-tabs,
+    .donadosu-actions-bar,
+    .donadosu-setup-wizard,
+    .donadosu-toggle-visibility,
+    .donadosu-integration-tabs {
+        display: none !important;
+    }
+
+    .donadosu-settings-layout {
+        display: block;
+    }
+
+    .donadosu-settings-card {
+        border: 1px solid #000000;
+        box-shadow: none;
+        page-break-inside: avoid;
+    }
+
+    .donadosu-settings-card input,
+    .donadosu-settings-card select,
+    .donadosu-settings-card textarea {
+        border: 1px solid #000000;
+        box-shadow: none;
+        background: #ffffff;
+    }
+}

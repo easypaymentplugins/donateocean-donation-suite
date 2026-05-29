@@ -1,0 +1,456 @@
+:root {
+  --donadosu-accent: #111111;
+}
+
+/* ── Display wrapper ──────────────────────────────────────────────────────── */
+
+.donadosu-display {
+  position: relative;
+}
+
+/* ── Modal trigger button ─────────────────────────────────────────────────── */
+
+.donadosu-open-modal {
+  border: 0;
+  border-radius: 8px;
+  background: var(--donadosu-accent);
+  color: #ffffff;
+  padding: 11px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+.donadosu-open-modal:hover,
+.donadosu-open-modal:focus,
+.donadosu-open-modal:active { opacity: 0.85; background-color: var(--donadosu-accent); border-color: transparent; color: #ffffff; }
+.donadosu-open-modal:focus-visible { outline: 3px solid var(--donadosu-accent); outline-offset: 3px; background-color: var(--donadosu-accent); border-color: transparent; color: #ffffff; }
+
+/* ── Modal backdrop ───────────────────────────────────────────────────────── */
+
+.donadosu-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 9998;
+}
+.donadosu-backdrop--visible { display: block; }
+
+/* Prevent body scroll while modal is open */
+.donadosu-body--modal-open { overflow: hidden; }
+
+/* ── Modal close button ───────────────────────────────────────────────────── */
+
+.donadosu-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #f4f4f5;
+  color: #3f3f46;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+}
+.donadosu-modal-close:hover { background: #e4e4e7; }
+.donadosu-modal-close:focus-visible { outline: 3px solid var(--donadosu-accent); outline-offset: 2px; }
+
+/* ── Form wrap ────────────────────────────────────────────────────────────── */
+
+.donadosu-wrap {
+  position: relative;
+  max-width: 640px;
+  padding: 24px;
+  border: 1px solid #d4d4d8;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #111111;
+  font-size: 14px;
+  line-height: 1.45;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+/* Display-mode variants */
+.donadosu-display--widget .donadosu-wrap { max-width: 420px; }
+.donadosu-display--page   .donadosu-wrap { max-width: 100%; }
+
+/* Modal open state – centred overlay */
+.donadosu-wrap--modal-open {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 9999;
+  width: min(640px, calc(100vw - 24px));
+  max-height: calc(100vh - 24px);
+  overflow-y: auto;
+  transform: translate(-50%, -50%);
+  /* Extra padding-top so the close button doesn't overlap the header */
+  padding-top: 56px;
+}
+
+/* ── Form header ──────────────────────────────────────────────────────────── */
+
+.donadosu-form-header { margin-bottom: 16px; }
+.donadosu-form-header h3 { margin: 0; font-size: 24px; line-height: 1.2; letter-spacing: -0.02em; color: #000; }
+.donadosu-form-header p  { margin: 6px 0 0; color: #525252; }
+
+/* ── Campaign closed state ────────────────────────────────────────────────── */
+
+.donadosu-wrap--closed {
+  text-align: center;
+  padding: 32px 16px;
+}
+.donadosu-campaign-closed {
+  color: #525252;
+  font-size: 15px;
+}
+.donadosu-campaign-closed p { margin: 0; }
+
+/* ── Panels ───────────────────────────────────────────────────────────────── */
+
+.donadosu-panel { padding: 16px; border: 1px solid #e4e4e7; border-radius: 12px; background: #fff; }
+.donadosu-panel + .donadosu-panel { margin-top: 12px; }
+.donadosu-panel__title { margin: 0 0 16px; font-size: 16px; line-height: 1.3; color: #111; }
+.donadosu-panel__title + .donadosu-panel__help { margin-top: -10px; }
+.donadosu-panel__help  { margin: 6px 0 16px; color: #525252; font-size: 13px; }
+
+/* ── Grid layouts ─────────────────────────────────────────────────────────── */
+
+.donadosu-inline-grid         { display: grid; grid-template-columns: 1fr 120px; gap: 12px; }
+.donadosu-inline-grid--donor  { grid-template-columns: 1fr 1fr; }
+.donadosu-field               { margin-top: 12px; }
+
+/* ── Form controls ────────────────────────────────────────────────────────── */
+
+.donadosu-wrap label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: #3f3f46;
+}
+.donadosu-wrap input,
+.donadosu-wrap textarea,
+.donadosu-wrap select {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 14px;
+  padding: 10px 11px;
+  border: 1px solid #a1a1aa;
+  border-radius: 8px;
+  line-height: 1.4;
+  background: #fff;
+  color: #111;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.donadosu-wrap input::placeholder,
+.donadosu-wrap textarea::placeholder { color: #71717a; }
+.donadosu-wrap input:focus,
+.donadosu-wrap textarea:focus,
+.donadosu-wrap select:focus {
+  border-color: var(--donadosu-accent);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+  outline: none;
+}
+.donadosu-wrap textarea { min-height: 88px; resize: vertical; }
+
+/* ── Preset amount buttons ────────────────────────────────────────────────── */
+
+.donadosu-preset-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.donadosu-preset-btn {
+  padding: 8px 16px;
+  border: 2px solid #e4e4e7;
+  border-radius: 8px;
+  background: #fff;
+  color: #27272a;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+}
+.donadosu-preset-btn:hover,
+.donadosu-preset-btn:focus,
+.donadosu-preset-btn:active {
+  border-color: var(--donadosu-accent);
+  color: var(--donadosu-accent);
+  background-color: #fff;
+}
+.donadosu-preset-btn--active {
+  border-color: var(--donadosu-accent);
+  background: var(--donadosu-accent);
+  color: #fff;
+}
+.donadosu-preset-btn--active:hover,
+.donadosu-preset-btn--active:focus,
+.donadosu-preset-btn--active:active {
+  opacity: 0.9;
+  color: #fff;
+  background-color: var(--donadosu-accent);
+  border-color: var(--donadosu-accent);
+}
+/* ── Giving-level buttons ────────────────────────────────────────────────── */
+
+.donadosu-preset-btn--level {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  line-height: 1.3;
+}
+.donadosu-preset-btn__amount {
+  font-size: 0.85em;
+  opacity: 0.7;
+}
+.donadosu-preset-btn--active .donadosu-preset-btn__amount {
+  opacity: 0.9;
+}
+
+/* ── Frequency toggle buttons (Feature 1) ────────────────────────────────── */
+
+.donadosu-frequency-group {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.donadosu-freq-btn {
+  padding: 8px 16px;
+  border: 2px solid #e4e4e7;
+  border-radius: 8px;
+  background: #fff;
+  color: #27272a;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.donadosu-freq-btn:hover,
+.donadosu-freq-btn:focus,
+.donadosu-freq-btn:active {
+  border-color: var(--donadosu-accent);
+  color: var(--donadosu-accent);
+  background-color: #fff;
+}
+.donadosu-freq-btn--active {
+  border-color: var(--donadosu-accent);
+  background: var(--donadosu-accent);
+  color: #fff;
+}
+.donadosu-freq-btn--active:hover,
+.donadosu-freq-btn--active:focus,
+.donadosu-freq-btn--active:active {
+  opacity: 0.9;
+  color: #fff;
+  background-color: var(--donadosu-accent);
+  border-color: var(--donadosu-accent);
+}
+.donadosu-freq-btn:focus-visible {
+  outline: 3px solid var(--donadosu-accent);
+  outline-offset: 2px;
+  background-color: #fff;
+  border-color: var(--donadosu-accent);
+}
+.donadosu-freq-btn--active:focus-visible {
+  background-color: var(--donadosu-accent);
+  border-color: var(--donadosu-accent);
+  color: #fff;
+}
+
+.donadosu-preset-btn--custom {
+  border-style: dashed;
+}
+.donadosu-preset-btn--custom.donadosu-preset-btn--active {
+  border-style: solid;
+}
+.donadosu-preset-btn:focus-visible {
+  outline: 3px solid var(--donadosu-accent);
+  outline-offset: 2px;
+  background-color: #fff;
+  border-color: var(--donadosu-accent);
+}
+.donadosu-preset-btn--active:focus-visible {
+  background-color: var(--donadosu-accent);
+  border-color: var(--donadosu-accent);
+  color: #fff;
+}
+
+/* ── Checkbox row ─────────────────────────────────────────────────────────── */
+
+.donadosu-checkbox-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
+.donadosu-checkbox-row input[type='checkbox'] { width: 16px; height: 16px; margin: 0; accent-color: var(--donadosu-accent); }
+.donadosu-checkbox-row label { margin: 0; font-size: 13px; font-weight: 500; letter-spacing: normal; text-transform: none; color: #27272a; }
+.donadosu-checkbox-row--remember label { font-weight: 400; color: #52525b; }
+
+/* ── Donor section ────────────────────────────────────────────────────────── */
+
+.donadosu-donor-section { margin-top: 4px; }
+
+/* ── Goal / progress bar ──────────────────────────────────────────────────── */
+
+.donadosu-goal__header { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.donadosu-goal__track  { margin-top: 10px; width: 100%; background: #ececf1; border-radius: 999px; height: 10px; overflow: hidden; }
+.donadosu-goal__value  { display: block; height: 100%; background: var(--donadosu-accent); transition: width 0.4s ease; }
+
+/* ── Summary panel ────────────────────────────────────────────────────────── */
+
+.donadosu-summary { margin-top: 12px; padding: 12px; border: 1px solid #e4e4e7; border-radius: 10px; background: #fafafa; }
+.donadosu-summary__row { display: flex; justify-content: space-between; align-items: center; gap: 12px; color: #27272a; }
+.donadosu-summary__row strong { color: #111; }
+.donadosu-summary__row + .donadosu-summary__row { margin-top: 6px; }
+
+/* ── Result message ───────────────────────────────────────────────────────── */
+
+#donadosu-result { margin: 10px 0 0; font-size: 13px; color: #27272a; min-height: 1.4em; }
+#donadosu-result.donadosu-result--error { color: #b91c1c; font-weight: 600; }
+
+/* ── PayPal button container ──────────────────────────────────────────────── */
+
+.donadosu-paypal-button-container { margin-top: 12px; }
+
+/* ── Payment method tabs ─────────────────────────────────────────────────── */
+
+.donadosu-payment-method { margin-top: 12px; }
+
+.donadosu-payment-tabs {
+  display: flex;
+  gap: 0;
+  border: 1px solid #e4e4e7;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f4f4f5;
+}
+
+.donadosu-payment-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: #71717a;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  margin: 3px;
+}
+.donadosu-payment-tab:hover,
+.donadosu-payment-tab:focus,
+.donadosu-payment-tab:active { color: #27272a; background-color: transparent; border-color: transparent; }
+.donadosu-payment-tab--active {
+  background: #ffffff;
+  color: #27272a;
+  border-color: var(--donadosu-accent);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+.donadosu-payment-tab--active:hover,
+.donadosu-payment-tab--active:focus,
+.donadosu-payment-tab--active:active { background-color: #ffffff; border-color: var(--donadosu-accent); color: #27272a; }
+.donadosu-payment-tab:focus-visible { outline: 3px solid var(--donadosu-accent); outline-offset: -2px; background-color: transparent; border-color: transparent; }
+.donadosu-payment-tab--active:focus-visible { background-color: #ffffff; border-color: var(--donadosu-accent); color: #27272a; }
+
+.donadosu-payment-tab__icon { flex-shrink: 0; }
+
+.donadosu-payment-panel { margin-top: 12px; }
+.donadosu-payment-panel .donadosu-paypal-button-container { margin-top: 0; }
+
+/* ── Card fields (Advanced Credit & Debit Card) ──────────────────────────── */
+
+.donadosu-card-fields-form { display: flex; flex-direction: column; gap: 10px; }
+
+.donadosu-card-field-wrapper { display: flex; flex-direction: column; gap: 4px; }
+.donadosu-card-field-wrapper label { font-size: 12px; font-weight: 500; color: #3f3f46; }
+
+.donadosu-card-fields-row { display: flex; gap: 10px; }
+.donadosu-card-field-wrapper--half { flex: 1; }
+
+.donadosu-card-field {
+  border: 1px solid #d4d4d8;
+  border-radius: 8px;
+  padding: 2px;
+  min-height: 40px;
+  background: #ffffff;
+  transition: border-color 0.15s ease;
+}
+.donadosu-card-field:focus-within { border-color: var(--donadosu-accent); }
+
+.donadosu-card-submit {
+  margin-top: 4px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--donadosu-accent);
+  color: #ffffff;
+  padding: 11px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  width: 100%;
+}
+.donadosu-card-submit:hover:not(:disabled),
+.donadosu-card-submit:focus:not(:disabled),
+.donadosu-card-submit:active:not(:disabled) { opacity: 0.85; background-color: var(--donadosu-accent); border-color: transparent; color: #ffffff; }
+.donadosu-card-submit:disabled { opacity: 0.5; cursor: not-allowed; background-color: var(--donadosu-accent); border-color: transparent; }
+.donadosu-card-submit:focus-visible { outline: 3px solid var(--donadosu-accent); outline-offset: 3px; background-color: var(--donadosu-accent); border-color: transparent; color: #ffffff; }
+
+/* ── Thank-you block ──────────────────────────────────────────────────────── */
+
+.donadosu-thankyou {
+  margin-top: 12px;
+  padding: 20px;
+  border: 1px solid #bbf7d0;
+  border-radius: 12px;
+  background: #f0fdf4;
+}
+.donadosu-thankyou h3 { margin: 0 0 6px; color: #15803d; font-size: 18px; }
+.donadosu-thankyou p  { margin: 0 0 4px; font-size: 13px; color: #166534; }
+.donadosu-thankyou p:last-child { margin-bottom: 0; }
+
+/* ── Footer policy links ──────────────────────────────────────────────────── */
+
+.donadosu-footer-links {
+  margin: 10px 0 0;
+  font-size: 12px;
+  color: #71717a;
+  text-align: center;
+}
+.donadosu-footer-links a {
+  color: #71717a;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.donadosu-footer-links a:hover { color: var(--donadosu-accent); }
+.donadosu-footer-links span[aria-hidden] { margin: 0 4px; }
+
+/* ── Responsive ───────────────────────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .donadosu-wrap { padding: 16px; }
+  .donadosu-wrap--modal-open { padding-top: 56px; }
+  .donadosu-inline-grid,
+  .donadosu-inline-grid--donor { grid-template-columns: 1fr; }
+  .donadosu-preset-buttons { gap: 6px; }
+  .donadosu-preset-btn { padding: 7px 12px; font-size: 13px; }
+}
