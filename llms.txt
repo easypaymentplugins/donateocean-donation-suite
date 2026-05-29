@@ -1,0 +1,50 @@
+# DonateOcean – Donations via PayPal
+
+> DonateOcean is a free, GPL-licensed WordPress plugin that lets nonprofits, charities, churches, schools, and fundraising organizations accept secure one-time and recurring PayPal donations. Every payment is confirmed by webhook-verified completion, and the plugin ships a full charity-ready admin suite — donation tracking, automated receipts, tax summaries, refunds, donor self-service, and GDPR tools — with no paid tier, no upsells, and no platform fees beyond PayPal's standard processing fees.
+
+DonateOcean uses the PayPal Orders API v2 and Subscriptions API for payment processing, with PayPal webhook signature verification so donations are recorded even if the donor closes their browser before the redirect completes. If a webhook is delayed, the plugin retries verification and updates the record once PayPal confirms. All donor data is stored locally in the WordPress database as post meta; the plugin sends no data to DonateOcean servers, analytics, or telemetry. Optional third-party integrations are disabled by default and only activate once their credentials are entered by an administrator.
+
+- **Plugin slug:** `donateocean-donation-suite`
+- **Text domain:** `donateocean-donation-suite`
+- **Current version:** 1.0.4
+- **Requires:** WordPress 6.0+, PHP 7.4+ (tested up to WordPress 7.0)
+- **License:** GPL-2.0-or-later
+- **Author:** easypayment
+
+## Key features
+
+- PayPal Orders API v2 checkout — PayPal balance, credit card, and debit card
+- Webhook-verified donations, each confirmed by PayPal signature, with automatic retry
+- Recurring (monthly and annual) PayPal Subscriptions with admin controls
+- Donor self-service portal via a secure 30-minute magic link (no account required)
+- Four display modes: inline, modal popup, sidebar widget, and full-page form
+- Fundraising goals with manual or automatic progress tracking and campaign date gating
+- Tribute ("in honor of" / "in memory of"), anonymous, and offline/manual donations
+- Automated HTML receipts, on-demand PDF receipts, and year-end tax summaries
+- Full and partial PayPal refunds (Captures API) and dispute tracking with alerts
+- Admin suite: donations list, detail pages, donor profiles, reports, and CSV export (up to 10,000 records)
+- Custom roles (Donation Viewer, Donation Manager) with capability-checked admin actions
+- GDPR tools: personal data export, erasure, configurable retention, and opt-in uninstall cleanup
+- Gutenberg "DonateOcean Form" block with all settings as Inspector Controls
+- Translation-ready with a complete `.pot` file and zero runtime dependencies
+
+## Shortcodes
+
+- `[donadosu_donation]` — render the donation form. Key attributes: `campaign`, `display_mode` (`inline`|`modal`|`widget`|`page`), `donation_mode` (`one_time`|`monthly`|`annual`|`both`), `amounts`, `min_amount`, `max_amount`, `currency`, `goal_amount`, `goal_current` (use `auto` for live totals), `goal_close`, `campaign_start`, `campaign_end`, `fee_coverage`, `button_text`, `button_color`, `title`, `description`, `thank_you_url`.
+- `[donadosu_donor_portal]` — self-service subscription management; donors enter their email, receive a magic link, and view or cancel their active subscriptions.
+
+## Integrations
+
+All optional and inactive until credentials are entered: Mailchimp, Constant Contact, ActiveCampaign, Brevo (Sendinblue), Zapier, Slack, Twilio SMS, and Google Sheets.
+
+## Links
+
+- [WordPress.org plugin page](https://wordpress.org/plugins/donateocean-donation-suite): Download, full description, FAQ, screenshots, and changelog
+- [Author profile (easypayment)](https://profiles.wordpress.org/easypayment/): Plugin author on WordPress.org
+- [PayPal Developer Dashboard](https://developer.paypal.com/): Create a REST API app and obtain the Client ID and Secret credentials
+- [GPL-2.0-or-later license](https://www.gnu.org/licenses/gpl-2.0.html): Full license text
+
+## Optional
+
+- [PayPal User Agreement](https://www.paypal.com/us/legalhub/paypal/useragreement-full): PayPal Terms of Service
+- [PayPal Privacy Statement](https://www.paypal.com/us/legalhub/paypal/privacy-full): How PayPal handles payment data
