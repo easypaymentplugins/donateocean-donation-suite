@@ -277,6 +277,7 @@ class DonationDetailPage {
 		if ( isset( $_GET['donadosu_msg'] ) ) {
 			$success_messages = array(
 				'refunded'               => __( 'Refund processed successfully.', 'donateocean-donation-suite' ),
+				'partially_refunded'     => __( 'Partial refund processed successfully. The donation remains completed for the unrefunded balance.', 'donateocean-donation-suite' ),
 				'receipt_resent'         => __( 'Receipt email resent successfully.', 'donateocean-donation-suite' ),
 				'subscription_cancelled' => __( 'Subscription cancelled successfully.', 'donateocean-donation-suite' ),
 				'subscription_paused'    => __( 'Subscription paused successfully.', 'donateocean-donation-suite' ),

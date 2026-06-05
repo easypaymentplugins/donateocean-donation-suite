@@ -140,13 +140,20 @@ class StateMachine {
 	 * @return bool Whether the transition is valid.
 	 */
 	private function can_transition_subscription( string $from_status, string $to_status ): bool {
+		// Money-terminal statuses a subscription post can also move into when a
+		// refund, dispute, or capture failure/denial webhook arrives for its
+		// (first) charge. Without these the refund/dispute is recorded in meta
+		// but the post stays in an active subscription status and keeps being
+		// counted as collected revenue in reports.
+		$money_terminal = array( 'donadosu_refunded', 'donadosu_disputed', 'donadosu_failed' );
+
 		$allowed = array(
 			// Entry from initial donation creation (subscription approval flow).
 			'donadosu_created'       => array( 'donadosu_sub_active', 'donadosu_sub_failed' ),
-			'donadosu_sub_active'    => array( 'donadosu_sub_paused', 'donadosu_sub_cancelled', 'donadosu_sub_failed' ),
-			'donadosu_sub_paused'    => array( 'donadosu_sub_active', 'donadosu_sub_cancelled' ),
-			'donadosu_sub_cancelled' => array(),
-			'donadosu_sub_failed'    => array( 'donadosu_sub_active' ),
+			'donadosu_sub_active'    => array_merge( array( 'donadosu_sub_paused', 'donadosu_sub_cancelled', 'donadosu_sub_failed' ), $money_terminal ),
+			'donadosu_sub_paused'    => array_merge( array( 'donadosu_sub_active', 'donadosu_sub_cancelled' ), $money_terminal ),
+			'donadosu_sub_cancelled' => array( 'donadosu_refunded', 'donadosu_disputed' ),
+			'donadosu_sub_failed'    => array( 'donadosu_sub_active', 'donadosu_refunded', 'donadosu_disputed' ),
 		);
 
 		return in_array( $to_status, $allowed[ $from_status ] ?? array(), true );

@@ -100,7 +100,7 @@ class Shortcode {
 		$atts = shortcode_atts(
 			array(
 				'title'               => __( 'Make a Donation', 'donateocean-donation-suite' ),
-				'description'         => __( 'Fast and secure checkout with PayPal.', 'donateocean-donation-suite' ),
+				'description'         => __( 'Fast and secure checkout.', 'donateocean-donation-suite' ),
 				'currency'            => '',
 				'amounts'             => '',
 				'campaign'            => '',
@@ -115,7 +115,7 @@ class Shortcode {
 				'goal_close'          => '0',
 				'campaign_start'      => '',
 				'campaign_end'        => '',
-				'button_text'         => __( 'Donate with PayPal', 'donateocean-donation-suite' ),
+				'button_text'         => __( 'Donate now', 'donateocean-donation-suite' ),
 				'button_color'        => '',
 				'thank_you_url'       => '',
 				'redirect_on_success' => '0',
@@ -207,6 +207,21 @@ class Shortcode {
 
 		$atts['campaign_closed']  = $campaign_closed;
 		$atts['campaign_message'] = $campaign_message;
+
+		// Marketing-consent opt-in: shown when any email/CRM marketing
+		// integration is enabled, so donor consent can be captured before any
+		// third-party subscription (GDPR). Subscription is gated on this value.
+		$settings    = $this->config->get_all();
+		$crm_enabled = ! empty( $settings['mailchimp_auto_subscribe'] )
+			|| ! empty( $settings['brevo_auto_subscribe'] )
+			|| ! empty( $settings['ac_auto_subscribe'] )
+			|| ! empty( $settings['cc_auto_subscribe'] );
+
+		$atts['marketing_consent_show']  = (bool) apply_filters( 'donadosu_show_marketing_consent', $crm_enabled, $atts );
+		$consent_label                   = trim( (string) ( $settings['marketing_consent_label'] ?? '' ) );
+		$atts['marketing_consent_label'] = '' !== $consent_label
+			? $consent_label
+			: __( 'Yes, keep me updated by email about your work and future appeals. You can unsubscribe at any time.', 'donateocean-donation-suite' );
 
 		wp_enqueue_script( 'donadosu-donate' );
 		wp_enqueue_style( 'donadosu-style' );

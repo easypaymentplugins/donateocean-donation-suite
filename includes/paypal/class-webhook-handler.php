@@ -223,7 +223,11 @@ class WebhookHandler {
 
 		if ( ! $post_id || ( '' === $order_id && '' === $subscription_id ) ) {
 			// Race condition: donation post hasn't been created yet.
-			// Queue the webhook for delayed retry instead of releasing the durable claim.
+			// Release the durable claim so a later delivery or the retry cron
+			// can re-claim and actually process this event. Without the release
+			// the INSERT-IGNORE claim would dedupe every retry and the donation
+			// would be stranded in its pre-completion status forever.
+			$this->release_event_durable( $event_id );
 			$this->queue_webhook_for_retry( $event_id, $event_type, $raw_body, $headers );
 
 			$this->logger->warn(
@@ -365,38 +369,9 @@ class WebhookHandler {
 
 			// Server-side verification: reject and refund if PayPal completed
 			// a capture with a different amount or currency than we recorded.
-			$cap_value  = (float) ( $payload['resource']['amount']['value'] ?? 0.0 );
-			$cap_curr   = strtoupper( (string) ( $payload['resource']['amount']['currency_code'] ?? '' ) );
-			$expected_v = (float) get_post_meta( $post_id, DonationMeta::GROSS_AMOUNT, true );
-			$expected_c = strtoupper( (string) get_post_meta( $post_id, DonationMeta::CURRENCY, true ) );
-
-			if ( $expected_v > 0 && ( abs( $cap_value - $expected_v ) > 0.005 || $cap_curr !== $expected_c ) ) {
-				$this->logger->error(
-					'Webhook capture amount/currency mismatch — auto-refunding',
-					array(
-						'post_id'           => $post_id,
-						'expected_amount'   => $expected_v,
-						'expected_currency' => $expected_c,
-						'captured_amount'   => $cap_value,
-						'captured_currency' => $cap_curr,
-					)
-				);
-				if ( '' !== $capture_id ) {
-					$refund_result = $this->paypal->refund_capture( $capture_id, $cap_value, $cap_curr );
-					if ( empty( $refund_result['success'] ) ) {
-						$this->logger->error(
-							'Auto-refund failed after amount mismatch — manual intervention required',
-							array(
-								'post_id'    => $post_id,
-								'capture_id' => $capture_id,
-								'amount'     => $cap_value,
-								'currency'   => $cap_curr,
-								'error'      => $refund_result['error'] ?? '',
-							)
-						);
-					}
-				}
-				$this->transition( $post_id, 'donadosu_failed', $context + array( 'reason' => 'amount_mismatch' ) );
+			$cap_value = (float) ( $payload['resource']['amount']['value'] ?? 0.0 );
+			$cap_curr  = strtoupper( (string) ( $payload['resource']['amount']['currency_code'] ?? '' ) );
+			if ( ! $this->verify_capture_amount_or_refund( $post_id, $cap_value, $cap_curr, $capture_id, $context ) ) {
 				return;
 			}
 
@@ -474,6 +449,20 @@ class WebhookHandler {
 
 		if ( 'CHECKOUT.ORDER.COMPLETED' === $event_type ) {
 			$this->logger->info( 'Checkout order completed via webhook', array( 'post_id' => $post_id, 'event_id' => $event_id ) );
+
+			// Server-side verification: an order-level completion carries its
+			// captured amount under purchase_units[].payments.captures[]. Apply
+			// the same amount/currency integrity check as the capture webhook so
+			// a mismatched completion is refunded and failed, not silently
+			// marked completed (with a receipt) for the wrong amount.
+			$capture     = $payload['resource']['purchase_units'][0]['payments']['captures'][0] ?? array();
+			$o_capture_id = (string) ( $capture['id'] ?? get_post_meta( $post_id, DonationMeta::CAPTURE_ID, true ) );
+			$o_cap_value  = (float) ( $capture['amount']['value'] ?? 0.0 );
+			$o_cap_curr   = strtoupper( (string) ( $capture['amount']['currency_code'] ?? '' ) );
+			if ( $o_cap_value > 0 && ! $this->verify_capture_amount_or_refund( $post_id, $o_cap_value, $o_cap_curr, $o_capture_id, $context ) ) {
+				return;
+			}
+
 			// Backfill donor details from PayPal if not provided during payment.
 			$this->backfill_donor_from_order( $post_id );
 			if ( $this->transition( $post_id, 'donadosu_completed', $context ) ) {
@@ -932,6 +921,35 @@ class WebhookHandler {
 	 * @param string $event_type PayPal event type.
 	 * @return bool True if claimed, false if already processed.
 	 */
+	/**
+	 * Delete processed-event dedup rows older than the retention window.
+	 *
+	 * The wp_donadosu_processed_events table grew without bound (one row per
+	 * webhook ever received). Pruning old rows keeps it from bloating while
+	 * retaining a long-enough window to deduplicate any realistic redelivery.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 */
+	public static function prune_processed_events(): void {
+		global $wpdb;
+		$table = $wpdb->prefix . 'donadosu_processed_events';
+
+		/**
+		 * Filters how many days of webhook dedup rows to retain.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param int $days Retention window in days.
+		 */
+		$days   = (int) apply_filters( 'donadosu_processed_events_retention_days', 90 );
+		$cutoff = gmdate( 'Y-m-d H:i:s', time() - ( max( 1, $days ) * DAY_IN_SECONDS ) );
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name from $wpdb->prefix; value parameterised.
+		$wpdb->query( $wpdb->prepare( "DELETE FROM {$table} WHERE received_at < %s", $cutoff ) );
+	}
+
 	private function claim_event_durable( string $event_id, string $event_type ): bool {
 		global $wpdb;
 		$table = $wpdb->prefix . 'donadosu_processed_events';
@@ -963,6 +981,63 @@ class WebhookHandler {
 		$table = $wpdb->prefix . 'donadosu_processed_events';
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery
 		$wpdb->delete( $table, array( 'event_id' => $event_id ), array( '%s' ) );
+	}
+
+	/**
+	 * Verify a captured amount/currency against the recorded gross, refunding
+	 * and failing the donation on mismatch.
+	 *
+	 * Shared by every completion path (capture webhook, order-completed
+	 * webhook) so a payment captured for a different amount than recorded is
+	 * never silently marked completed.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int                  $post_id    Donation post ID.
+	 * @param float                $cap_value  Captured amount reported by PayPal.
+	 * @param string               $cap_curr   Captured currency (uppercase).
+	 * @param string               $capture_id Capture ID to refund on mismatch.
+	 * @param array<string, mixed> $context    Transition context.
+	 * @return bool True if the amount matches (safe to complete), false if a
+	 *              mismatch was detected and the donation was failed/refunded.
+	 */
+	private function verify_capture_amount_or_refund( int $post_id, float $cap_value, string $cap_curr, string $capture_id, array $context ): bool {
+		$expected_v = (float) get_post_meta( $post_id, DonationMeta::GROSS_AMOUNT, true );
+		$expected_c = strtoupper( (string) get_post_meta( $post_id, DonationMeta::CURRENCY, true ) );
+
+		if ( $expected_v <= 0 || ( abs( $cap_value - $expected_v ) <= 0.005 && $cap_curr === $expected_c ) ) {
+			return true;
+		}
+
+		$this->logger->error(
+			'Webhook capture amount/currency mismatch — auto-refunding',
+			array(
+				'post_id'           => $post_id,
+				'expected_amount'   => $expected_v,
+				'expected_currency' => $expected_c,
+				'captured_amount'   => $cap_value,
+				'captured_currency' => $cap_curr,
+			)
+		);
+
+		if ( '' !== $capture_id ) {
+			$refund_result = $this->paypal->refund_capture( $capture_id, $cap_value, $cap_curr );
+			if ( empty( $refund_result['success'] ) ) {
+				$this->logger->error(
+					'Auto-refund failed after amount mismatch — manual intervention required',
+					array(
+						'post_id'    => $post_id,
+						'capture_id' => $capture_id,
+						'amount'     => $cap_value,
+						'currency'   => $cap_curr,
+						'error'      => $refund_result['error'] ?? '',
+					)
+				);
+			}
+		}
+
+		$this->transition( $post_id, 'donadosu_failed', $context + array( 'reason' => 'amount_mismatch' ) );
+		return false;
 	}
 
 	public function is_event_globally_processed( string $event_id ): bool {

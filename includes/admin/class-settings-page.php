@@ -81,6 +81,25 @@ class SettingsPage {
 	private const TAB_INTEGRATIONS = 'integrations';
 
 	/**
+	 * Option storing the keys of inline state banners the admin has dismissed.
+	 *
+	 * Holds an array of connection-state keys (e.g. 'disconnected',
+	 * 'sandbox_active'); a key in the array means that banner stays hidden.
+	 *
+	 * @since 1.0.7
+	 * @var string
+	 */
+	private const DISMISSED_NOTICES_OPTION = 'donadosu_dismissed_notices';
+
+	/**
+	 * Inline state banners that may be dismissed and persisted.
+	 *
+	 * @since 1.0.7
+	 * @var string[]
+	 */
+	private const DISMISSIBLE_NOTICES = array( 'disconnected', 'sandbox_active' );
+
+	/**
 	 * Webhook registrar instance.
 	 *
 	 * @since 1.0.0
@@ -114,6 +133,8 @@ class SettingsPage {
 		add_action( 'wp_ajax_donadosu_test_connection', array( $this, 'handle_test_connection' ) );
 		add_action( 'wp_ajax_donadosu_send_test_email', array( $this, 'handle_test_email' ) );
 		add_action( 'wp_ajax_donadosu_disconnect_paypal', array( $this, 'handle_disconnect' ) );
+		add_action( 'wp_ajax_donadosu_dismiss_notice', array( $this, 'handle_dismiss_notice' ) );
+		add_action( 'wp_ajax_donadosu_test_mailchimp', array( $this, 'handle_test_mailchimp' ) );
 		add_action( 'wp_ajax_donadosu_test_zapier', array( $this, 'handle_test_zapier' ) );
 		add_action( 'wp_ajax_donadosu_test_slack', array( $this, 'handle_test_slack' ) );
 		add_action( 'wp_ajax_donadosu_test_twilio', array( $this, 'handle_test_twilio' ) );
@@ -201,7 +222,15 @@ class SettingsPage {
 		register_setting(
 			ConfigService::OPTION_KEY,
 			ConfigService::OPTION_KEY,
-			array( 'sanitize_callback' => array( $this, 'sanitize' ) )
+			array(
+				'sanitize_callback' => array( $this, 'sanitize' ),
+				// This option holds PayPal and integration secrets; never
+				// autoload it into memory on every front-end request.
+				// (The 'autoload' arg is honoured on WP 6.6+ and ignored
+				// gracefully on older versions; the installer also flips the
+				// flag via wp_set_option_autoload() for existing installs.)
+				'autoload'          => false,
+			)
 		);
 	}
 
@@ -219,6 +248,16 @@ class SettingsPage {
 	 */
 	public function sanitize( array $input ): array {
 		$existing_settings = (array) get_option( ConfigService::OPTION_KEY, array() );
+
+		// When the UI submits the masked placeholder, keep the existing
+		// (already-encrypted) value so a save-without-edit doesn't destroy secrets.
+		$masked_placeholder = '••••••••';
+		foreach ( array( 'sandbox_secret', 'live_secret', 'mailchimp_api_key', 'cc_client_secret', 'twilio_auth_token', 'ac_api_key', 'brevo_api_key', 'zapier_secret_key' ) as $secret_field ) {
+			if ( isset( $input[ $secret_field ] ) && $masked_placeholder === $input[ $secret_field ] ) {
+				$input[ $secret_field ] = ConfigService::decrypt_secret( (string) ( $existing_settings[ $secret_field ] ?? '' ) );
+			}
+		}
+
 		$active_tab        = sanitize_text_field( (string) ( $input['_active_tab'] ?? '' ) );
 
 		$environment_keys = array(
@@ -277,7 +316,8 @@ class SettingsPage {
 			'mailchimp_list_id',
 			'mailchimp_auto_subscribe',
 			'mailchimp_double_optin',
-			'cc_api_key',
+			'cc_client_id',
+			'cc_client_secret',
 			'cc_list_id',
 			'cc_auto_subscribe',
 			'zapier_enabled',
@@ -352,6 +392,21 @@ class SettingsPage {
 		$min_amount_input = trim( (string) $get_input_or_stored_value( 'min_amount', $existing_settings['min_amount'] ?? '' ) );
 		$max_amount_input = trim( (string) $get_input_or_stored_value( 'max_amount', $existing_settings['max_amount'] ?? '' ) );
 
+		$sanitized_min = '' === $min_amount_input ? 1.0 : max( 0.5, (float) $min_amount_input );
+		$sanitized_max = '' === $max_amount_input ? 100000.0 : min( 999999.0, (float) $max_amount_input );
+
+		// Reject saves where minimum is not strictly below maximum.
+		if ( self::TAB_EXPERIENCE === $active_tab && $sanitized_min >= $sanitized_max ) {
+			add_settings_error(
+				ConfigService::OPTION_KEY,
+				'donadosu_invalid_min_max',
+				__( 'Minimum amount must be lower than the maximum amount. Values were not saved.', 'donateocean-donation-suite' ),
+				'error'
+			);
+			$sanitized_min = (float) ( $existing_settings['min_amount'] ?? 1 );
+			$sanitized_max = (float) ( $existing_settings['max_amount'] ?? 100000 );
+		}
+
 		$settings = array(
 			'sandbox'                  => empty( $get_input_or_stored_value( 'sandbox', 1 ) ) ? 0 : 1,
 			'sandbox_client_id'        => sanitize_text_field( (string) $get_input_or_stored_value( 'sandbox_client_id', '' ) ),
@@ -365,8 +420,8 @@ class SettingsPage {
 			'currency'                 => $default_currency,
 			'allowed_currencies'       => $currencies ? $currencies : array( $default_currency ),
 			'custom_amount'            => empty( $get_input_or_stored_value( 'custom_amount', 1 ) ) ? 0 : 1,
-			'min_amount'               => '' === $min_amount_input ? 1 : max( 0.5, (float) $min_amount_input ),
-			'max_amount'               => '' === $max_amount_input ? 100000 : min( 999999, (float) $max_amount_input ),
+			'min_amount'               => $sanitized_min,
+			'max_amount'               => $sanitized_max,
 			'preset_amounts'           => sanitize_text_field( (string) $get_input_or_stored_value( 'preset_amounts', '10,25,50,100' ) ),
 			'enable_logging'           => empty( $get_input_or_stored_value( 'enable_logging', 0 ) ) ? 0 : 1,
 			'logging_level'            => ( static function ( string $level ): string {
@@ -377,8 +432,18 @@ class SettingsPage {
 			'reg_id'                   => sanitize_text_field( (string) $get_input_or_stored_value( 'reg_id', '' ) ),
 			'contact_email'            => sanitize_email( (string) $get_input_or_stored_value( 'contact_email', '' ) ),
 			'tax_disclaimer'           => sanitize_textarea_field( (string) $get_input_or_stored_value( 'tax_disclaimer', 'No goods or services were provided in exchange for this donation.' ) ),
-			'privacy_url'              => esc_url_raw( (string) $get_input_or_stored_value( 'privacy_url', '' ) ),
-			'refund_url'               => esc_url_raw( (string) $get_input_or_stored_value( 'refund_url', '' ) ),
+			'privacy_url'              => self::sanitize_url_field(
+				(string) $get_input_or_stored_value( 'privacy_url', '' ),
+				(string) ( $existing_settings['privacy_url'] ?? '' ),
+				__( 'Privacy URL', 'donateocean-donation-suite' ),
+				self::TAB_COMPLIANCE === $active_tab
+			),
+			'refund_url'               => self::sanitize_url_field(
+				(string) $get_input_or_stored_value( 'refund_url', '' ),
+				(string) ( $existing_settings['refund_url'] ?? '' ),
+				__( 'Refund URL', 'donateocean-donation-suite' ),
+				self::TAB_COMPLIANCE === $active_tab
+			),
 			'retention_months'         => max( 1, (int) $get_input_or_stored_value( 'retention_months', 24 ) ),
 			'store_raw_payload'        => empty( $get_input_or_stored_value( 'store_raw_payload', 0 ) ) ? 0 : 1,
 			'enable_recurring'             => empty( $get_input_or_stored_value( 'enable_recurring', 0 ) ) ? 0 : 1,
@@ -418,7 +483,8 @@ class SettingsPage {
 			'mailchimp_list_id'        => sanitize_text_field( (string) $get_input_or_stored_value( 'mailchimp_list_id', '' ) ),
 			'mailchimp_auto_subscribe' => empty( $get_input_or_stored_value( 'mailchimp_auto_subscribe', 0 ) ) ? 0 : 1,
 			'mailchimp_double_optin'   => empty( $get_input_or_stored_value( 'mailchimp_double_optin', 0 ) ) ? 0 : 1,
-			'cc_api_key'               => sanitize_text_field( (string) $get_input_or_stored_value( 'cc_api_key', '' ) ),
+			'cc_client_id'             => sanitize_text_field( (string) $get_input_or_stored_value( 'cc_client_id', '' ) ),
+			'cc_client_secret'         => sanitize_text_field( (string) $get_input_or_stored_value( 'cc_client_secret', '' ) ),
 			'cc_list_id'               => sanitize_text_field( (string) $get_input_or_stored_value( 'cc_list_id', '' ) ),
 			'cc_auto_subscribe'        => empty( $get_input_or_stored_value( 'cc_auto_subscribe', 0 ) ) ? 0 : 1,
 			'zapier_enabled'           => empty( $get_input_or_stored_value( 'zapier_enabled', 0 ) ) ? 0 : 1,
@@ -540,6 +606,13 @@ class SettingsPage {
 			}
 		}
 
+		// Encrypt secret fields before persisting to the database.
+		foreach ( $settings as $key => $value ) {
+			if ( ConfigService::is_secret_key( $key ) && '' !== (string) $value ) {
+				$settings[ $key ] = ConfigService::encrypt_secret( (string) $value );
+			}
+		}
+
 		return $settings;
 	}
 
@@ -588,7 +661,7 @@ class SettingsPage {
 		$stored_settings = (array) get_option( ConfigService::OPTION_KEY, array() );
 		$email_key       = $sandbox ? 'sandbox_connected_email' : 'live_connected_email';
 		$stored_settings[ $email_key ] = sanitize_email( $email );
-		update_option( ConfigService::OPTION_KEY, $stored_settings );
+		update_option( ConfigService::OPTION_KEY, $stored_settings, false );
 
 		$env = $sandbox ? __( 'Sandbox', 'donateocean-donation-suite' ) : __( 'Live', 'donateocean-donation-suite' );
 		wp_send_json_success(
@@ -696,7 +769,7 @@ class SettingsPage {
 		$settings[ $prefix . 'webhook_id' ]       = '';
 		$settings[ $prefix . 'connected_email' ]  = '';
 
-		update_option( ConfigService::OPTION_KEY, $settings );
+		update_option( ConfigService::OPTION_KEY, $settings, false );
 
 		// Clear cached OAuth token for this environment.
 		delete_transient( 'donadosu_token_' . ( $sandbox ? 'sandbox' : 'live' ) );
@@ -711,6 +784,81 @@ class SettingsPage {
 				),
 			)
 		);
+	}
+
+	/**
+	 * AJAX handler to persist dismissal of an inline state banner.
+	 *
+	 * Records the dismissed banner key so it is not rendered again on the
+	 * settings screen.
+	 *
+	 * @since 1.0.7
+	 *
+	 * @return void
+	 */
+	public function handle_dismiss_notice(): void {
+		check_ajax_referer( 'donadosu_admin_actions', 'nonce' );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Insufficient permissions.', 'donateocean-donation-suite' ) ), 403 );
+		}
+
+		$notice = isset( $_POST['notice'] ) ? sanitize_key( wp_unslash( $_POST['notice'] ) ) : '';
+
+		if ( ! in_array( $notice, self::DISMISSIBLE_NOTICES, true ) ) {
+			wp_send_json_error( array( 'message' => __( 'Unknown notice.', 'donateocean-donation-suite' ) ) );
+		}
+
+		$dismissed = self::get_dismissed_notices();
+		if ( ! in_array( $notice, $dismissed, true ) ) {
+			$dismissed[] = $notice;
+			update_option( self::DISMISSED_NOTICES_OPTION, $dismissed, false );
+		}
+
+		wp_send_json_success();
+	}
+
+	/**
+	 * Return the list of inline state banners the admin has dismissed.
+	 *
+	 * @since 1.0.7
+	 *
+	 * @return string[] Dismissed banner keys.
+	 */
+	private static function get_dismissed_notices(): array {
+		$dismissed = get_option( self::DISMISSED_NOTICES_OPTION, array() );
+
+		return is_array( $dismissed ) ? array_values( array_intersect( $dismissed, self::DISMISSIBLE_NOTICES ) ) : array();
+	}
+
+	/**
+	 * AJAX handler to test the Mailchimp API connection.
+	 *
+	 * @since 1.0.5
+	 *
+	 * @return void
+	 */
+	public function handle_test_mailchimp(): void {
+		check_ajax_referer( 'donadosu_admin_actions', 'nonce' );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => __( 'Insufficient permissions.', 'donateocean-donation-suite' ) ), 403 );
+		}
+
+		$api_key = isset( $_POST['api_key'] ) ? sanitize_text_field( wp_unslash( $_POST['api_key'] ) ) : '';
+		$list_id = isset( $_POST['list_id'] ) ? sanitize_text_field( wp_unslash( $_POST['list_id'] ) ) : '';
+
+		if ( '' === $api_key || '' === $list_id ) {
+			wp_send_json_error( array( 'message' => __( 'Please provide both the API key and audience ID.', 'donateocean-donation-suite' ) ) );
+		}
+
+		$result = \DonationSuite\Integration\Mailchimp::test_connection( $api_key, $list_id );
+
+		if ( $result['success'] ) {
+			wp_send_json_success( array( 'message' => $result['message'] ) );
+		} else {
+			wp_send_json_error( array( 'message' => $result['message'] ) );
+		}
 	}
 
 	/**
@@ -955,13 +1103,47 @@ class SettingsPage {
 			wp_die( esc_html__( 'You do not have permission to view this page.', 'donateocean-donation-suite' ) );
 		}
 
-		$settings     = ( new ConfigService() )->get_all();
-		$activeTab    = $this->get_active_tab();
-		$tabs         = $this->get_tabs();
-		$settingsTabs = $this->get_settings_tabs();
-		$toolTabs     = $this->get_tool_tabs();
+		$settings         = ( new ConfigService() )->get_all();
+		$activeTab        = $this->get_active_tab();
+		$tabs             = $this->get_tabs();
+		$settingsTabs     = $this->get_settings_tabs();
+		$toolTabs         = $this->get_tool_tabs();
+		$connectionState  = ( new ConfigService() )->get_connection_state();
+		$dismissedNotices = self::get_dismissed_notices();
 
 		include DONADOSU_PATH . 'templates/admin-settings.php';
+	}
+
+	/**
+	 * Sanitize a URL field and surface an error if it is invalid.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $raw       Raw input value from the form.
+	 * @param string $fallback  Existing stored value to revert to on failure.
+	 * @param string $label     Human-readable field name for the error message.
+	 * @param bool   $on_tab    Whether the field's tab is the one being saved.
+	 * @return string Sanitized URL or fallback when input was unparseable.
+	 */
+	private static function sanitize_url_field( string $raw, string $fallback, string $label, bool $on_tab ): string {
+		$raw       = trim( $raw );
+		$sanitized = esc_url_raw( $raw );
+
+		if ( '' !== $raw && '' === $sanitized && $on_tab ) {
+			add_settings_error(
+				ConfigService::OPTION_KEY,
+				'donadosu_invalid_url_' . sanitize_key( $label ),
+				sprintf(
+					/* translators: %s: field name (e.g. "Privacy URL"). */
+					__( '%s is not a valid URL — the previous value was kept.', 'donateocean-donation-suite' ),
+					$label
+				),
+				'error'
+			);
+			return $fallback;
+		}
+
+		return $sanitized;
 	}
 
 	/**
@@ -973,9 +1155,25 @@ class SettingsPage {
 	 */
 	private function get_active_tab(): string {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading tab for display purposes only.
-		$tab = isset( $_GET['tab'] ) ? sanitize_key( (string) wp_unslash( $_GET['tab'] ) ) : self::TAB_ENVIRONMENT;
+		if ( ! isset( $_GET['tab'] ) ) {
+			return self::TAB_ENVIRONMENT;
+		}
 
-		return array_key_exists( $tab, $this->get_tabs() ) ? $tab : self::TAB_ENVIRONMENT;
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading tab for display purposes only.
+		$tab = sanitize_key( (string) wp_unslash( $_GET['tab'] ) );
+
+		if ( array_key_exists( $tab, $this->get_tabs() ) ) {
+			return $tab;
+		}
+
+		// Unknown tab — redirect to a clean URL on the default tab so the
+		// browser address bar reflects what is being shown.
+		if ( ! headers_sent() ) {
+			wp_safe_redirect( admin_url( 'admin.php?page=donadosu-settings' ) );
+			exit;
+		}
+
+		return self::TAB_ENVIRONMENT;
 	}
 
 	/**
@@ -998,7 +1196,7 @@ class SettingsPage {
 	 */
 	private function get_settings_tabs(): array {
 		return array(
-			self::TAB_ENVIRONMENT  => __( 'Environment & API Credentials', 'donateocean-donation-suite' ),
+			self::TAB_ENVIRONMENT  => __( 'PayPal Connection', 'donateocean-donation-suite' ),
 			self::TAB_EXPERIENCE   => __( 'Donation Experience', 'donateocean-donation-suite' ),
 			self::TAB_COMPLIANCE   => __( 'Organization & Compliance', 'donateocean-donation-suite' ),
 			self::TAB_ADVANCED     => __( 'Advanced & Security', 'donateocean-donation-suite' ),

@@ -754,3 +754,91 @@
     gap: 10px;
     font-size: 12px;
 }
+
+/* ── Tooltip (? icon) ──────────────────────────────────────────────────── */
+.donadosu-tooltip {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    margin-left: 4px;
+    cursor: help;
+}
+
+.donadosu-tooltip__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #9ca3af;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+    transition: background-color 120ms ease;
+}
+
+/* Darken the icon on hover/focus, mirroring the WooCommerce help tip. */
+.donadosu-tooltip:hover .donadosu-tooltip__icon,
+.donadosu-tooltip:focus .donadosu-tooltip__icon {
+    background: #2c3338;
+}
+
+/* WooCommerce-style tooltip bubble: dark, centered above the icon with a
+   downward arrow (see ::before) and centered text. */
+.donadosu-tooltip::after {
+    content: attr(aria-label);
+    position: absolute;
+    bottom: calc(100% + 9px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2c3338;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 8px 11px;
+    border-radius: 3px;
+    white-space: normal;
+    width: max-content;
+    max-width: 220px;
+    text-align: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 140ms ease;
+    z-index: 100;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Tooltip arrow — points down from the bubble toward the icon. */
+.donadosu-tooltip::before {
+    content: "";
+    position: absolute;
+    bottom: calc(100% + 3px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #2c3338;
+    opacity: 0;
+    transition: opacity 140ms ease;
+    pointer-events: none;
+    z-index: 101;
+}
+
+.donadosu-tooltip:hover::after,
+.donadosu-tooltip:focus::after,
+.donadosu-tooltip:hover::before,
+.donadosu-tooltip:focus::before {
+    opacity: 1;
+}
+
+.donadosu-tooltip:focus-visible .donadosu-tooltip__icon {
+    box-shadow: 0 0 0 3px rgba(34, 113, 177, 0.4);
+    outline: none;
+}

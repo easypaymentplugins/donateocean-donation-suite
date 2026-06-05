@@ -43,6 +43,13 @@ wp_clear_scheduled_hook( 'donadosu_renewal_charges' );
 
 delete_option( 'donadosu_activated_at' );
 
+// Review notice state (tiny options; cleaned regardless of the cleanup setting).
+delete_option( 'donadosu_review_notice_hide' );
+delete_option( 'donadosu_review_next_show' );
+
+// Dismissed inline state banners (tiny option; cleaned regardless of the cleanup setting).
+delete_option( 'donadosu_dismissed_notices' );
+
 /*
  * If cleanup is enabled, delete all donation posts, custom tables,
  * options, transients, and the log directory.
@@ -80,6 +87,7 @@ if ( $donadosu_cleanup ) {
 	delete_option( 'donadosu_db_version' );
 	delete_option( 'donadosu_webhook_retry_queue' );
 	delete_option( 'donadosu_campaign_goals' );
+	delete_option( 'donadosu_cc_tokens' );
 
 	// Clean up transients.
 	delete_transient( 'donadosu_token_sandbox' );

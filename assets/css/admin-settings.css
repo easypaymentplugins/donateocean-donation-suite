@@ -35,6 +35,48 @@
     font-weight: 650;
 }
 
+.donadosu-settings-toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 0 12px;
+}
+
+.donadosu-support-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border: 1px solid #8a8f98;
+    border-radius: 7px;
+    background: #ffffff;
+    color: #3d4148;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none;
+    transition: transform 120ms ease, background-color 140ms ease,
+        border-color 140ms ease, color 140ms ease;
+}
+
+.donadosu-support-link .dashicons {
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+}
+
+.donadosu-support-link:hover,
+.donadosu-support-link:focus {
+    background: #f3f3f3;
+    border-color: #3d4148;
+    color: #111111;
+    transform: translateY(-1px);
+}
+
+.donadosu-support-link:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(17, 17, 17, 0.25);
+}
+
 .donadosu-eyebrow {
     display: inline-flex;
     margin: 10px 0 0;
@@ -117,6 +159,42 @@
 
 .donadosu-inline-notice[hidden] {
     display: none;
+}
+
+.donadosu-inline-notice[data-donadosu-dismissible-notice] {
+    position: relative;
+    padding-right: 42px;
+}
+
+.donadosu-notice-dismiss {
+    position: absolute;
+    top: 50%;
+    right: 6px;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #787c82;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.donadosu-notice-dismiss:hover,
+.donadosu-notice-dismiss:focus {
+    color: #1d2327;
+    background: rgba(0, 0, 0, 0.06);
+}
+
+.donadosu-notice-dismiss .dashicons {
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+    line-height: 18px;
 }
 
 #donadosu-sc-recurring-warning {
@@ -284,26 +362,6 @@
     color: #555555;
 }
 
-.donadosu-step-item.is-complete .donadosu-step-item__link {
-    border-color: transparent;
-    background: transparent;
-}
-
-.donadosu-step-item.is-complete .donadosu-step-item__index {
-    border-color: #555555;
-    color: #ffffff;
-    background: #555555;
-    font-size: 10px;
-}
-
-.donadosu-step-item.is-complete .donadosu-step-item__label {
-    color: #616467;
-}
-
-.donadosu-step-item.is-complete .donadosu-step-item__status {
-    color: #8a8f98;
-}
-
 .donadosu-setup-wizard__note {
     margin: 10px 2px 0;
     font-size: 11px;
@@ -434,6 +492,14 @@
     vertical-align: top;
 }
 
+/* Honor the [hidden] attribute on settings rows. The responsive layout further
+   down sets `display: block` on `.form-table tr`, which would otherwise win over
+   the UA stylesheet's `[hidden] { display: none }` and reveal toggled-off rows
+   (e.g. the fee-coverage dependents) on narrow viewports. */
+.donadosu-settings-card .form-table tr[hidden] {
+    display: none;
+}
+
 .donadosu-settings-card .form-table th {
     width: 210px;
     padding: 11px 14px 0 0;
@@ -545,21 +611,6 @@
 
 .donadosu-credentials-guide[open] .donadosu-credentials-guide__summary::after {
     transform: rotate(-135deg) translate(-2px, -2px);
-}
-
-.donadosu-credentials-guide__icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex: 0 0 auto;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: #8a8f98;
-    color: #ffffff;
-    font-size: 11px;
-    font-weight: 700;
-    line-height: 1;
 }
 
 .donadosu-credentials-guide__title {
@@ -919,36 +970,47 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
-    background: #8a8f98;
+    background: #9ca3af;
     color: #ffffff;
     font-size: 11px;
     font-weight: 700;
     line-height: 1;
+    transition: background-color 120ms ease;
 }
 
+/* Darken the icon on hover/focus, mirroring the WooCommerce help tip. */
+.donadosu-tooltip:hover .donadosu-tooltip__icon,
+.donadosu-tooltip:focus .donadosu-tooltip__icon {
+    background: #2c3338;
+}
+
+/* WooCommerce-style tooltip bubble: dark, centered above the icon with a
+   downward arrow (see ::before) and centered text. */
 .donadosu-tooltip::after {
     content: attr(aria-label);
     position: absolute;
-    left: calc(100% + 8px);
-    top: 50%;
-    transform: translateY(-50%);
-    background: #1e1e1e;
+    bottom: calc(100% + 9px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2c3338;
     color: #ffffff;
     font-size: 12px;
     font-weight: 400;
-    line-height: 1.45;
-    padding: 8px 12px;
-    border-radius: 6px;
+    line-height: 1.5;
+    padding: 8px 11px;
+    border-radius: 3px;
     white-space: normal;
-    width: 260px;
+    width: max-content;
+    max-width: 220px;
+    text-align: center;
     pointer-events: none;
     opacity: 0;
     transition: opacity 140ms ease;
     z-index: 100;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .donadosu-tooltip:hover::after,
@@ -1095,9 +1157,13 @@
     opacity: 0.55;
 }
 
-/* Checkbox variant */
+/* Checkbox variant — lay the label and its tooltip out on a single row so
+   the ? icon sits inline next to the label instead of stretching full-width
+   and dropping onto a centered second line. */
 .donadosu-sc-field--checkbox {
-    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    gap: 7px;
     padding-top: 4px;
 }
 
@@ -1294,9 +1360,9 @@
 .donadosu-disconnect-btn {
     border: 1px solid var(--donadosu-border) !important;
     background: #ffffff !important;
-    color: #374151 !important;
+    color: var(--donadosu-text) !important;
     font-size: 13px !important;
-    font-weight: 500 !important;
+    font-weight: 600 !important;
     padding: 6px 16px !important;
     min-height: 36px !important;
     border-radius: 7px !important;
@@ -1305,9 +1371,8 @@
 }
 
 .donadosu-disconnect-btn:hover {
-    border-color: #dc2626 !important;
-    color: #dc2626 !important;
-    background: #fef2f2 !important;
+    border-color: #8c8f94 !important;
+    background: #f6f7f7 !important;
 }
 
 .donadosu-disconnect-btn:disabled {
@@ -1919,15 +1984,18 @@
     box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.08);
 }
 
-/* Tooltip — add a subtle arrow for clearer attribution */
+/* Tooltip arrow — points down from the bubble toward the icon. */
 .donadosu-tooltip::before {
     content: "";
     position: absolute;
-    left: calc(100% + 2px);
-    top: 50%;
-    transform: translateY(-50%);
-    border: 6px solid transparent;
-    border-right-color: #1e1e1e;
+    bottom: calc(100% + 3px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #2c3338;
     opacity: 0;
     transition: opacity 140ms ease;
     pointer-events: none;
@@ -1977,7 +2045,7 @@
 
 .donadosu-disconnect-btn:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.18);
+    box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.18);
 }
 
 /* Card edge: when followed by an actions bar, kill the rounded bottom seam */
@@ -2260,5 +2328,41 @@
         border: 1px solid #000000;
         box-shadow: none;
         background: #ffffff;
+    }
+}
+
+.donadosu-min-max-hint {
+    margin-top: 4px;
+}
+
+/* ── Integration legend ─────────────────────────────────────────────────── */
+.donadosu-integration-legend {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    margin: 0 0 12px;
+    color: var(--donadosu-subtle);
+    font-size: 12px;
+}
+
+.donadosu-integration-legend__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.donadosu-integration-legend__dot {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* ── Shortcode Builder: accent color field layout ───────────────────────── */
+.donadosu-sc-field--accent {
+    grid-column: span 2;
+}
+
+@media (max-width: 720px) {
+    .donadosu-sc-field--accent {
+        grid-column: 1 / -1;
     }
 }

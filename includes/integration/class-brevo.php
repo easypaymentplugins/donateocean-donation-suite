@@ -105,6 +105,11 @@ class Brevo {
 			return;
 		}
 
+		// Only subscribe donors who explicitly opted in to marketing (GDPR).
+		if ( ! \DonationSuite\Core\Consent::has_marketing_consent( $post_id ) ) {
+			return;
+		}
+
 		// Do not subscribe anonymous donors to mailing lists.
 		$is_anonymous = '1' === (string) get_post_meta( $post_id, DonationMeta::IS_ANONYMOUS, true );
 		if ( $is_anonymous ) {

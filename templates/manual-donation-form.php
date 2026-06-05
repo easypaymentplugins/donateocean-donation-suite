@@ -87,7 +87,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
                     </select>
                 </div>
                 <div class="donadosu-field-group">
-                    <label for="donadosu-reference"><?php esc_html_e('Reference / Cheque Number', 'donateocean-donation-suite'); ?></label>
+                    <label for="donadosu-reference"><?php esc_html_e('Reference / Cheque Number', 'donateocean-donation-suite'); ?> <span class="donadosu-tooltip" tabindex="0" aria-label="<?php esc_attr_e('Optional. Appears on the receipt.', 'donateocean-donation-suite'); ?>"><span class="donadosu-tooltip__icon" aria-hidden="true">?</span></span></label>
                     <input
                         type="text"
                         id="donadosu-reference"
@@ -95,7 +95,6 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
                         placeholder="e.g. CHQ-001234"
                         value="<?php echo esc_attr( sanitize_text_field( (string) wp_unslash( (string) ( $_POST['offline_reference'] ?? '' ) ) ) ); ?>"
                     />
-                    <p class="description"><?php esc_html_e('Optional. Appears on the receipt.', 'donateocean-donation-suite'); ?></p>
                 </div>
             </div>
 
@@ -233,11 +232,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
                     value="1"
                     <?php checked(! isset($_POST['donadosu_manual_submit']) || ! empty($_POST['send_receipt'])); ?>
                 />
-                <label for="donadosu-send-receipt"><?php esc_html_e('Send receipt email to donor', 'donateocean-donation-suite'); ?></label>
+                <label for="donadosu-send-receipt"><?php esc_html_e('Send receipt email to donor', 'donateocean-donation-suite'); ?> <span class="donadosu-tooltip" tabindex="0" aria-label="<?php esc_attr_e('Uses the same HTML receipt template as PayPal donations. Leave unticked if the donor should not receive an automated email.', 'donateocean-donation-suite'); ?>"><span class="donadosu-tooltip__icon" aria-hidden="true">?</span></span></label>
             </div>
-            <p class="description" style="margin-top:6px;font-size:12px;color:#9ca3af;">
-                <?php esc_html_e('Uses the same HTML receipt template as PayPal donations. Leave unticked if the donor should not receive an automated email.', 'donateocean-donation-suite'); ?>
-            </p>
         </div>
 
         <div style="margin-top:20px;display:flex;gap:10px;align-items:center;">

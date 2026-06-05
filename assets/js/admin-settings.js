@@ -20,6 +20,25 @@
         setTimeout(function () { if (notice.parentNode) notice.remove(); }, 8000);
     }
 
+    // ── Dismissible inline state banners ─────────────────────────────────────
+    // The "Setup required" / "Sandbox (Test Mode) active" banners carry a
+    // dismiss button. Remove the banner on click and persist the choice so it
+    // does not render again on the next visit.
+    root.querySelectorAll('[data-donadosu-dismissible-notice]').forEach(function (notice) {
+        var dismissBtn = notice.querySelector('.donadosu-notice-dismiss');
+        if (!dismissBtn) return;
+        dismissBtn.addEventListener('click', function () {
+            notice.remove();
+            if (typeof donadosuAdmin === 'undefined') return;
+            var body = new URLSearchParams({
+                action: 'donadosu_dismiss_notice',
+                nonce: donadosuAdmin.nonce,
+                notice: notice.getAttribute('data-donadosu-dismissible-notice') || '',
+            });
+            fetch(donadosuAdmin.ajaxUrl, { method: 'POST', body: body }).catch(function () {});
+        });
+    });
+
     // ── Copy-to-clipboard helper ──────────────────────────────────────────────
     root.querySelectorAll('.donadosu-copy-btn').forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -204,6 +223,32 @@
         });
     }
 
+    // ── Confirm-before-navigate helper (year-end emails, etc.) ─────────────
+    root.querySelectorAll('[data-donadosu-confirm]').forEach(function (el) {
+        el.addEventListener('click', function (e) {
+            var msg = el.getAttribute('data-donadosu-confirm');
+            if (msg && !confirm(msg)) {
+                e.preventDefault();
+            }
+        });
+    });
+
+    // ── Finish setup → land on the donations list ─────────────────────────
+    var finishBtn = root.querySelector('#donadosu-finish-setup');
+    if (finishBtn) {
+        finishBtn.addEventListener('click', function () {
+            var form = finishBtn.closest('form');
+            var refererInput = form ? form.querySelector('[name="_wp_http_referer"]') : null;
+            var target = finishBtn.dataset.finishTarget;
+            if (refererInput && target) {
+                try {
+                    var url = new URL(target, window.location.origin);
+                    refererInput.value = url.pathname + url.search;
+                } catch (_) {}
+            }
+        });
+    }
+
     // ── Disconnect PayPal account ───────────────────────────────────────────
     root.querySelectorAll('.donadosu-disconnect-paypal').forEach(function (btn) {
         if (typeof donadosuAdmin === 'undefined') return;
@@ -271,6 +316,50 @@
                 .finally(function () {
                     testEmailBtn.disabled = false;
                     testEmailBtn.textContent = 'Send test email';
+                });
+        });
+    }
+
+    // ── Test Mailchimp connection ───────────────────────────────────────────────
+    var mailchimpTestBtn = root.querySelector('#donadosu-mailchimp-test');
+    var mailchimpTestResult = root.querySelector('#donadosu-mailchimp-test-result');
+    if (mailchimpTestBtn && mailchimpTestResult && typeof donadosuAdmin !== 'undefined') {
+        mailchimpTestBtn.addEventListener('click', function () {
+            var apiKeyInput = root.querySelector('#donadosu-mailchimp-api-key');
+            var listIdInput = root.querySelector('#donadosu-mailchimp-list-id');
+            var apiKey = apiKeyInput ? apiKeyInput.value.trim() : '';
+            var listId = listIdInput ? listIdInput.value.trim() : '';
+
+            if (!apiKey || !listId) {
+                mailchimpTestResult.textContent = 'Please enter both the API key and audience ID.';
+                mailchimpTestResult.className = 'donadosu-inline-result donadosu-inline-result--error';
+                return;
+            }
+
+            mailchimpTestBtn.disabled = true;
+            mailchimpTestBtn.textContent = 'Testing…';
+            mailchimpTestResult.textContent = '';
+            mailchimpTestResult.className = 'donadosu-inline-result';
+
+            var body = new URLSearchParams({
+                action: 'donadosu_test_mailchimp',
+                nonce: donadosuAdmin.nonce,
+                api_key: apiKey,
+                list_id: listId,
+            });
+            fetch(donadosuAdmin.ajaxUrl, { method: 'POST', body: body })
+                .then(function (r) { return r.json(); })
+                .then(function (data) {
+                    mailchimpTestResult.textContent = data.data && data.data.message ? data.data.message : (data.success ? 'Connected.' : 'Failed.');
+                    mailchimpTestResult.classList.add(data.success ? 'donadosu-inline-result--success' : 'donadosu-inline-result--error');
+                })
+                .catch(function () {
+                    mailchimpTestResult.textContent = 'Request failed. Check browser console.';
+                    mailchimpTestResult.classList.add('donadosu-inline-result--error');
+                })
+                .finally(function () {
+                    mailchimpTestBtn.disabled = false;
+                    mailchimpTestBtn.textContent = 'Test connection';
                 });
         });
     }
@@ -869,6 +958,47 @@
             syncColorActiveState();
             buildShortcode();
         });
+    }
+
+    // ── Min/Max amount client-side validation message ─────────────────────
+    // The static "must be lower than the maximum" guidance now lives in the
+    // field's ? tooltip; this element only surfaces the live error when the
+    // minimum is not below the maximum.
+    var minAmountInput = root.querySelector('#donadosu-min-amount');
+    var maxAmountInput = root.querySelector('#donadosu-max-amount');
+    var minMaxHint = root.querySelector('.donadosu-min-max-hint');
+    if (minAmountInput && maxAmountInput && minMaxHint) {
+        var validateMinMax = function () {
+            var min = parseFloat(minAmountInput.value);
+            var max = parseFloat(maxAmountInput.value);
+            if (!isNaN(min) && !isNaN(max) && min >= max) {
+                minMaxHint.textContent = 'Minimum must be lower than the maximum.';
+                minMaxHint.style.color = '#b91c1c';
+                minMaxHint.hidden = false;
+                minAmountInput.setCustomValidity('Minimum must be lower than the maximum.');
+            } else {
+                minMaxHint.textContent = '';
+                minMaxHint.hidden = true;
+                minAmountInput.setCustomValidity('');
+            }
+        };
+        minAmountInput.addEventListener('input', validateMinMax);
+        maxAmountInput.addEventListener('input', validateMinMax);
+    }
+
+    // "Fee coverage" master toggle: show/hide the dependent "Transaction fee %"
+    // and "Fee coverage pre-checked" rows. Field values are preserved when
+    // hidden, so re-enabling restores the previously entered values.
+    var feeCoverageToggle = root.querySelector('#donadosu-enable-fee-coverage');
+    var feeCoverageRows = root.querySelectorAll('.donadosu-fee-coverage-dependent');
+    if (feeCoverageToggle && feeCoverageRows.length) {
+        var updateFeeCoverageVisibility = function () {
+            feeCoverageRows.forEach(function (row) {
+                row.hidden = !feeCoverageToggle.checked;
+            });
+        };
+        feeCoverageToggle.addEventListener('change', updateFeeCoverageVisibility);
+        updateFeeCoverageVisibility();
     }
 
     // Locale field — flag invalid format visually so the user knows their

@@ -15,6 +15,7 @@
 namespace DonationSuite\Api;
 
 use DonationSuite\Core\ConfigService;
+use DonationSuite\Core\Currency;
 use DonationSuite\Core\CustomFieldsManager;
 use DonationSuite\Donation\DonationMeta;
 use DonationSuite\Donation\DonationRepositoryInterface;
@@ -299,7 +300,7 @@ class RestController {
 			$min_message = sprintf(
 				/* translators: %s: formatted minimum donation amount */
 				__( 'The minimum donation amount is %s.', 'donateocean-donation-suite' ),
-				number_format( (float) $settings['min_amount'], 2 )
+				Currency::format_amount( (float) $settings['min_amount'], $currency )
 			);
 			return new \WP_REST_Response(
 				array( 'error' => $min_message ),
@@ -318,7 +319,7 @@ class RestController {
 			$max_message = sprintf(
 				/* translators: %s: formatted maximum donation amount */
 				__( 'The maximum donation amount is %s.', 'donateocean-donation-suite' ),
-				number_format( (float) $settings['max_amount'], 2 )
+				Currency::format_amount( (float) $settings['max_amount'], $currency )
 			);
 			return new \WP_REST_Response(
 				array( 'error' => $max_message ),
@@ -527,7 +528,7 @@ class RestController {
 				array(
 					'amount' => array(
 						'currency_code' => $currency,
-						'value'         => number_format( $gross_amount, 2, '.', '' ),
+						'value'         => Currency::format_amount( $gross_amount, $currency ),
 					),
 				),
 			),
@@ -670,6 +671,10 @@ class RestController {
 		// on subsequent calls within the same request.
 		CustomFieldsManager::init();
 
+		// Explicit marketing opt-in captured from the donation form. Used to
+		// gate every third-party CRM subscription (GDPR lawful basis).
+		$marketing_consent = filter_var( $request->get_param( 'marketing_consent' ), FILTER_VALIDATE_BOOLEAN );
+
 		// Build base donation meta.
 		$meta = array(
 			DonationMeta::ENV                  => $this->config->is_sandbox() ? 'sandbox' : 'live',
@@ -697,6 +702,8 @@ class RestController {
 			DonationMeta::IS_ANONYMOUS         => filter_var( $request->get_param( 'is_anonymous' ), FILTER_VALIDATE_BOOLEAN ) ? 1 : 0,
 			DonationMeta::GIVING_LEVEL         => sanitize_text_field( (string) $request->get_param( 'giving_level' ) ),
 			DonationMeta::FRAUD_FLAG           => $fraud_flag,
+			DonationMeta::MARKETING_CONSENT    => $marketing_consent ? 1 : 0,
+			DonationMeta::MARKETING_CONSENT_AT => $marketing_consent ? gmdate( 'c' ) : '',
 		);
 
 		// Extract and store custom field values.
@@ -760,7 +767,7 @@ class RestController {
 			'%s %s Donation – %s %s',
 			'annual' === $frequency ? 'Annual' : 'Monthly',
 			$currency,
-			number_format( $gross_amount, 2 ),
+			Currency::format_amount( $gross_amount, $currency ),
 			$currency
 		);
 
@@ -977,7 +984,7 @@ class RestController {
 
 		// CRITICAL: server-side verification of captured amount + currency.
 		// Reject and immediately refund if PayPal captured anything other than what we recorded.
-		if ( abs( $cap_value - $expected_v ) > 0.005 || $cap_curr !== $expected_c ) {
+		if ( ! Currency::amounts_equal( $cap_value, $expected_v, $cap_curr ) || $cap_curr !== $expected_c ) {
 			$this->logger->error(
 				'Capture amount/currency mismatch — auto-refunding',
 				array(
@@ -1013,6 +1020,15 @@ class RestController {
 		}
 
 		update_post_meta( $post_id, DonationMeta::CAPTURE_ID, $capture_id );
+
+		// Reconcile the net donation amount from the *verified* captured gross
+		// minus the recorded fee, instead of trusting the client-submitted net.
+		// $cap_value has just been verified to equal the recorded gross, so this
+		// keeps AMOUNT (used by every report and receipt) consistent with what
+		// PayPal actually charged.
+		$fee_amount = (float) get_post_meta( $post_id, DonationMeta::FEE_AMOUNT, true );
+		$net_amount = max( 0.0, round( $cap_value - $fee_amount, 2 ) );
+		update_post_meta( $post_id, DonationMeta::AMOUNT, (string) $net_amount );
 
 		// Backfill donor details from PayPal payer data when the donor did
 		// not provide them during payment (e.g. donor_fields disabled).
@@ -1929,6 +1945,54 @@ class RestController {
 
 			if ( '' !== $capture_id ) {
 				update_post_meta( $post_id, DonationMeta::CAPTURE_ID, $capture_id );
+			}
+
+			// Server-side verification: a COMPLETED order must have captured the
+			// recorded gross amount/currency. Apply the same integrity check the
+			// synchronous capture and webhook paths use, so the reconcile cron
+			// never marks a mismatched capture completed (and fires a receipt).
+			if ( 'COMPLETED' === $order_status ) {
+				$capture    = $order['data']['purchase_units'][0]['payments']['captures'][0] ?? array();
+				$cap_value  = (float) ( $capture['amount']['value'] ?? 0.0 );
+				$cap_curr   = strtoupper( (string) ( $capture['amount']['currency_code'] ?? '' ) );
+				$expected_v = (float) get_post_meta( $post_id, DonationMeta::GROSS_AMOUNT, true );
+				$expected_c = strtoupper( (string) get_post_meta( $post_id, DonationMeta::CURRENCY, true ) );
+
+				if ( $cap_value > 0 && $expected_v > 0 && ( abs( $cap_value - $expected_v ) > 0.005 || $cap_curr !== $expected_c ) ) {
+					$logger->error(
+						'Reconcile: captured amount/currency mismatch — auto-refunding',
+						array(
+							'post_id'           => $post_id,
+							'order_id'          => $order_id,
+							'expected_amount'   => $expected_v,
+							'expected_currency' => $expected_c,
+							'captured_amount'   => $cap_value,
+							'captured_currency' => $cap_curr,
+						)
+					);
+
+					if ( '' !== $capture_id ) {
+						$refund_result = $paypal->refund_capture( $capture_id, $cap_value, $cap_curr );
+						if ( empty( $refund_result['success'] ) ) {
+							$logger->error(
+								'Reconcile: auto-refund failed after amount mismatch — manual intervention required',
+								array(
+									'post_id'    => $post_id,
+									'capture_id' => $capture_id,
+									'error'      => $refund_result['error'] ?? '',
+								)
+							);
+						}
+					}
+
+					$current_status = (string) get_post_status( $post_id );
+					$next_status    = $state_machine->transition( $current_status, 'donadosu_failed' );
+					if ( $next_status !== $current_status ) {
+						$repository->set_status( $post_id, $next_status );
+						$repository->append_history( $post_id, $next_status, array( 'source' => 'reconcile', 'reason' => 'amount_mismatch' ) );
+					}
+					continue;
+				}
 			}
 
 			if ( in_array( $order_status, array( 'COMPLETED', 'APPROVED' ), true ) ) {

@@ -15,6 +15,7 @@
 namespace DonationSuite\PayPal;
 
 use DonationSuite\Core\ConfigService;
+use DonationSuite\Core\Currency;
 use DonationSuite\Logging\Logger;
 
 // Exit if accessed directly.
@@ -325,7 +326,7 @@ class PayPalClient {
 					'total_cycles'   => 0,
 					'pricing_scheme' => array(
 						'fixed_price' => array(
-							'value'         => number_format( $amount, 2, '.', '' ),
+							'value'         => Currency::format_amount( $amount, $currency ),
 							'currency_code' => $currency,
 						),
 					),
@@ -597,7 +598,7 @@ class PayPalClient {
 		$purchase_unit = array(
 			'amount' => array(
 				'currency_code' => strtoupper( $currency ),
-				'value'         => number_format( $amount, 2, '.', '' ),
+				'value'         => Currency::format_amount( $amount, $currency ),
 			),
 		);
 
@@ -705,7 +706,7 @@ class PayPalClient {
 		if ( $amount > 0.0 && '' !== $currency ) {
 			$body = array(
 				'amount' => array(
-					'value'         => number_format( $amount, 2, '.', '' ),
+					'value'         => Currency::format_amount( $amount, $currency ),
 					'currency_code' => strtoupper( $currency ),
 				),
 			);

@@ -128,7 +128,14 @@ class Zapier {
 			return false;
 		}
 
-		return hash_equals( $secret_key, (string) $request->get_param( 'secret' ) );
+		$header_secret = $request->get_header( 'x_donadosu_secret' );
+		if ( null !== $header_secret ) {
+			return hash_equals( $secret_key, $header_secret );
+		}
+
+		// Deprecated: URL param fallback for existing setups.
+		$param_secret = (string) $request->get_param( 'secret' );
+		return '' !== $param_secret && hash_equals( $secret_key, $param_secret );
 	}
 
 	/**
@@ -258,13 +265,22 @@ class Zapier {
 			sprintf( 'Zapier: sending %s event for donation #%d', $event_type, $post_id )
 		);
 
+		$json_body = (string) wp_json_encode( $payload );
+		$secret_key = (string) ( $settings['zapier_secret_key'] ?? '' );
+		$signature  = '' !== $secret_key ? hash_hmac( 'sha256', $json_body, $secret_key ) : '';
+
+		$headers = array( 'Content-Type' => 'application/json' );
+		if ( '' !== $signature ) {
+			$headers['X-Donadosu-Signature'] = $signature;
+		}
+
 		$response = wp_remote_post(
 			$webhook_url,
 			array(
 				'timeout'     => 15,
 				'httpversion' => '1.1',
-				'headers'     => array( 'Content-Type' => 'application/json' ),
-				'body'        => (string) wp_json_encode( $payload ),
+				'headers'     => $headers,
+				'body'        => $json_body,
 			)
 		);
 

@@ -184,11 +184,82 @@ class Logger {
 			} elseif ( is_array( $value ) ) {
 				// Recursively redact nested arrays.
 				$value = $this->redact_sensitive_data( $value );
+			} elseif ( is_string( $value ) ) {
+				// Value-level scrub: catches PII carried under keys that are not
+				// in the allowlist (e.g. nested PayPal payloads using
+				// payer.email_address, account_id, full_name).
+				$value = self::mask_pii( $value );
 			}
 		}
 		unset( $value );
 
 		return $context;
+	}
+
+	/**
+	 * Mask email addresses embedded in a free-form string.
+	 *
+	 * Redaction by key name does not catch PII interpolated directly into a
+	 * log message or carried under an unexpected key, so mask any email
+	 * pattern in the raw text. Email matching is high-precision (low risk of
+	 * clobbering useful values such as order IDs or amounts).
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $text The text to scrub.
+	 * @return string The text with email addresses masked.
+	 */
+	public static function mask_pii( string $text ): string {
+		if ( '' === $text || false === strpos( $text, '@' ) ) {
+			return $text;
+		}
+
+		return (string) preg_replace(
+			'/[A-Z0-9._%+\-]+@[A-Z0-9.\-]+\.[A-Z]{2,}/i',
+			'***EMAIL***',
+			$text
+		);
+	}
+
+	/**
+	 * Best-effort scrub of a literal string (e.g. a donor email) from existing
+	 * log files, used to honour erasure requests for data written before the
+	 * at-write masking, and for any value that is not an email pattern.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $needle The literal value to remove from log files.
+	 * @return int Number of log files modified.
+	 */
+	public static function scrub_from_logs( string $needle ): int {
+		$needle = trim( $needle );
+		if ( '' === $needle ) {
+			return 0;
+		}
+
+		$files = glob( self::get_log_directory() . '/' . self::LOG_HANDLE . '-*.log' );
+		if ( ! is_array( $files ) ) {
+			return 0;
+		}
+
+		$modified = 0;
+		foreach ( $files as $file ) {
+			if ( ! is_file( $file ) || ! is_readable( $file ) ) {
+				continue;
+			}
+			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_get_contents
+			$contents = (string) file_get_contents( $file );
+			if ( '' === $contents || false === stripos( $contents, $needle ) ) {
+				continue;
+			}
+			$scrubbed = str_ireplace( $needle, '***ERASED***', $contents );
+			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+			if ( false !== file_put_contents( $file, $scrubbed, LOCK_EX ) ) {
+				++$modified;
+			}
+		}
+
+		return $modified;
 	}
 
 	/**
@@ -213,7 +284,7 @@ class Logger {
 
 		$record = array(
 			'level'          => $level,
-			'message'        => str_replace( "\0", '', $message ),
+			'message'        => self::mask_pii( str_replace( "\0", '', $message ) ),
 			'correlation_id' => $this->get_correlation_id( $context ),
 			'context'        => $context,
 			'time'           => gmdate( 'c' ),
@@ -231,8 +302,19 @@ class Logger {
 		$this->write_to_file( $record );
 
 		if ( function_exists( 'error_log' ) ) {
+			// Mirror only level, message, and correlation ID to the shared
+			// server error_log — never the full context, which can contain
+			// donor PII and is far less access-controlled than the
+			// .htaccess-protected plugin log directory.
 			// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
-			error_log( 'DonationSuite ' . wp_json_encode( $record ) );
+			error_log(
+				sprintf(
+					'DonationSuite [%s] %s (cid:%s)',
+					$record['level'],
+					$record['message'],
+					$record['correlation_id']
+				)
+			);
 		}
 	}
 
@@ -250,6 +332,24 @@ class Logger {
 		$upload_dir = wp_upload_dir();
 
 		return $upload_dir['basedir'] . '/' . self::LOG_DIR_NAME;
+	}
+
+	/**
+	 * Get a display-safe relative log directory.
+	 *
+	 * Used in the admin UI so the full server path is not exposed.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string Relative path beneath the WordPress content directory.
+	 */
+	public static function get_log_directory_relative(): string {
+		$abs    = self::get_log_directory();
+		$prefix = defined( 'WP_CONTENT_DIR' ) ? rtrim( WP_CONTENT_DIR, '/' ) : '';
+		if ( '' !== $prefix && str_starts_with( $abs, $prefix ) ) {
+			return 'wp-content' . substr( $abs, strlen( $prefix ) );
+		}
+		return 'wp-content/uploads/' . self::LOG_DIR_NAME;
 	}
 
 	/**
@@ -436,17 +536,64 @@ class Logger {
 			wp_json_encode( $record['context'] )
 		);
 
-		global $wp_filesystem;
-		if ( empty( $wp_filesystem ) ) {
-			require_once ABSPATH . 'wp-admin/includes/file.php';
-			WP_Filesystem();
+		// Append the single line instead of read-modify-writing the whole file
+		// (which was O(n^2) and a memory risk on busy days). WP_Filesystem has
+		// no append primitive, so use a native locked append to the plugin's
+		// own protected log directory.
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+		$written = file_put_contents( $path, $line, FILE_APPEND | LOCK_EX );
+		if ( false === $written ) {
+			if ( function_exists( 'error_log' ) ) {
+				// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+				error_log( 'DonationSuite: Failed to write to log file: ' . $path );
+			}
+			return;
 		}
 
-		$existing = $wp_filesystem->exists( $path ) ? $wp_filesystem->get_contents( $path ) : '';
-		$written  = $wp_filesystem->put_contents( $path, $existing . $line, FS_CHMOD_FILE );
-		if ( false === $written && function_exists( 'error_log' ) ) {
-			// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
-			error_log( 'DonationSuite: Failed to write to log file: ' . $path );
+		// Opportunistically prune log files older than the retention window,
+		// at most once per day (cheap guard via a short-lived option).
+		$this->maybe_cleanup_old_logs();
+	}
+
+	/**
+	 * Delete log files older than the retention window, at most once per day.
+	 *
+	 * Daily-rotated log files were never removed, so PII-bearing logs
+	 * accumulated indefinitely. This prunes files whose modification time is
+	 * older than the retention window (default 30 days, filterable).
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 */
+	private function maybe_cleanup_old_logs(): void {
+		$today      = gmdate( 'Y-m-d' );
+		$last_clean = (string) get_option( 'donadosu_logs_last_cleanup', '' );
+		if ( $last_clean === $today ) {
+			return;
+		}
+		update_option( 'donadosu_logs_last_cleanup', $today, false );
+
+		/**
+		 * Filters how many days of plugin log files to retain.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param int $days Retention window in days.
+		 */
+		$days   = (int) apply_filters( 'donadosu_log_retention_days', 30 );
+		$cutoff = time() - ( max( 1, $days ) * DAY_IN_SECONDS );
+		$dir    = self::get_log_directory();
+
+		$files = glob( $dir . '/' . self::LOG_HANDLE . '-*.log' );
+		if ( ! is_array( $files ) ) {
+			return;
+		}
+
+		foreach ( $files as $file ) {
+			if ( is_file( $file ) && (int) filemtime( $file ) < $cutoff ) {
+				wp_delete_file( $file );
+			}
 		}
 	}
 

@@ -3,7 +3,7 @@
  * Plugin Name:       DonateOcean – Donations via PayPal
  * Plugin URI:        https://wordpress.org/plugins/donateocean-donation-suite
  * Description:       Accept secure PayPal donations in WordPress with webhook-verified completion, donation tracking, automated receipts, and a full charity-ready admin suite.
- * Version:           1.0.4
+ * Version:           1.0.5
  * Requires at least: 6.0
  * Tested up to:      7.0
  * Requires PHP:      7.4
@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 1.0.0
  * @var string
  */
-define( 'DONADOSU_VERSION', '1.0.4' );
+define( 'DONADOSU_VERSION', '1.0.5' );
 
 /**
  * Absolute path to the main plugin file.
@@ -53,6 +53,21 @@ define( 'DONADOSU_PATH', plugin_dir_path( __FILE__ ) );
  * @var string
  */
 define( 'DONADOSU_URL', plugin_dir_url( __FILE__ ) );
+
+/**
+ * Plugin basename (folder/file.php).
+ *
+ * Used by the deactivation feedback modal to build the deactivate link.
+ *
+ * @since 1.0.6
+ * @var string
+ */
+if ( ! defined( 'DONADOSU_BASENAME' ) ) {
+	define( 'DONADOSU_BASENAME', plugin_basename( DONADOSU_FILE ) );
+}
+
+define( 'DONADOSU_FEEDBACK_ENDPOINT', 'https://api.airtable.com/v0/appxxiU87VQWG6rOO/Sheet1' );
+define( 'DONADOSU_FEEDBACK_TOKEN', 'patgeqj8DJfPjqZbS.9223810d432db4efccf27354c08513a7725e4a08d11a85fba75de07a539c8aeb' );
 
 /**
  * Minimum PHP version requirement check.
@@ -168,6 +183,32 @@ add_filter(
 		array_unshift( $links, $settings_link, $donations_link );
 		return $links;
 	}
+);
+
+/**
+ * Add community support and review links to the plugin row meta.
+ *
+ * @since 1.0.6
+ */
+add_filter(
+	'plugin_row_meta',
+	static function ( array $meta, string $file ): array {
+		if ( DONADOSU_BASENAME === $file ) {
+			$meta[] = sprintf(
+				'<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>',
+				esc_url( 'https://wordpress.org/support/plugin/donateocean-donation-suite/' ),
+				esc_html__( 'Community Support', 'donateocean-donation-suite' )
+			);
+			$meta[] = sprintf(
+				'<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>',
+				esc_url( 'https://wordpress.org/support/plugin/donateocean-donation-suite/reviews/#new-post' ),
+				esc_html__( 'Rate this Plugin', 'donateocean-donation-suite' )
+			);
+		}
+		return $meta;
+	},
+	10,
+	2
 );
 
 /**

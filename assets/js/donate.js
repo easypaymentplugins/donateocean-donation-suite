@@ -27,6 +27,18 @@
     return `${sym}${amount.toFixed(2)}`;
   }
 
+  /**
+   * Like formatCurrency but drops the decimals when the amount is round
+   * (e.g. "$10" for whole amounts, "$10.50" for fractional). Matches the
+   * server-side $_format_amount() in templates/shortcode.php so preset
+   * buttons keep the same look when JS re-renders them.
+   */
+  function formatCurrencyShort(code, amount) {
+    const sym = currencySymbol(code);
+    const num = amount % 1 === 0 ? String(Math.round(amount)) : amount.toFixed(2);
+    return `${sym}${num}`;
+  }
+
   // ── API helpers ───────────────────────────────────────────────────────────
 
   async function fetchConfig() {
@@ -52,6 +64,10 @@
       const components = cardFieldsEnabled ? 'buttons,card-fields' : 'buttons';
       const s = document.createElement('script');
       s.src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(clientId)}&currency=${encodeURIComponent(currency)}&intent=capture&vault=true&components=${components}`;
+      // PayPal Partner Attribution ID (BN code) for the integration's PayPal
+      // technology partner. Non-personal integration identifier only: it sends
+      // no donor data and does not affect amounts, fees, or fund destination.
+      // Disclosed in readme.txt (External Services). See issue #248.
       s.setAttribute('data-partner-attribution-id', 'mbjtechnolabs_sp');
       s.onload = () => resolve(window.paypal);
       s.onerror = () => reject(new Error('PayPal SDK failed to load'));
@@ -178,7 +194,7 @@
     amountInput.dispatchEvent(new Event('input', { bubbles: true }));
   }
 
-  function buildPresetButtons(container, givingLevels, presetAmounts, amountInput, customAmountEnabled, onSelect) {
+  function buildPresetButtons(container, givingLevels, presetAmounts, amountInput, customAmountEnabled, currencyCode, onSelect) {
     if (!container) return;
     container.innerHTML = '';
 
@@ -194,6 +210,8 @@
         const amt = parseFloat(String(level.amount || 0));
         if (!Number.isFinite(amt) || amt <= 0) return;
 
+        const display = formatCurrencyShort(currencyCode, amt);
+
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'donadosu-preset-btn donadosu-preset-btn--level';
@@ -201,17 +219,17 @@
         btn.dataset.level  = String(level.label || '');
 
         const labelEl = document.createElement('strong');
-        labelEl.textContent = level.label || `${amt}`;
+        labelEl.textContent = level.label || display;
         const amtEl = document.createElement('span');
         amtEl.className = 'donadosu-preset-btn__amount';
-        amtEl.textContent = amt % 1 === 0 ? String(Math.round(amt)) : amt.toFixed(2);
+        amtEl.textContent = display;
         btn.appendChild(labelEl);
         btn.appendChild(amtEl);
 
         if (level.description) {
           btn.title = level.description;
         }
-        btn.setAttribute('aria-label', `${level.label || ''} – ${amt % 1 === 0 ? Math.round(amt) : amt.toFixed(2)}`);
+        btn.setAttribute('aria-label', `${level.label || ''} – ${display}`);
 
         btn.addEventListener('click', () => {
           deactivateAll();
@@ -230,12 +248,14 @@
         : [];
 
       amounts.forEach((amt) => {
+        const display = formatCurrencyShort(currencyCode, amt);
+
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'donadosu-preset-btn';
-        btn.textContent = amt % 1 === 0 ? String(Math.round(amt)) : amt.toFixed(2);
+        btn.textContent = display;
         btn.dataset.amount = String(amt);
-        btn.setAttribute('aria-label', `Donate ${amt % 1 === 0 ? Math.round(amt) : amt.toFixed(2)}`);
+        btn.setAttribute('aria-label', `Donate ${display}`);
 
         btn.addEventListener('click', () => {
           deactivateAll();
@@ -253,8 +273,8 @@
       const customBtn = document.createElement('button');
       customBtn.type = 'button';
       customBtn.className = 'donadosu-preset-btn donadosu-preset-btn--custom';
-      customBtn.textContent = 'Custom';
-      customBtn.setAttribute('aria-label', 'Enter a custom donation amount');
+      customBtn.textContent = 'Other amount';
+      customBtn.setAttribute('aria-label', 'Enter your own donation amount');
 
       customBtn.addEventListener('click', () => {
         deactivateAll();
@@ -417,6 +437,41 @@
     }
   }
 
+  // ── Google Analytics / GTM donation event ─────────────────────────────────
+  // Pushes a `donation_complete` event to the GTM dataLayer and, when GA4
+  // (gtag.js) is present, fires an equivalent GA4 event. Only invoked when the
+  // admin enabled "Push donation_complete events" (cfg.gaPushEvents).
+
+  function pushDonationEvent(info) {
+    const value    = parseFloat(info.value) || 0;
+    const currency = info.currency || 'USD';
+    const detail   = {
+      transaction_id: info.transaction_id || '',
+      value: value,
+      currency: currency,
+      frequency: info.frequency || 'one_time',
+      campaign: info.campaign || '',
+    };
+
+    // Google Tag Manager data layer.
+    try {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'donation_complete', donation: detail });
+    } catch (e) { /* noop */ }
+
+    // GA4 (gtag.js) direct event — covers GA4 configured without GTM.
+    try {
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'donation_complete', {
+          transaction_id: detail.transaction_id,
+          value: value,
+          currency: currency,
+          items: [{ item_name: detail.campaign || 'Donation', price: value, quantity: 1 }],
+        });
+      }
+    } catch (e) { /* noop */ }
+  }
+
   // ── Payment method tabs ───────────────────────────────────────────────────
 
   function initPaymentMethodTabs() {
@@ -484,6 +539,8 @@
         donor_city:    document.getElementById('donadosu-city')?.value    ?? '',
         donor_postal:  document.getElementById('donadosu-postal')?.value  ?? '',
         donor_message: document.getElementById('donadosu-message')?.value ?? '',
+        // Marketing consent opt-in (GDPR). Absent checkbox => no consent.
+        marketing_consent: document.getElementById('donadosu-marketing-consent')?.checked ? '1' : '0',
         // Feature 4: anonymous
         is_anonymous:  document.getElementById('donadosu-anonymous')?.checked ? '1' : '0',
         // Feature 3: tribute
@@ -650,7 +707,7 @@
       : (Array.isArray(cfg.presetAmounts) ? cfg.presetAmounts : []);
 
     if (givingLevels.length > 0 || presetAmounts.length > 0) {
-      buildPresetButtons(presetContainer, givingLevels, presetAmounts, amountInput, cfg.customAmountEnabled, (levelName) => {
+      buildPresetButtons(presetContainer, givingLevels, presetAmounts, amountInput, cfg.customAmountEnabled, currencySelect.value || 'USD', (levelName) => {
         _selectedLevel = levelName;
         updateSummary(currentFrequency);
       });
@@ -796,6 +853,15 @@
 
         if (capture && capture.ok) {
           saveDonorToStorage();
+          if (cfg.gaPushEvents) {
+            pushDonationEvent({
+              transaction_id: data.orderID || '',
+              value: amountInput ? amountInput.value : '',
+              currency: currencySelect ? currencySelect.value : (cfg.currency || 'USD'),
+              frequency: currentFrequency,
+              campaign: campaignInput ? campaignInput.value : '',
+            });
+          }
           if (redirectOnSuccess && thankYouUrl) {
             window.location.assign(thankYouUrl);
             return;

@@ -37,9 +37,10 @@ class Donadosu_Donation_Suite_Autoloader {
 	 * @var array<string,string>
 	 */
 	private static $overrides = array(
-		'OAuthTokenCache'  => 'oauth-token-cache',
-		'PayPalClient'     => 'paypal-client',
-		'PayPalException'  => 'paypal-exception',
+		'OAuthTokenCache'      => 'oauth-token-cache',
+		'PayPalClient'         => 'paypal-client',
+		'PayPalException'      => 'paypal-exception',
+		'ConstantContactOAuth' => 'constant-contact-oauth',
 	);
 
 	/**

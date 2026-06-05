@@ -6,7 +6,7 @@
     "title": "Donation Suite Form",
     "category": "widgets",
     "icon": "heart",
-    "description": "Embed a PayPal donation form anywhere on your site.",
+    "description": "Embed a donation form accepting PayPal and card payments.",
     "keywords": ["donation", "donate", "paypal", "charity", "fundraise"],
     "textDomain": "donateocean-donation-suite",
     "editorScript": "file:./index.js",
@@ -54,7 +54,7 @@
         },
         "buttonText": {
             "type": "string",
-            "default": "Donate with PayPal"
+            "default": "Donate now"
         },
         "buttonColor": {
             "type": "string",

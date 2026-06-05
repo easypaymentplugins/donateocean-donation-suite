@@ -125,6 +125,8 @@ class CptDonationRepository implements DonationRepositoryInterface {
 			update_post_meta( $post_id, $key, $value );
 		}
 
+		$this->sync_to_normalized_table( $post_id );
+
 		return $post_id;
 	}
 
@@ -144,6 +146,7 @@ class CptDonationRepository implements DonationRepositoryInterface {
 				'post_status' => $status,
 			)
 		);
+		$this->sync_to_normalized_table( $post_id );
 	}
 
 	/**
@@ -197,7 +200,7 @@ class CptDonationRepository implements DonationRepositoryInterface {
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Aggregate query; object cache not appropriate for dynamic financial summaries.
 		$result = $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT SUM(meta_amount.meta_value + 0)
+				"SELECT SUM(CAST(meta_amount.meta_value AS DECIMAL(20,6)))
 				 FROM {$wpdb->posts} p
 				 INNER JOIN {$wpdb->postmeta} meta_campaign
 				         ON p.ID = meta_campaign.post_id
@@ -262,7 +265,7 @@ class CptDonationRepository implements DonationRepositoryInterface {
 			$wpdb->prepare(
 				"SELECT
 				     COUNT(*)                              AS total_completed,
-				     SUM(meta_amount.meta_value + 0)      AS total_amount,
+				     SUM(CAST(meta_amount.meta_value AS DECIMAL(20,6)))      AS total_amount,
 				     MIN(p.post_date_gmt)                 AS first_date,
 				     MAX(p.post_date_gmt)                 AS last_date,
 				     (SELECT meta_value
@@ -364,7 +367,7 @@ class CptDonationRepository implements DonationRepositoryInterface {
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Aggregate query; object cache not appropriate for dynamic financial summaries.
 		$total_amount = (float) $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT SUM(pm.meta_value + 0)
+				"SELECT SUM(CAST(pm.meta_value AS DECIMAL(20,6)))
 				 FROM {$wpdb->posts} p
 				 INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id AND pm.meta_key = %s
 				 WHERE p.post_type = 'donadosu_donation' AND p.post_status = 'donadosu_completed'",
@@ -390,7 +393,7 @@ class CptDonationRepository implements DonationRepositoryInterface {
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Aggregate query; object cache not appropriate for dynamic financial summaries.
 		$month_amount = (float) $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT SUM(pm.meta_value + 0)
+				"SELECT SUM(CAST(pm.meta_value AS DECIMAL(20,6)))
 				 FROM {$wpdb->posts} p
 				 INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id AND pm.meta_key = %s
 				 WHERE p.post_type     = 'donadosu_donation'
@@ -407,7 +410,7 @@ class CptDonationRepository implements DonationRepositoryInterface {
 			$wpdb->prepare(
 				"SELECT meta_campaign.meta_value AS campaign,
 				        COUNT(*)                 AS donation_count,
-				        SUM(meta_amount.meta_value + 0) AS total_amount
+				        SUM(CAST(meta_amount.meta_value AS DECIMAL(20,6))) AS total_amount
 				 FROM {$wpdb->posts} p
 				 INNER JOIN {$wpdb->postmeta} meta_campaign
 				         ON p.ID = meta_campaign.post_id AND meta_campaign.meta_key = %s
@@ -458,7 +461,7 @@ class CptDonationRepository implements DonationRepositoryInterface {
 				     YEAR(p.post_date_gmt)           AS year,
 				     MONTH(p.post_date_gmt)          AS month,
 				     COUNT(*)                        AS count,
-				     SUM(pm.meta_value + 0)          AS amount
+				     SUM(CAST(pm.meta_value AS DECIMAL(20,6)))          AS amount
 				 FROM {$wpdb->posts} p
 				 INNER JOIN {$wpdb->postmeta} pm
 				         ON p.ID = pm.post_id AND pm.meta_key = %s
@@ -613,6 +616,8 @@ class CptDonationRepository implements DonationRepositoryInterface {
 			)
 		);
 
+		$this->sync_to_normalized_table( $post_id );
+
 		return $post_id;
 	}
 
@@ -663,12 +668,12 @@ class CptDonationRepository implements DonationRepositoryInterface {
 		}
 
 		// Completed-donation aggregates (count, amount, unique donors).
-		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared -- Aggregate report query; caching handled by caller; SUCCESS_STATUSES_SQL is a hardcoded class constant with no user input.
+		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Aggregate report query; caching handled by caller. SUCCESS_STATUSES_SQL is a hardcoded class constant; the optional $currency_join fragment contains only %s placeholders resolved through $wpdb->prepare(), which receives every value via array_merge().
 		$summary = $wpdb->get_row(
 			$wpdb->prepare(
 				"SELECT
 				     COUNT(*)                                      AS count,
-				     COALESCE(SUM(meta_amount.meta_value + 0), 0) AS amount,
+				     COALESCE(SUM(CAST(meta_amount.meta_value AS DECIMAL(20,6))), 0) AS amount,
 				     COUNT(DISTINCT meta_email.meta_value)         AS unique_donors
 				 FROM {$wpdb->posts} p
 				 INNER JOIN {$wpdb->postmeta} meta_amount
@@ -690,7 +695,7 @@ class CptDonationRepository implements DonationRepositoryInterface {
 			),
 			ARRAY_A
 		);
-		// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
+		// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber, PluginCheck.Security.DirectDB.UnescapedDBParameter
 
 		$count         = (int) ( $summary['count'] ?? 0 );
 		$amount        = (float) ( $summary['amount'] ?? 0.0 );
@@ -698,7 +703,7 @@ class CptDonationRepository implements DonationRepositoryInterface {
 		$avg_amount    = $count > 0 ? $amount / $count : 0.0;
 
 		// New donors: donors whose earliest-ever completed donation falls in the window.
-		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared -- Aggregate report query; caching handled by caller; SUCCESS_STATUSES_SQL is a hardcoded class constant with no user input.
+		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Aggregate report query; caching handled by caller. SUCCESS_STATUSES_SQL is a hardcoded class constant; the optional $currency_join fragment contains only %s placeholders resolved through $wpdb->prepare(), which receives every value via array_merge().
 		$new_donors = (int) $wpdb->get_var(
 			$wpdb->prepare(
 				"SELECT COUNT(*) FROM (
@@ -722,31 +727,48 @@ class CptDonationRepository implements DonationRepositoryInterface {
 				)
 			)
 		);
-		// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
+		// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber, PluginCheck.Security.DirectDB.UnescapedDBParameter
 
 		// Refunds in window.
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Aggregate report query; caching handled by caller.
+		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Aggregate report query; caching handled by caller. The optional $currency_join fragment contains only %s placeholders resolved through $wpdb->prepare(), which receives every value via array_merge().
+		// Refunds: count any donation that has been fully refunded
+		// (post_status = donadosu_refunded) OR partially refunded (a non-zero
+		// _donadosu_refunded_amount on a still-completed donation). The refunded
+		// value uses the tracked partial-refund total when present, falling back
+		// to the donation amount for legacy/webhook full refunds with no total.
 		$refunds = $wpdb->get_row(
 			$wpdb->prepare(
 				"SELECT
-				     COUNT(*)                                      AS count,
-				     COALESCE(SUM(meta_amount.meta_value + 0), 0) AS amount
+				     COUNT(DISTINCT p.ID) AS count,
+				     COALESCE(SUM(
+				         CASE
+				             WHEN meta_refund.meta_value IS NOT NULL AND CAST(meta_refund.meta_value AS DECIMAL(20,6)) > 0
+				                 THEN CAST(meta_refund.meta_value AS DECIMAL(20,6))
+				             WHEN p.post_status = 'donadosu_refunded'
+				                 THEN CAST(meta_amount.meta_value AS DECIMAL(20,6))
+				             ELSE 0
+				         END
+				     ), 0) AS amount
 				 FROM {$wpdb->posts} p
+				 LEFT JOIN {$wpdb->postmeta} meta_refund
+				        ON p.ID = meta_refund.post_id
+				       AND meta_refund.meta_key = %s
 				 LEFT JOIN {$wpdb->postmeta} meta_amount
 				        ON p.ID = meta_amount.post_id
 				       AND meta_amount.meta_key = %s
 				 " . $currency_join . "
 				 WHERE p.post_type     = 'donadosu_donation'
-				   AND p.post_status   = 'donadosu_refunded'
+				   AND ( p.post_status = 'donadosu_refunded' OR CAST(meta_refund.meta_value AS DECIMAL(20,6)) > 0 )
 				   AND p.post_date_gmt BETWEEN %s AND %s",
 				array_merge(
-					array( DonationMeta::AMOUNT ),
+					array( DonationMeta::REFUNDED_AMOUNT, DonationMeta::AMOUNT ),
 					$currency_args,
 					array( $from, $to )
 				)
 			),
 			ARRAY_A
 		);
+		// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber, PluginCheck.Security.DirectDB.UnescapedDBParameter
 
 		return array(
 			'count'         => $count,
@@ -786,13 +808,13 @@ class CptDonationRepository implements DonationRepositoryInterface {
 			$currency_args = array( DonationMeta::CURRENCY, $currency );
 		}
 
-		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared -- Aggregate report query; caching handled by caller; SUCCESS_STATUSES_SQL is a hardcoded class constant with no user input.
+		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Aggregate report query; caching handled by caller. SUCCESS_STATUSES_SQL is a hardcoded class constant; the optional $currency_join fragment contains only %s placeholders resolved through $wpdb->prepare(), which receives every value via array_merge().
 		$rows = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT
 				     DATE(p.post_date_gmt)           AS day,
 				     COUNT(*)                        AS count,
-				     COALESCE(SUM(pm.meta_value + 0), 0) AS amount
+				     COALESCE(SUM(CAST(pm.meta_value AS DECIMAL(20,6))), 0) AS amount
 				 FROM {$wpdb->posts} p
 				 INNER JOIN {$wpdb->postmeta} pm
 				         ON p.ID = pm.post_id AND pm.meta_key = %s
@@ -810,7 +832,7 @@ class CptDonationRepository implements DonationRepositoryInterface {
 			),
 			ARRAY_A
 		);
-		// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
+		// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber, PluginCheck.Security.DirectDB.UnescapedDBParameter
 
 		if ( ! is_array( $rows ) ) {
 			return array();
@@ -854,13 +876,13 @@ class CptDonationRepository implements DonationRepositoryInterface {
 			$currency_args = array( DonationMeta::CURRENCY, $currency );
 		}
 
-		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared -- Aggregate report query; caching handled by caller; SUCCESS_STATUSES_SQL is a hardcoded class constant with no user input.
+		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Aggregate report query; caching handled by caller. SUCCESS_STATUSES_SQL is a hardcoded class constant; the optional $currency_join fragment contains only %s placeholders resolved through $wpdb->prepare(), which receives every value via array_merge().
 		$rows = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT
 				     COALESCE(NULLIF(meta_group.meta_value, ''), 'unknown') AS value,
 				     COUNT(*)                                                AS count,
-				     COALESCE(SUM(meta_amount.meta_value + 0), 0)           AS amount
+				     COALESCE(SUM(CAST(meta_amount.meta_value AS DECIMAL(20,6))), 0)           AS amount
 				 FROM {$wpdb->posts} p
 				 INNER JOIN {$wpdb->postmeta} meta_amount
 				         ON p.ID = meta_amount.post_id
@@ -882,7 +904,7 @@ class CptDonationRepository implements DonationRepositoryInterface {
 			),
 			ARRAY_A
 		);
-		// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
+		// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber, PluginCheck.Security.DirectDB.UnescapedDBParameter
 
 		if ( ! is_array( $rows ) ) {
 			return array();
@@ -933,19 +955,19 @@ class CptDonationRepository implements DonationRepositoryInterface {
 			$currency_args = array( DonationMeta::CURRENCY, $currency );
 		}
 
-		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared -- Aggregate report query; caching handled by caller; SUCCESS_STATUSES_SQL is a hardcoded class constant with no user input.
+		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Aggregate report query; caching handled by caller. SUCCESS_STATUSES_SQL is a hardcoded class constant; the optional $currency_join fragment contains only %s placeholders resolved through $wpdb->prepare(), which receives every value via array_merge().
 		$rows = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT
 				     CASE
-				         WHEN (pm.meta_value + 0) < 25    THEN 'a_under_25'
-				         WHEN (pm.meta_value + 0) < 100   THEN 'b_25_99'
-				         WHEN (pm.meta_value + 0) < 500   THEN 'c_100_499'
-				         WHEN (pm.meta_value + 0) < 1000  THEN 'd_500_999'
+				         WHEN CAST(pm.meta_value AS DECIMAL(20,6)) < 25    THEN 'a_under_25'
+				         WHEN CAST(pm.meta_value AS DECIMAL(20,6)) < 100   THEN 'b_25_99'
+				         WHEN CAST(pm.meta_value AS DECIMAL(20,6)) < 500   THEN 'c_100_499'
+				         WHEN CAST(pm.meta_value AS DECIMAL(20,6)) < 1000  THEN 'd_500_999'
 				         ELSE                                  'e_1000_plus'
 				     END AS bucket,
 				     COUNT(*)                                      AS count,
-				     COALESCE(SUM(pm.meta_value + 0), 0)          AS amount
+				     COALESCE(SUM(CAST(pm.meta_value AS DECIMAL(20,6))), 0)          AS amount
 				 FROM {$wpdb->posts} p
 				 INNER JOIN {$wpdb->postmeta} pm
 				         ON p.ID = pm.post_id
@@ -964,7 +986,7 @@ class CptDonationRepository implements DonationRepositoryInterface {
 			),
 			ARRAY_A
 		);
-		// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
+		// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber, PluginCheck.Security.DirectDB.UnescapedDBParameter
 
 		if ( ! is_array( $rows ) ) {
 			return array();
@@ -1009,13 +1031,13 @@ class CptDonationRepository implements DonationRepositoryInterface {
 			$currency_args = array( DonationMeta::CURRENCY, $currency );
 		}
 
-		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared -- Aggregate report query; caching handled by caller; SUCCESS_STATUSES_SQL is a hardcoded class constant with no user input.
+		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Aggregate report query; caching handled by caller. SUCCESS_STATUSES_SQL is a hardcoded class constant; the optional $currency_join fragment contains only %s placeholders resolved through $wpdb->prepare(), which receives every value via array_merge().
 		$rows = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT
 				     meta_campaign.meta_value                     AS campaign,
 				     COUNT(*)                                      AS count,
-				     COALESCE(SUM(meta_amount.meta_value + 0), 0) AS amount,
+				     COALESCE(SUM(CAST(meta_amount.meta_value AS DECIMAL(20,6))), 0) AS amount,
 				     COUNT(DISTINCT meta_email.meta_value)         AS donor_count
 				 FROM {$wpdb->posts} p
 				 INNER JOIN {$wpdb->postmeta} meta_campaign
@@ -1044,7 +1066,7 @@ class CptDonationRepository implements DonationRepositoryInterface {
 			),
 			ARRAY_A
 		);
-		// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
+		// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber, PluginCheck.Security.DirectDB.UnescapedDBParameter
 
 		if ( ! is_array( $rows ) ) {
 			return array();
@@ -1059,5 +1081,83 @@ class CptDonationRepository implements DonationRepositoryInterface {
 			),
 			$rows
 		);
+	}
+
+	/**
+	 * Sync donation data to the normalized reporting table.
+	 *
+	 * Called after creating or updating a donation post so the
+	 * normalized table stays in lock-step with postmeta. Uses
+	 * INSERT ... ON DUPLICATE KEY UPDATE for upsert semantics.
+	 *
+	 * @since 1.0.5
+	 *
+	 * @param int $post_id The donation post ID.
+	 * @return void
+	 */
+	private function sync_to_normalized_table( int $post_id ): void {
+		global $wpdb;
+
+		$table = $wpdb->prefix . 'donadosu_donations';
+
+		// Guard: skip if the table does not exist yet (pre-migration).
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$exists = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table ) );
+		if ( $table !== $exists ) {
+			return;
+		}
+
+		$post = get_post( $post_id );
+		if ( ! $post || 'donadosu_donation' !== $post->post_type ) {
+			return;
+		}
+
+		$meta = static function ( string $key ) use ( $post_id ) {
+			return (string) get_post_meta( $post_id, $key, true );
+		};
+
+		$amount       = (float) $meta( DonationMeta::AMOUNT );
+		$gross_amount = (float) ( $meta( DonationMeta::GROSS_AMOUNT ) ?: $amount );
+		$fee_amount   = (float) $meta( DonationMeta::FEE_AMOUNT );
+		$frequency    = $meta( DonationMeta::DONATION_FREQUENCY ) ?: 'one_time';
+
+		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Upsert into a plugin-owned table; table name from $wpdb->prefix, all values parameterised.
+		$wpdb->query(
+			$wpdb->prepare(
+				"INSERT INTO {$table}
+					(post_id, amount, gross_amount, fee_amount, currency, status,
+					 donor_email, donor_name, campaign, purpose, frequency,
+					 payment_source, is_anonymous, created_at)
+				VALUES (%d, %f, %f, %f, %s, %s, %s, %s, %s, %s, %s, %s, %d, %s)
+				ON DUPLICATE KEY UPDATE
+					amount         = VALUES(amount),
+					gross_amount   = VALUES(gross_amount),
+					fee_amount     = VALUES(fee_amount),
+					currency       = VALUES(currency),
+					status         = VALUES(status),
+					donor_email    = VALUES(donor_email),
+					donor_name     = VALUES(donor_name),
+					campaign       = VALUES(campaign),
+					purpose        = VALUES(purpose),
+					frequency      = VALUES(frequency),
+					payment_source = VALUES(payment_source),
+					is_anonymous   = VALUES(is_anonymous)",
+				$post_id,
+				$amount,
+				$gross_amount,
+				$fee_amount,
+				$meta( DonationMeta::CURRENCY ),
+				$post->post_status,
+				$meta( DonationMeta::DONOR_EMAIL ),
+				$meta( DonationMeta::DONOR_NAME ),
+				$meta( DonationMeta::CAMPAIGN ),
+				$meta( DonationMeta::PURPOSE ),
+				$frequency,
+				$meta( DonationMeta::PAYMENT_SOURCE ) ?: 'paypal',
+				'1' === $meta( DonationMeta::IS_ANONYMOUS ) ? 1 : 0,
+				$post->post_date_gmt
+			)
+		);
+		// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter
 	}
 }

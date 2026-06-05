@@ -4,7 +4,7 @@ Tags: paypal donations, recurring donations, donation plugin, fundraising, nonpr
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -112,6 +112,7 @@ PayPal is the payment processor that handles every online donation. Without PayP
 * When data is sent: each time a visitor initiates a donation (order creation), completes payment (order capture), creates or manages a subscription, when an administrator issues a refund, and whenever PayPal posts a webhook event that the plugin verifies.
 * Endpoints contacted: `https://api-m.paypal.com` (Live mode) or `https://api-m.sandbox.paypal.com` (Sandbox mode). The PayPal JavaScript SDK is loaded from `https://www.paypal.com/sdk/js` on any page that renders the donation form.
 * Data sent: donation amount, currency, frequency (one-time or recurring), donor name, donor email, billing address (when provided), shipping address (when provided), campaign identifier, and the order or subscription identifier.
+* Partner attribution: the PayPal JavaScript SDK is loaded with a PayPal Partner Attribution ID (BN code) of `mbjtechnolabs_sp`. This is a non-personal integration identifier provided by the plugin's PayPal technology partner (MBJ Technolabs). It does not transmit any donor data, does not change the donation amount, fees, or where funds are deposited (donations are always paid into your own connected PayPal account), and is used only so PayPal can recognise the integration. It can be removed by filtering the SDK attributes if you prefer.
 * PayPal Terms of Service: https://www.paypal.com/us/legalhub/paypal/useragreement-full
 * PayPal Privacy Statement: https://www.paypal.com/us/legalhub/paypal/privacy-full
 
@@ -125,8 +126,9 @@ PayPal is the payment processor that handles every online donation. Without PayP
 * **Google Sheets** — Google's spreadsheet service. When enabled, the plugin contacts `https://oauth2.googleapis.com/token` to authenticate with a service account, then `https://sheets.googleapis.com/v4/spreadsheets` to append a row on each completed donation. Data sent: donation date, amount, currency, donor name, donor email, campaign, and donation identifier, written to the administrator-supplied spreadsheet. Terms of Service: https://policies.google.com/terms — Privacy Policy: https://policies.google.com/privacy
 * **Slack** — a team messaging service. When enabled, the plugin contacts the administrator-supplied Slack incoming-webhook URL on each completed donation to post a notification message. Data sent: donation amount, currency, campaign name, and (if the administrator has not disabled it in settings) the donor name. Terms of Service: https://slack.com/terms-of-service/user — Privacy Policy: https://slack.com/trust/privacy/privacy-policy
 * **Zapier** — a workflow automation service. When enabled, the plugin contacts the administrator-supplied Zapier webhook URL on each donation event (completed, refunded, subscription created, subscription cancelled) to trigger a Zap. Data sent: the donation payload including amount, currency, frequency, donor name, donor email, campaign, event type, and donation identifier. Terms of Service: https://zapier.com/legal — Privacy Policy: https://zapier.com/privacy
+* **Google Analytics 4 / Google Tag Manager (optional, disabled by default)** — Google's web-analytics and tag-management services. Only active when an administrator enables tracking and supplies a Measurement ID (`G-XXXXXXXXXX`) and/or Container ID (`GTM-XXXXXXX`). When active, the visitor's browser loads `https://www.googletagmanager.com/gtag/js` and/or `https://www.googletagmanager.com/gtm.js` and Google receives standard analytics data (such as IP address, page URL, and donation-conversion events). These tags are only rendered after analytics consent: the plugin integrates with the WordPress Consent API (`statistics` category) when a consent-management plugin is active, otherwise honours the plugin's "require consent" setting and the `donadosu_analytics_has_consent` filter. Terms of Service: https://marketingplatform.google.com/about/analytics/terms/us/ — Privacy Policy: https://policies.google.com/privacy
 
-The plugin does not send any data to DonateOcean servers or to any analytics or telemetry service.
+Apart from the optional Google Analytics / Tag Manager integration described above, the plugin does not send any data to DonateOcean servers or to any other analytics or telemetry service.
 
 == Data Storage ==
 
@@ -135,6 +137,8 @@ Donation records, donor profiles, and plugin settings are stored locally in the 
 == Privacy ==
 
 DonateOcean stores donor information (name, email, billing address, donation history) in your database as post meta. No donor data is transmitted to the plugin author.
+
+For convenience, the donation form may also remember a returning donor's own contact details (name, email, phone, and company) in their browser's local storage on the device they donate from, so the form can pre-fill on their next visit. This data stays in the visitor's own browser, is not transmitted anywhere by this feature, and can be cleared by clearing the browser's site data.
 
 The plugin integrates with the core privacy tools to fulfill data subject requests:
 
@@ -249,6 +253,11 @@ Yes. DonateOcean is theme-agnostic and works with any well-coded theme. The dona
 8. Donation page.
 
 == Changelog ==
+
+= 1.0.5 =
+* Added: Google Analytics 4 and Google Tag Manager tag output, with an optional `donation_complete` event pushed to the data layer (and GA4) on successful donations.
+* Improved: Constant Contact now connects securely via OAuth2 (Connect button) with automatic access-token refresh, replacing the unsupported static API key.
+* Added: "Test connection" button for the Mailchimp integration.
 
 = 1.0.4 =
 * Added: Currency switcher on donation form. 

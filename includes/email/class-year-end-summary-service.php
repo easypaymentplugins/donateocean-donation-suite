@@ -109,7 +109,7 @@ class YearEndSummaryService {
 			$body    = self::build_html( $email, $donations, $totals_by_currency, $year, $org_name, $org_address, $reg_id, $contact_email, $tax_statement, $privacy_url );
 			/* translators: 1: organization name, 2: four-digit year */
 			$subject = sprintf( __( '[%1$s] Your %2$d donation summary', 'donateocean-donation-suite' ), $org_name, $year );
-			$headers = array( 'Content-Type: text/html; charset=UTF-8' );
+			$headers = \DonationSuite\Email\ReceiptEmailService::build_email_headers();
 
 			if ( wp_mail( $email, $subject, $body, $headers ) ) {
 				$sent++;

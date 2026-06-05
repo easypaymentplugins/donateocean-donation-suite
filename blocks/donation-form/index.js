@@ -190,6 +190,40 @@
                             checked: attrs.redirectOnSuccess,
                             onChange: function (v) { setAttr({ redirectOnSuccess: v }); },
                         })
+                    ),
+
+                    el(PanelBody, { title: 'Advanced overrides', initialOpen: false },
+                        el(TextControl, {
+                            label: 'Minimum amount',
+                            type: 'number',
+                            value: attrs.minAmount,
+                            placeholder: 'Leave blank for site default',
+                            min: '0',
+                            step: '0.01',
+                            onChange: function (v) { setAttr({ minAmount: v }); },
+                        }),
+                        el(TextControl, {
+                            label: 'Maximum amount',
+                            type: 'number',
+                            value: attrs.maxAmount,
+                            placeholder: 'Leave blank for site default',
+                            min: '0',
+                            step: '0.01',
+                            onChange: function (v) { setAttr({ maxAmount: v }); },
+                        }),
+                        el(ToggleControl, {
+                            label: 'Show fee coverage option',
+                            checked: attrs.feeCoverage,
+                            onChange: function (v) { setAttr({ feeCoverage: v }); },
+                            help: 'Lets donors opt in to cover the transaction fee on this form.',
+                        }),
+                        el(TextControl, {
+                            label: 'Custom CSS class',
+                            value: attrs.cssClass,
+                            placeholder: 'e.g. my-campaign-form',
+                            onChange: function (v) { setAttr({ cssClass: v }); },
+                            help: 'Extra CSS class added to the form for your own styling.',
+                        })
                     )
                 ),
 

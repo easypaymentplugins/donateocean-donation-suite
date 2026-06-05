@@ -12,10 +12,17 @@
 
 namespace DonationSuite\Core;
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+use DonationSuite\Admin\DeactivationFeedback;
 use DonationSuite\Admin\DonationDetailPage;
 use DonationSuite\Admin\DonorProfilePage;
 use DonationSuite\Admin\RefundController;
 use DonationSuite\Admin\ManualDonationPage;
+use DonationSuite\Admin\ReviewNotice;
 use DonationSuite\Admin\SettingsPage;
 use DonationSuite\Admin\CampaignTrackingPage;
 use DonationSuite\Admin\SubscriptionController;
@@ -37,19 +44,16 @@ use DonationSuite\Reporting\AnalyticsWidget;
 use DonationSuite\Reporting\ExportController;
 use DonationSuite\Reporting\ReportsPage;
 use DonationSuite\Integration\ActiveCampaign;
+use DonationSuite\Integration\Analytics;
 use DonationSuite\Integration\Brevo;
 use DonationSuite\Integration\ConstantContact;
+use DonationSuite\Integration\ConstantContactOAuth;
 use DonationSuite\Integration\GoogleSheets;
 use DonationSuite\Integration\Mailchimp;
 use DonationSuite\Integration\Slack;
 use DonationSuite\Integration\Twilio;
 use DonationSuite\Integration\Zapier;
 use DonationSuite\Reporting\WebhookHealthWidget;
-
-// Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
 
 /**
  * Class Bootstrap
@@ -98,6 +102,7 @@ class Bootstrap {
 
 		// Scheduled tasks.
 		add_action( 'donadosu_donation_retention', array( PrivacyTools::class, 'run_retention' ) );
+		add_action( 'donadosu_donation_retention', array( \DonationSuite\PayPal\WebhookHandler::class, 'prune_processed_events' ) );
 		add_action( 'donadosu_donation_reconcile', array( RestController::class, 'run_reconcile' ) );
 		// Year-end summary — fires on Jan 1 each year.
 		add_action( 'donadosu_donation_year_end_summary', array( self::class, 'run_year_end_summary' ) );
@@ -164,6 +169,10 @@ class Bootstrap {
 		( new ManualDonationPage() )->register();
 		( new CampaignTrackingPage() )->register();
 
+		// Deactivation feedback modal & "leave a review" notice.
+		( new DeactivationFeedback() )->register();
+		( new ReviewNotice() )->register();
+
 		// REST API.
 		( new RestController( $repository, $config, $paypal, null, $logger ) )->register();
 
@@ -186,11 +195,13 @@ class Bootstrap {
 		( new CampaignStatsService( $logger ) )->register();
 
 		// Integrations.
+		( new Analytics( $config ) )->register();
 		( new Zapier( $config, $logger ) )->register();
 		( new Slack( $config, $logger ) )->register();
 		( new Twilio( $config, $logger ) )->register();
 		( new Mailchimp( $config, $logger ) )->register();
 		( new ConstantContact( $config, $logger ) )->register();
+		( new ConstantContactOAuth( $config, $logger ) )->register();
 		( new ActiveCampaign( $config, $logger ) )->register();
 		( new Brevo( $config, $logger ) )->register();
 		( new GoogleSheets( $config, $logger ) )->register();
@@ -281,51 +292,6 @@ class Bootstrap {
 			);
 		}
 		return $schedules;
-	}
-
-	/**
-	 * Show an admin notice when the plugin is running in PayPal sandbox mode.
-	 *
-	 * Displayed on all admin screens to admins with manage_options.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return void
-	 */
-	public static function sandbox_admin_notice(): void {
-		if ( ! current_user_can( 'manage_options' ) ) {
-			return;
-		}
-
-		$settings     = ( new ConfigService() )->get_all();
-		$is_sandbox   = ! empty( $settings['sandbox'] );
-		$prefix       = $is_sandbox ? 'sandbox_' : 'live_';
-		$has_creds    = '' !== (string) ( $settings[ $prefix . 'client_id' ] ?? '' )
-		             && '' !== (string) ( $settings[ $prefix . 'secret' ] ?? '' );
-		$settings_url = esc_url( admin_url( 'admin.php?page=donadosu-settings&tab=environment' ) );
-
-		// No credentials configured — prompt to connect.
-		if ( ! $has_creds ) {
-			printf(
-				'<div class="notice notice-info donadosu-sandbox-notice"><p><strong>%s</strong> %s <a href="%s">%s</a></p></div>',
-				esc_html__( 'Donation Suite — Setup required.', 'donateocean-donation-suite' ),
-				esc_html__( 'Connect your PayPal account to start accepting donations.', 'donateocean-donation-suite' ),
-				esc_url( $settings_url ),
-				esc_html__( 'Connect PayPal', 'donateocean-donation-suite' )
-			);
-			return;
-		}
-
-		// Credentials present but in sandbox mode — warn.
-		if ( $is_sandbox ) {
-			printf(
-				'<div class="notice notice-warning donadosu-sandbox-notice"><p><strong>%s</strong> %s <a href="%s">%s</a></p></div>',
-				esc_html__( 'Donation Suite — Sandbox (Test Mode) active.', 'donateocean-donation-suite' ),
-				esc_html__( 'The donation form is using PayPal sandbox credentials. No real payments will be processed.', 'donateocean-donation-suite' ),
-				esc_url( $settings_url ),
-				esc_html__( 'Switch to Production', 'donateocean-donation-suite' )
-			);
-		}
 	}
 
 	/**
@@ -437,8 +403,8 @@ class Bootstrap {
 			// Attempt to reprocess the webhook.
 			$result = $handler->handle( $webhook['raw_body'], $webhook['headers'] );
 
-			if ( 200 === $result['status'] || 202 === $result['status'] ) {
-				// Successfully processed or re-queued, remove from retry queue.
+			if ( 200 === $result['status'] ) {
+				// Fully processed (or deduplicated): remove from retry queue.
 				$logger->info(
 					'Webhook retried successfully',
 					array(
@@ -449,7 +415,12 @@ class Bootstrap {
 				continue;
 			}
 
-			// Webhook still failed, increment retry count and keep in queue.
+			// 202 means the donation post still does not exist yet, and any
+			// other non-2xx status is a transient failure. In both cases keep
+			// the event queued with an incremented retry count so it is tried
+			// again, rather than being silently dropped. (handle() may have
+			// re-queued the entry itself, but this cron overwrites the option
+			// at the end of the loop, so the cron must own retention here.)
 			$webhook['retry_count'] = $retry_count + 1;
 			$updated_queue[ $event_id ] = $webhook;
 

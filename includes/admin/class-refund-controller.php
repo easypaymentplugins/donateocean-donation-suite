@@ -114,9 +114,17 @@ class RefundController {
 		// Support partial refunds: if refund_amount is provided and valid, pass it;
 		// otherwise pass 0 to trigger a full refund via the PayPal API.
 		$refund_amount_input = trim( sanitize_text_field( (string) wp_unslash( $_POST['refund_amount'] ?? '' ) ) );
-		$refund_amount       = 0.0;
+		$refund_amount       = 0.0; // Amount sent to PayPal; 0.0 = full refund of the remaining balance.
 		$donation_currency   = sanitize_text_field( (string) get_post_meta( $post_id, DonationMeta::CURRENCY, true ) );
 		$gross_amount        = (float) get_post_meta( $post_id, DonationMeta::GROSS_AMOUNT, true );
+		$already_refunded    = (float) get_post_meta( $post_id, DonationMeta::REFUNDED_AMOUNT, true );
+		$remaining           = $gross_amount > 0 ? max( 0.0, $gross_amount - $already_refunded ) : 0.0;
+
+		// Block further refunds once the donation is already fully refunded.
+		if ( $gross_amount > 0 && $remaining <= 0.005 ) {
+			wp_safe_redirect( add_query_arg( 'donadosu_error', 'refund_exceeds_captured', $detail_url ) );
+			exit;
+		}
 
 		if ( '' !== $refund_amount_input ) {
 			if ( ! is_numeric( $refund_amount_input ) || (float) $refund_amount_input <= 0 ) {
@@ -125,12 +133,17 @@ class RefundController {
 			}
 			$refund_amount = (float) $refund_amount_input;
 
-			// Prevent refunding more than the captured amount.
-			if ( $gross_amount > 0 && $refund_amount > $gross_amount ) {
+			// Prevent refunding more than what remains after prior partial
+			// refunds (half-cent tolerance for float comparison).
+			if ( $gross_amount > 0 && $refund_amount > $remaining + 0.005 ) {
 				wp_safe_redirect( add_query_arg( 'donadosu_error', 'refund_exceeds_captured', $detail_url ) );
 				exit;
 			}
 		}
+
+		// The actual value refunded for cumulative tracking: the explicit
+		// amount, or the remaining balance when a blank (full) refund is sent.
+		$recorded_amount = $refund_amount > 0 ? $refund_amount : $remaining;
 
 		$result = $paypal->refund_capture( $capture_id, $refund_amount, $donation_currency );
 
@@ -153,35 +166,55 @@ class RefundController {
 		$repository    = new CptDonationRepository();
 		$state_machine = new StateMachine();
 
-		$next_status = $state_machine->transition( $current_status, 'donadosu_refunded' );
-		if ( $next_status !== $current_status ) {
+		// Update the cumulative refunded total and record the refund ID.
+		$new_refunded_total = round( $already_refunded + $recorded_amount, 2 );
+		update_post_meta( $post_id, DonationMeta::REFUNDED_AMOUNT, (string) $new_refunded_total );
+		if ( '' !== $refund_id ) {
+			update_post_meta( $post_id, DonationMeta::REFUND_ID, $refund_id );
+		}
+
+		// Only flip the donation to fully-refunded when the entire captured
+		// amount has been refunded. A partial refund leaves it completed so it
+		// still counts (net of the refunded amount) in reports.
+		$is_full_refund = $gross_amount <= 0 || $new_refunded_total >= $gross_amount - 0.005;
+
+		if ( $is_full_refund ) {
+			$next_status = $state_machine->transition( $current_status, 'donadosu_refunded' );
+			if ( $next_status === $current_status ) {
+				// Force status update -- PayPal refund already succeeded.
+				$next_status = 'donadosu_refunded';
+			}
 			$repository->set_status( $post_id, $next_status );
 		} else {
-			// Force status update -- PayPal refund already succeeded.
-			$repository->set_status( $post_id, 'donadosu_refunded' );
-			$next_status = 'donadosu_refunded';
+			$next_status = $current_status;
 		}
+
 		$repository->append_history(
 			$post_id,
 			$next_status,
 			array(
-				'source'    => 'admin_refund',
-				'refund_id' => $refund_id,
-				'actor'     => (string) wp_get_current_user()->user_email,
+				'source'          => 'admin_refund',
+				'refund_id'       => $refund_id,
+				'refund_amount'   => $recorded_amount,
+				'refunded_total'  => $new_refunded_total,
+				'partial'         => ! $is_full_refund,
+				'actor'           => (string) wp_get_current_user()->user_email,
 			)
 		);
 
 		$logger->info(
 			'Admin refund completed successfully',
 			array(
-				'post_id'   => $post_id,
-				'refund_id' => $refund_id,
-				'amount'    => $refund_amount,
-				'currency'  => $donation_currency,
+				'post_id'        => $post_id,
+				'refund_id'      => $refund_id,
+				'amount'         => $recorded_amount,
+				'refunded_total' => $new_refunded_total,
+				'partial'        => ! $is_full_refund,
+				'currency'       => $donation_currency,
 			)
 		);
 
-		wp_safe_redirect( add_query_arg( 'donadosu_msg', 'refunded', $detail_url ) );
+		wp_safe_redirect( add_query_arg( 'donadosu_msg', ( $is_full_refund ? 'refunded' : 'partially_refunded' ), $detail_url ) );
 		exit;
 	}
 }

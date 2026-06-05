@@ -433,6 +433,6 @@ class DonorPortalShortcode {
 			esc_html__( 'If you did not request this link, you can safely ignore this email.', 'donateocean-donation-suite' )
 		);
 
-		wp_mail( $email, $subject, $body, array( 'Content-Type: text/html; charset=UTF-8' ) );
+		wp_mail( $email, $subject, $body, \DonationSuite\Email\ReceiptEmailService::build_email_headers() );
 	}
 }

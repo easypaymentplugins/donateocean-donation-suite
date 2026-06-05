@@ -99,10 +99,13 @@ class ConfigService {
 			'mailchimp_list_id'        => '',
 			'mailchimp_auto_subscribe' => 0,
 			'mailchimp_double_optin'   => 0,
-			// Integrations: Constant Contact.
-			'cc_api_key'        => '',
-			'cc_list_id'        => '',
-			'cc_auto_subscribe' => 0,
+			// Integrations: Constant Contact (OAuth2 — access/refresh tokens are
+			// stored in the dedicated donadosu_cc_tokens option; see
+			// ConstantContactOAuth).
+			'cc_client_id'         => '',
+			'cc_client_secret'     => '',
+			'cc_list_id'           => '',
+			'cc_auto_subscribe'    => 0,
 			// Integrations: Zapier.
 			'zapier_enabled'       => 0,
 			'zapier_webhook_url'   => '',
@@ -143,7 +146,23 @@ class ConfigService {
 			'gsheets_credentials_json' => '',
 		);
 
-		return wp_parse_args( (array) get_option( self::OPTION_KEY, array() ), $defaults );
+		$settings = wp_parse_args( (array) get_option( self::OPTION_KEY, array() ), $defaults );
+
+		// Decrypt secrets at rest.
+		foreach ( self::SECRET_KEYS as $key ) {
+			if ( isset( $settings[ $key ] ) && '' !== $settings[ $key ] ) {
+				$settings[ $key ] = self::decrypt_secret( (string) $settings[ $key ] );
+			}
+		}
+
+		// Constant overrides take precedence over DB values.
+		foreach ( self::CONSTANT_OVERRIDES as $key => $const_name ) {
+			if ( defined( $const_name ) ) {
+				$settings[ $key ] = (string) constant( $const_name );
+			}
+		}
+
+		return $settings;
 	}
 
 	/**
@@ -155,6 +174,33 @@ class ConfigService {
 	 */
 	public function is_sandbox(): bool {
 		return ! empty( $this->get_all()['sandbox'] );
+	}
+
+	/**
+	 * Get the PayPal connection state.
+	 *
+	 * Single source of truth for the connection banner. Returns one of:
+	 *   - 'disconnected'      — no credentials saved for the active environment
+	 *   - 'sandbox_active'    — sandbox creds present, sandbox mode on
+	 *   - 'live_active'       — live creds present, live mode on
+	 *
+	 * Used by both the inline template banner and the global admin notice
+	 * so they never disagree.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string One of 'disconnected', 'sandbox_active', 'live_active'.
+	 */
+	public function get_connection_state(): string {
+		$settings = $this->get_all();
+		$prefix   = ! empty( $settings['sandbox'] ) ? 'sandbox_' : 'live_';
+		$has_creds = '' !== (string) ( $settings[ $prefix . 'client_id' ] ?? '' )
+		          && '' !== (string) ( $settings[ $prefix . 'secret' ] ?? '' );
+
+		if ( ! $has_creds ) {
+			return 'disconnected';
+		}
+		return ! empty( $settings['sandbox'] ) ? 'sandbox_active' : 'live_active';
 	}
 
 	/**
@@ -267,6 +313,10 @@ class ConfigService {
 			'cardFieldsEnabled'   => ! empty( $settings['enable_paypal_card_fields'] ),
 			// Feature 7: Giving levels.
 			'givingLevels'        => $giving_levels,
+			// Integrations: Google Analytics / GTM donation event push. Only
+			// true when tracking is enabled AND the event push toggle is on, so
+			// the frontend never emits events unless the admin opted in.
+			'gaPushEvents'        => ! empty( $settings['ga_enable_tracking'] ) && ! empty( $settings['ga_push_events'] ),
 		);
 	}
 
@@ -305,5 +355,87 @@ class ConfigService {
 	public function get_receipt_statement(): string {
 		$settings = $this->get_all();
 		return (string) ( $settings['tax_disclaimer'] ?? 'No goods or services were provided in exchange for this donation.' );
+	}
+
+	/**
+	 * Secret option keys that should be encrypted at rest.
+	 */
+	private const SECRET_KEYS = array(
+		'sandbox_secret',
+		'live_secret',
+		'mailchimp_api_key',
+		'cc_client_secret',
+		'twilio_auth_token',
+		'ac_api_key',
+		'brevo_api_key',
+		'zapier_secret_key',
+	);
+
+	/**
+	 * Map of settings keys to wp-config.php constant names.
+	 * When a constant is defined, it takes precedence over the DB value.
+	 */
+	private const CONSTANT_OVERRIDES = array(
+		'sandbox_client_id' => 'DONADOSU_SANDBOX_CLIENT_ID',
+		'sandbox_secret'    => 'DONADOSU_SANDBOX_SECRET',
+		'live_client_id'    => 'DONADOSU_LIVE_CLIENT_ID',
+		'live_secret'       => 'DONADOSU_LIVE_SECRET',
+	);
+
+	/**
+	 * Check whether a settings key is defined as a constant override.
+	 */
+	public static function has_constant_override( string $key ): bool {
+		$const = self::CONSTANT_OVERRIDES[ $key ] ?? '';
+		return '' !== $const && defined( $const );
+	}
+
+	/**
+	 * Return the encryption key derived from a wp-config.php constant
+	 * or the WordPress AUTH_KEY salt.
+	 */
+	private static function get_encryption_key(): string {
+		$source = defined( 'DONADOSU_ENCRYPTION_KEY' ) ? (string) constant( 'DONADOSU_ENCRYPTION_KEY' ) : (string) AUTH_KEY;
+		return sodium_crypto_generichash( $source, '', SODIUM_CRYPTO_SECRETBOX_KEYBYTES );
+	}
+
+	/**
+	 * Encrypt a plaintext secret for storage.
+	 */
+	public static function encrypt_secret( string $plaintext ): string {
+		if ( '' === $plaintext || ! function_exists( 'sodium_crypto_secretbox' ) ) {
+			return $plaintext;
+		}
+		$nonce = random_bytes( SODIUM_CRYPTO_SECRETBOX_NONCEBYTES );
+		$cipher = sodium_crypto_secretbox( $plaintext, $nonce, self::get_encryption_key() );
+		return 'enc:' . base64_encode( $nonce . $cipher );
+	}
+
+	/**
+	 * Decrypt a stored secret. Returns plaintext on success,
+	 * the original string if it is not encrypted or decryption fails.
+	 */
+	public static function decrypt_secret( string $stored ): string {
+		if ( '' === $stored || ! function_exists( 'sodium_crypto_secretbox_open' ) ) {
+			return $stored;
+		}
+		if ( 0 !== strpos( $stored, 'enc:' ) ) {
+			return $stored;
+		}
+		$raw = base64_decode( substr( $stored, 4 ), true );
+		if ( false === $raw || strlen( $raw ) < SODIUM_CRYPTO_SECRETBOX_NONCEBYTES + SODIUM_CRYPTO_SECRETBOX_MACBYTES ) {
+			return $stored;
+		}
+		$nonce  = substr( $raw, 0, SODIUM_CRYPTO_SECRETBOX_NONCEBYTES );
+		$cipher = substr( $raw, SODIUM_CRYPTO_SECRETBOX_NONCEBYTES );
+		$plain  = sodium_crypto_secretbox_open( $cipher, $nonce, self::get_encryption_key() );
+		return false === $plain ? $stored : $plain;
+	}
+
+	/**
+	 * Check whether a key is a secret that should be encrypted.
+	 */
+	public static function is_secret_key( string $key ): bool {
+		return in_array( $key, self::SECRET_KEYS, true );
 	}
 }

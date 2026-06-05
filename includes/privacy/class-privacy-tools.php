@@ -61,6 +61,37 @@ class PrivacyTools {
 	public function register(): void {
 		add_filter( 'wp_privacy_personal_data_exporters', array( $this, 'exporters' ) );
 		add_filter( 'wp_privacy_personal_data_erasers', array( $this, 'erasers' ) );
+		add_action( 'admin_init', array( $this, 'add_privacy_policy_content' ) );
+	}
+
+	/**
+	 * Register suggested privacy-policy text describing the donor data the
+	 * plugin collects, the processors it may share it with, and retention.
+	 *
+	 * Surfaces in Settings → Privacy → "Check Privacy Policy" so site owners
+	 * can include accurate disclosures.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 */
+	public function add_privacy_policy_content(): void {
+		if ( ! function_exists( 'wp_add_privacy_policy_content' ) ) {
+			return;
+		}
+
+		$content = '<p>' . esc_html__( 'This site uses the DonateOcean donation plugin to accept donations. When you make a donation we collect the information you provide on the donation form — which may include your name, email address, phone number, billing and/or shipping address, donation amount, currency, campaign, and any message or tribute details — together with technical data such as your IP address and the time of the donation.', 'donateocean-donation-suite' ) . '</p>';
+
+		$content .= '<p>' . esc_html__( 'Donation records and donor profiles are stored in this site\'s database. Payments are processed by PayPal; the plugin never stores your full card details. PDF receipts are generated on demand and are not retained on the server after delivery.', 'donateocean-donation-suite' ) . '</p>';
+
+		$content .= '<p>' . esc_html__( 'Depending on the features this site has enabled, your donation details may be shared with third-party processors: PayPal (payment processing) and, where configured, email/CRM and notification services (for example Mailchimp, Brevo, ActiveCampaign, Constant Contact, Google Sheets, Slack, Twilio, or Zapier). You are only added to a marketing service when you have given consent on the donation form. See the plugin\'s External Services documentation for details of each service and links to their privacy policies.', 'donateocean-donation-suite' ) . '</p>';
+
+		$content .= '<p>' . esc_html__( 'Donation records may be retained for the period configured by the site administrator (for accounting and tax-reporting purposes) and are anonymised or removed after that period. You can request export or erasure of your personal data using this site\'s privacy tools.', 'donateocean-donation-suite' ) . '</p>';
+
+		wp_add_privacy_policy_content(
+			__( 'DonateOcean – Donations via PayPal', 'donateocean-donation-suite' ),
+			wp_kses_post( $content )
+		);
 	}
 
 	/**
@@ -212,12 +243,62 @@ class PrivacyTools {
 			self::erase_pii( (int) $post->ID, false );
 		}
 
+		$messages = array();
+
+		// Best-effort scrub of the email from existing plugin log files, and an
+		// honest notice that copies may persist in third-party services the
+		// plugin pushed data to, which must be removed in those services.
+		if ( '' !== $email ) {
+			\DonationSuite\Logging\Logger::scrub_from_logs( $email );
+
+			$processors = self::active_data_processors();
+			if ( ! empty( $processors ) ) {
+				$messages[] = sprintf(
+					/* translators: %s: comma-separated list of third-party service names */
+					__( 'This donor\'s name and email may also have been sent to the following third-party services, which are outside this site and must be erased directly with each provider: %s.', 'donateocean-donation-suite' ),
+					implode( ', ', $processors )
+				);
+			}
+		}
+
 		return array(
 			'items_removed'  => count( $posts ),
-			'items_retained' => 0,
-			'messages'       => array(),
+			'items_retained' => false,
+			'messages'       => $messages,
 			'done'           => count( $posts ) < 50,
 		);
+	}
+
+	/**
+	 * Names of third-party services that are enabled and may hold donor data.
+	 *
+	 * Used to give an honest erasure message: this plugin cannot delete data
+	 * already pushed to external processors, so it tells the admin which ones
+	 * to clear manually.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array<int, string> Human-readable service names.
+	 */
+	private static function active_data_processors(): array {
+		$settings = ( new ConfigService() )->get_all();
+		$map      = array(
+			'mailchimp_auto_subscribe' => 'Mailchimp',
+			'brevo_auto_subscribe'     => 'Brevo',
+			'ac_auto_subscribe'        => 'ActiveCampaign',
+			'cc_auto_subscribe'        => 'Constant Contact',
+			'gsheets_enabled'          => 'Google Sheets',
+			'zapier_enabled'           => 'Zapier',
+		);
+
+		$active = array();
+		foreach ( $map as $key => $label ) {
+			if ( ! empty( $settings[ $key ] ) ) {
+				$active[] = $label;
+			}
+		}
+
+		return $active;
 	}
 
 	/**

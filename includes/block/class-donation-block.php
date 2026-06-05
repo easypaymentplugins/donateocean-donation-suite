@@ -96,7 +96,7 @@ class DonationBlock {
 			'goal_current'        => sanitize_text_field( (string) ( $attributes['goalCurrent'] ?? '' ) ),
 			'goal_label'          => sanitize_text_field( (string) ( $attributes['goalLabel'] ?? 'Campaign progress' ) ),
 			'goal_close'          => ! empty( $attributes['goalClose'] ) ? '1' : '0',
-			'button_text'         => sanitize_text_field( (string) ( $attributes['buttonText'] ?? 'Donate with PayPal' ) ),
+			'button_text'         => sanitize_text_field( (string) ( $attributes['buttonText'] ?? 'Donate now' ) ),
 			'button_color'        => sanitize_hex_color( (string) ( $attributes['buttonColor'] ?? '' ) ) ?: '',
 			'thank_you_url'       => esc_url_raw( (string) ( $attributes['thankYouUrl'] ?? '' ) ),
 			'redirect_on_success' => ! empty( $attributes['redirectOnSuccess'] ) ? '1' : '0',

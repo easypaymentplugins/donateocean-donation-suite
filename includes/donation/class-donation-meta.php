@@ -471,4 +471,41 @@ class DonationMeta {
 	 * @var string
 	 */
 	public const RENEWAL_FAIL_COUNT = '_donadosu_renewal_fail_count';
+
+	/**
+	 * Cumulative amount refunded against this donation (string decimal).
+	 *
+	 * Tracks the running total across one or more partial refunds so the
+	 * donation is only moved to donadosu_refunded once it is fully refunded,
+	 * and so reports can subtract the exact refunded amount.
+	 *
+	 * @since 1.0.0
+	 * @var string
+	 */
+	public const REFUNDED_AMOUNT = '_donadosu_refunded_amount';
+
+	/**
+	 * The most recent PayPal refund ID issued for this donation.
+	 *
+	 * @since 1.0.0
+	 * @var string
+	 */
+	public const REFUND_ID = '_donadosu_refund_id';
+
+	/**
+	 * Whether the donor explicitly consented to marketing/email contact
+	 * ('1' when consent was given on the donation form, '0' otherwise).
+	 *
+	 * @since 1.0.0
+	 * @var string
+	 */
+	public const MARKETING_CONSENT = '_donadosu_marketing_consent';
+
+	/**
+	 * ISO-8601 timestamp at which marketing consent was captured.
+	 *
+	 * @since 1.0.0
+	 * @var string
+	 */
+	public const MARKETING_CONSENT_AT = '_donadosu_marketing_consent_at';
 }

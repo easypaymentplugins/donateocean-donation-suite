@@ -19,8 +19,27 @@ $_cfg        = array(
 	'defaults' => $this->config->get_frontend_config(),
 	'atts'     => $atts,
 );
+
+// Resolve the form's currency once so the goal panel, preset buttons, and
+// amount label all show the same symbol. Mirrors the JS map in assets/js/donate.js.
+$_currency_code       = strtoupper( (string) ( '' !== (string) $atts['currency'] ? $atts['currency'] : ( $_cfg['defaults']['currency'] ?? 'USD' ) ) );
+$_currency_symbol_map = array(
+	'USD' => '$',  'EUR' => '€',  'GBP' => '£',  'JPY' => '¥',  'CNY' => '¥',
+	'CAD' => 'CA$','AUD' => 'A$', 'CHF' => 'CHF','INR' => '₹',  'KRW' => '₩',
+	'BRL' => 'R$', 'MXN' => 'MX$','SGD' => 'S$', 'HKD' => 'HK$','NZD' => 'NZ$',
+	'SEK' => 'kr', 'NOK' => 'kr', 'DKK' => 'kr', 'ZAR' => 'R',  'PLN' => 'zł',
+	'THB' => '฿',  'IDR' => 'Rp', 'MYR' => 'RM', 'PHP' => '₱',  'CZK' => 'Kč',
+	'ILS' => '₪',  'TWD' => 'NT$','TRY' => '₺',  'RUB' => '₽',  'HUF' => 'Ft',
+);
+$_currency_symbol = $_currency_symbol_map[ $_currency_code ] ?? $_currency_code;
 ?>
-<div class="donadosu-display donadosu-display--<?php echo esc_attr($atts['display_mode']); ?>" data-donadosu-display="<?php echo esc_attr($atts['display_mode']); ?>">
+<?php
+$_display_classes = 'donadosu-display donadosu-display--' . $atts['display_mode'];
+if ( '' !== trim( (string) $atts['css_class'] ) ) {
+  $_display_classes .= ' ' . trim( (string) $atts['css_class'] );
+}
+?>
+<div class="<?php echo esc_attr( $_display_classes ); ?>" data-donadosu-display="<?php echo esc_attr($atts['display_mode']); ?>"<?php if ( '' !== $atts['button_color'] ) : ?> style="--donadosu-accent: <?php echo esc_attr( $atts['button_color'] ); ?>;"<?php endif; ?>>
 
   <?php if ($atts['display_mode'] === 'modal' && '' !== trim($atts['button_text'])) : ?>
   <button type="button" id="donadosu-open-modal" class="donadosu-open-modal" aria-haspopup="dialog">
@@ -78,10 +97,10 @@ $_cfg        = array(
         <p class="donadosu-panel__help">
           <?php
           printf(
-            /* translators: 1: amount raised, 2: goal amount */
+            /* translators: 1: amount raised (with currency symbol), 2: goal amount (with currency symbol) */
             esc_html__('%1$s raised of %2$s.', 'donateocean-donation-suite'),
-            esc_html(number_format($atts['goal_current'], 2)),
-            esc_html(number_format($atts['goal_amount'], 2))
+            esc_html( $_currency_symbol . number_format($atts['goal_current'], 2) ),
+            esc_html( $_currency_symbol . number_format($atts['goal_amount'], 2) )
           );
           ?>
         </p>
@@ -134,7 +153,7 @@ $_cfg        = array(
             $_amt = (float) ( $_level['amount'] ?? 0 );
             if ( $_amt <= 0 ) { continue; }
             $_label   = (string) ( $_level['label'] ?? '' );
-            $_display = $_format_amount( $_amt );
+            $_display = $_currency_symbol . $_format_amount( $_amt );
           ?>
           <button type="button" class="donadosu-preset-btn donadosu-preset-btn--level" data-amount="<?php echo esc_attr( (string) $_amt ); ?>" data-level="<?php echo esc_attr( $_label ); ?>"<?php if ( ! empty( $_level['description'] ) ) : ?> title="<?php echo esc_attr( (string) $_level['description'] ); ?>"<?php endif; ?>>
             <strong><?php echo esc_html( '' !== $_label ? $_label : $_display ); ?></strong>
@@ -145,13 +164,13 @@ $_cfg        = array(
           <?php foreach ( $_preset_amounts as $_amt ) :
             $_amt = (float) $_amt;
             if ( $_amt <= 0 ) { continue; }
-            $_display = $_format_amount( $_amt );
+            $_display = $_currency_symbol . $_format_amount( $_amt );
           ?>
           <button type="button" class="donadosu-preset-btn" data-amount="<?php echo esc_attr( (string) $_amt ); ?>" aria-label="<?php echo esc_attr( sprintf( /* translators: %s: donation amount */ __( 'Donate %s', 'donateocean-donation-suite' ), $_display ) ); ?>"><?php echo esc_html( $_display ); ?></button>
           <?php endforeach; ?>
         <?php endif; ?>
         <?php if ( $_custom_amount_enabled ) : ?>
-          <button type="button" class="donadosu-preset-btn donadosu-preset-btn--custom" aria-label="<?php esc_attr_e( 'Enter a custom donation amount', 'donateocean-donation-suite' ); ?>"><?php esc_html_e( 'Custom', 'donateocean-donation-suite' ); ?></button>
+          <button type="button" class="donadosu-preset-btn donadosu-preset-btn--custom" aria-label="<?php esc_attr_e( 'Enter your own donation amount', 'donateocean-donation-suite' ); ?>"><?php esc_html_e( 'Other amount', 'donateocean-donation-suite' ); ?></button>
         <?php endif; ?>
       </div>
 
@@ -159,8 +178,11 @@ $_cfg        = array(
       $_allowed_currencies = ( ! empty( $_cfg['defaults']['allowedCurrencies'] ) && is_array( $_cfg['defaults']['allowedCurrencies'] ) )
         ? $_cfg['defaults']['allowedCurrencies']
         : array( (string) ( $_cfg['defaults']['currency'] ?? 'USD' ) );
-      $_selected_currency  = (string) ( '' !== (string) $atts['currency'] ? $atts['currency'] : ( $_cfg['defaults']['currency'] ?? ( $_allowed_currencies[0] ?? 'USD' ) ) );
+      $_allowed_currencies   = array_values( array_filter( array_map( 'strval', $_allowed_currencies ), static function ( $c ) { return '' !== $c; } ) );
+      $_selected_currency    = (string) ( '' !== (string) $atts['currency'] ? $atts['currency'] : ( $_cfg['defaults']['currency'] ?? ( $_allowed_currencies[0] ?? 'USD' ) ) );
+      $_show_currency_select = count( $_allowed_currencies ) > 1;
       ?>
+      <?php if ( $_show_currency_select ) : ?>
       <div class="donadosu-inline-grid">
         <div class="donadosu-field donadosu-field--amount">
           <label for="donadosu-amount"><?php esc_html_e('Amount', 'donateocean-donation-suite'); ?></label>
@@ -169,12 +191,24 @@ $_cfg        = array(
         <div class="donadosu-field donadosu-field--currency">
           <label for="donadosu-currency"><?php esc_html_e('Currency', 'donateocean-donation-suite'); ?></label>
           <select id="donadosu-currency" aria-label="<?php esc_attr_e('Currency', 'donateocean-donation-suite'); ?>">
-            <?php foreach ( $_allowed_currencies as $_code ) : $_code = (string) $_code; if ( '' === $_code ) { continue; } ?>
+            <?php foreach ( $_allowed_currencies as $_code ) : ?>
               <option value="<?php echo esc_attr( $_code ); ?>" <?php selected( $_code, $_selected_currency ); ?>><?php echo esc_html( $_code ); ?></option>
             <?php endforeach; ?>
           </select>
         </div>
       </div>
+      <?php else : ?>
+      <div class="donadosu-field donadosu-field--amount">
+        <label for="donadosu-amount">
+          <?php
+          /* translators: %s: ISO currency code, e.g. USD */
+          printf( esc_html__('Amount (%s)', 'donateocean-donation-suite'), esc_html( $_currency_code ) );
+          ?>
+        </label>
+        <input id="donadosu-amount" type="number" min="1" step="0.01" aria-label="<?php esc_attr_e('Donation amount', 'donateocean-donation-suite'); ?>" placeholder="50.00" />
+      </div>
+      <input type="hidden" id="donadosu-currency" value="<?php echo esc_attr( $_selected_currency ); ?>" />
+      <?php endif; ?>
       <?php if ('' !== trim((string) $atts['campaign']) || '' !== trim((string) $atts['purpose'])) : ?>
       <div class="donadosu-inline-grid">
         <?php if ('' !== trim((string) $atts['campaign'])) : ?>
@@ -251,8 +285,16 @@ $_cfg        = array(
         <!-- Remember donor details for returning donors -->
         <div class="donadosu-checkbox-row donadosu-checkbox-row--remember">
           <input type="checkbox" id="donadosu-remember-donor" checked />
-          <label for="donadosu-remember-donor"><?php esc_html_e('Remember my details for next time', 'donateocean-donation-suite'); ?></label>
+          <label for="donadosu-remember-donor"><?php esc_html_e('Save my details for faster checkout next time', 'donateocean-donation-suite'); ?></label>
         </div>
+
+        <?php if ( ! empty( $atts['marketing_consent_show'] ) ) : ?>
+        <!-- Marketing consent opt-in (GDPR): unchecked by default -->
+        <div class="donadosu-checkbox-row donadosu-checkbox-row--marketing-consent">
+          <input type="checkbox" id="donadosu-marketing-consent" />
+          <label for="donadosu-marketing-consent"><?php echo esc_html( (string) $atts['marketing_consent_label'] ); ?></label>
+        </div>
+        <?php endif; ?>
 
         <!-- Feature 3: Tribute donation -->
         <div class="donadosu-checkbox-row">
@@ -375,7 +417,7 @@ $_cfg        = array(
     <!-- Step 3: Confirm and pay -->
     <section class="donadosu-panel" aria-labelledby="donadosu-step-3-title">
       <h4 id="donadosu-step-3-title" class="donadosu-panel__title"><?php esc_html_e('Confirm and pay', 'donateocean-donation-suite'); ?></h4>
-      <p class="donadosu-panel__help"><?php esc_html_e('Review your details and complete payment with PayPal.', 'donateocean-donation-suite'); ?></p>
+      <p class="donadosu-panel__help"><?php esc_html_e('Review your details and complete your donation.', 'donateocean-donation-suite'); ?></p>
 
       <div class="donadosu-summary" aria-live="polite">
         <div class="donadosu-summary__row">

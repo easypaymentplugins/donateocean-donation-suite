@@ -33,6 +33,41 @@ if ( ! defined( 'ABSPATH' ) ) {
 class ReceiptEmailService {
 
 	/**
+	 * Build standard HTML email headers including a From and Reply-To.
+	 *
+	 * The From address uses a site-domain mailbox (mirroring WordPress'
+	 * default sender) so SPF/DKIM alignment is preserved, with the charity
+	 * name as the display name. Reply-To is set to the configured charity
+	 * contact email so donors can reply to receipts and tax summaries.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array<int, string> Mail headers for wp_mail().
+	 */
+	public static function build_email_headers(): array {
+		$settings = ( new ConfigService() )->get_all();
+		$org_name = trim( (string) ( $settings['charity_name'] ?? '' ) ) ?: (string) get_bloginfo( 'name' );
+		$reply_to = sanitize_email( (string) ( $settings['contact_email'] ?? '' ) );
+
+		$host = wp_parse_url( (string) home_url(), PHP_URL_HOST );
+		$host = is_string( $host ) ? preg_replace( '/^www\./i', '', $host ) : '';
+		$from_email = '' !== (string) $host ? 'wordpress@' . $host : sanitize_email( (string) get_option( 'admin_email' ) );
+
+		$headers = array( 'Content-Type: text/html; charset=UTF-8' );
+
+		if ( '' !== $org_name && '' !== (string) $from_email ) {
+			// Quote the display name so commas in the charity name are safe.
+			$headers[] = sprintf( 'From: "%s" <%s>', str_replace( '"', '', $org_name ), $from_email );
+		}
+
+		if ( '' !== $reply_to && is_email( $reply_to ) ) {
+			$headers[] = 'Reply-To: ' . $reply_to;
+		}
+
+		return $headers;
+	}
+
+	/**
 	 * Manually resend the receipt for a specific donation.
 	 *
 	 * Bypasses the duplicate-send guard so it can be called by admins.
@@ -122,7 +157,7 @@ class ReceiptEmailService {
 			esc_html__( 'PayPal Resolution Center', 'donateocean-donation-suite' )
 		);
 
-		wp_mail( $admin_email, $subject, $body, array( 'Content-Type: text/html; charset=UTF-8' ) );
+		wp_mail( $admin_email, $subject, $body, self::build_email_headers() );
 	}
 
 	/**
@@ -174,7 +209,7 @@ class ReceiptEmailService {
 			esc_html( $org_name )
 		);
 
-		wp_mail( $notify_email, $subject, $body, array( 'Content-Type: text/html; charset=UTF-8' ) );
+		wp_mail( $notify_email, $subject, $body, self::build_email_headers() );
 	}
 
 	/**
@@ -276,7 +311,7 @@ class ReceiptEmailService {
 			$donor_message
 		);
 
-		$headers = array( 'Content-Type: text/html; charset=UTF-8' );
+		$headers = self::build_email_headers();
 		$sent    = wp_mail( $email, $subject, $body, $headers );
 
 		update_post_meta( $post_id, DonationMeta::RECEIPT_EMAIL_STATUS, $sent ? 'sent' : 'failed' );
@@ -356,7 +391,7 @@ class ReceiptEmailService {
 			$admin_url
 		);
 
-		$headers = array( 'Content-Type: text/html; charset=UTF-8' );
+		$headers = self::build_email_headers();
 		wp_mail( $admin_email, $subject, $body, $headers );
 	}
 
