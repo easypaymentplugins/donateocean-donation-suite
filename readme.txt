@@ -4,7 +4,7 @@ Tags: paypal donations, recurring donations, donation plugin, fundraising, nonpr
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -254,6 +254,16 @@ Yes. DonateOcean is theme-agnostic and works with any well-coded theme. The dona
 
 == Changelog ==
 
+= 1.0.6 =
+* Added: Scheduled CSV exports — automatically email a donation export on a weekly or monthly schedule.
+* Added: Recurring donors can update their PayPal payment method directly from the donor portal.
+* Added: Marketing opt-in consent checkbox on the donation form, so donors are only added to email/CRM integrations when they agree.
+* Added: Resend receipt button on the admin donation detail screen.
+* Added: Community Support and Rate this Plugin links on the Plugins screen.
+* Improved: Google Analytics and Tag Manager tags now honour visitor consent (WordPress Consent API) before loading.
+* Security: PayPal and integration secrets are now encrypted at rest and no longer loaded on every page request.
+* Fixed: Partial refunds received via a PayPal webhook are now recorded as partial instead of marking the whole donation refunded.
+
 = 1.0.5 =
 * Added: Google Analytics 4 and Google Tag Manager tag output, with an optional `donation_complete` event pushed to the data layer (and GA4) on successful donations.
 * Improved: Constant Contact now connects securely via OAuth2 (Connect button) with automatic access-token refresh, replacing the unsupported static API key.
@@ -276,6 +286,9 @@ Yes. DonateOcean is theme-agnostic and works with any well-coded theme. The dona
 * Initial public release.
 
 == Upgrade Notice ==
+
+= 1.0.6 =
+Adds scheduled CSV exports, donor self-service payment-method updates, and marketing consent; encrypts stored credentials; and fixes partial-refund tracking from PayPal webhooks.
 
 = 1.0.0 =
 Initial release of DonateOcean.

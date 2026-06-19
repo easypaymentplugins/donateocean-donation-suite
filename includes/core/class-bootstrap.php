@@ -110,6 +110,9 @@ class Bootstrap {
 		add_action( 'donadosu_webhook_retry_cron', array( self::class, 'process_webhook_retry_queue' ) );
 		// Card-recurring renewals — fires daily to charge due vaulted cards.
 		add_action( 'donadosu_renewal_charges', array( RestController::class, 'run_renewal_charges' ) );
+		// Scheduled CSV export — daily tick that emails an export on the
+		// configured cadence (weekly/monthly) when enabled.
+		add_action( 'donadosu_scheduled_export', array( \DonationSuite\Reporting\ExportController::class, 'run_scheduled_export' ) );
 
 		// Manual year-end summary trigger from admin.
 		add_action( 'admin_post_donadosu_year_end_summary', array( self::class, 'handle_year_end_summary_request' ) );

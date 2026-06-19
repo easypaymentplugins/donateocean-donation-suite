@@ -429,8 +429,7 @@ class WebhookHandler {
 		}
 
 		if ( 'PAYMENT.CAPTURE.REFUNDED' === $event_type ) {
-			$this->logger->info( 'Payment capture refunded via webhook', array( 'post_id' => $post_id, 'event_id' => $event_id ) );
-			$this->transition( $post_id, 'donadosu_refunded', $context );
+			$this->record_capture_refund( $post_id, $payload, $event_id, $context );
 			return;
 		}
 
@@ -906,6 +905,94 @@ class WebhookHandler {
 			)
 		);
 		return true;
+	}
+
+	/**
+	 * Record a PAYMENT.CAPTURE.REFUNDED webhook with partial-refund accounting.
+	 *
+	 * A refund issued from the PayPal dashboard (or any out-of-band channel)
+	 * arrives as this webhook. Previously the handler flipped the whole
+	 * donation to donadosu_refunded regardless of how much was actually
+	 * refunded, so a $10 refund on a $100 donation was reported as a $100
+	 * refund / $0 collected. This mirrors the admin RefundController: it
+	 * accumulates the refunded total, records the refund ID, and only marks
+	 * the donation fully refunded once the entire captured amount is returned.
+	 * Partial refunds leave the donation in its current status so it still
+	 * counts (net of the refunded amount) in reports.
+	 *
+	 * PayPal reports the authoritative cumulative figure for the capture under
+	 * resource.seller_payable_breakdown.total_refunded_amount, which is
+	 * preferred so multiple partial refunds (or a webhook redelivery) cannot
+	 * double-count.
+	 *
+	 * @since 1.0.6
+	 *
+	 * @param int                  $post_id  Donation post ID.
+	 * @param array<string, mixed> $payload  Decoded webhook payload.
+	 * @param string               $event_id PayPal event ID (for logging).
+	 * @param array<string, mixed> $context  Transition context.
+	 * @return void
+	 */
+	private function record_capture_refund( int $post_id, array $payload, string $event_id, array $context ): void {
+		$resource   = ( isset( $payload['resource'] ) && is_array( $payload['resource'] ) ) ? $payload['resource'] : array();
+		$refund_id  = sanitize_text_field( (string) ( $resource['id'] ?? '' ) );
+		$this_value = (float) ( $resource['amount']['value'] ?? 0.0 );
+
+		// The captured (gross) amount is what PayPal can refund against; fall
+		// back to the net amount for legacy donations with no gross stored.
+		$gross = (float) get_post_meta( $post_id, DonationMeta::GROSS_AMOUNT, true );
+		if ( $gross <= 0 ) {
+			$gross = (float) get_post_meta( $post_id, DonationMeta::AMOUNT, true );
+		}
+
+		$already           = (float) get_post_meta( $post_id, DonationMeta::REFUNDED_AMOUNT, true );
+		$cumulative_paypal = (float) ( $resource['seller_payable_breakdown']['total_refunded_amount']['value'] ?? 0.0 );
+
+		if ( $cumulative_paypal > 0 ) {
+			$refunded_total = $cumulative_paypal;
+		} elseif ( $this_value > 0 ) {
+			$refunded_total = $already + $this_value;
+		} else {
+			// No amount detail in the payload — treat as a full refund.
+			$refunded_total = $gross > 0 ? $gross : $already;
+		}
+
+		// Never let the tracked total go backwards (e.g. an out-of-order event).
+		$refunded_total = round( max( $already, $refunded_total ), 2 );
+
+		update_post_meta( $post_id, DonationMeta::REFUNDED_AMOUNT, (string) $refunded_total );
+		if ( '' !== $refund_id ) {
+			update_post_meta( $post_id, DonationMeta::REFUND_ID, $refund_id );
+		}
+
+		$is_full = $gross <= 0 || $refunded_total >= $gross - 0.005;
+
+		$refund_context = $context + array(
+			'source'         => 'webhook_refund',
+			'refund_id'      => $refund_id,
+			'refund_amount'  => $this_value,
+			'refunded_total' => $refunded_total,
+			'partial'        => ! $is_full,
+		);
+
+		if ( $is_full ) {
+			$this->transition( $post_id, 'donadosu_refunded', $refund_context );
+		} else {
+			// Partial refund: keep the current status, just record the event.
+			$this->repository->append_history( $post_id, (string) get_post_status( $post_id ), $refund_context );
+		}
+
+		$this->logger->info(
+			'Payment capture refunded via webhook',
+			array(
+				'post_id'        => $post_id,
+				'event_id'       => $event_id,
+				'refund_id'      => $refund_id,
+				'refund_amount'  => $this_value,
+				'refunded_total' => $refunded_total,
+				'partial'        => ! $is_full,
+			)
+		);
 	}
 
 	/**

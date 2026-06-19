@@ -277,6 +277,12 @@ class Installer {
 			wp_schedule_event( $next_jan_1, 'donadosu_yearly', 'donadosu_donation_year_end_summary' );
 		}
 
+		// Scheduled CSV export — daily tick that decides internally whether the
+		// configured cadence (weekly/monthly) is due before building/emailing.
+		if ( ! wp_next_scheduled( 'donadosu_scheduled_export' ) ) {
+			wp_schedule_event( time() + HOUR_IN_SECONDS, 'daily', 'donadosu_scheduled_export' );
+		}
+
 		// Register custom roles on activation.
 		Capabilities::register_roles();
 

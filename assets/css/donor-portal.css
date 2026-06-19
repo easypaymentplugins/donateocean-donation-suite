@@ -22,7 +22,11 @@
 .donadosu-sub-badge--active { background: #dcfce7; color: #15803d; }
 .donadosu-sub-badge--paused { background: #fef9c3; color: #854d0e; }
 .donadosu-sub-meta { font-size: 12px; color: #6b7280; margin-bottom: 14px; line-height: 1.7; }
+.donadosu-sub-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
 .donadosu-btn-cancel { padding: 6px 14px; background: #fff; color: #b91c1c; border: 1px solid #fca5a5; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; }
 .donadosu-btn-cancel:hover { background: #fff1f2; }
+.donadosu-btn-manage { display: inline-block; padding: 6px 14px; background: #fff; color: #4338ca; border: 1px solid #c7d2fe; border-radius: 6px; font-size: 12px; font-weight: 600; text-decoration: none; }
+.donadosu-btn-manage:hover { background: #eef2ff; }
+.donadosu-sub-note { margin: 10px 0 0; font-size: 12px; color: #9ca3af; line-height: 1.6; }
 .donadosu-no-subs { color: #6b7280; font-size: 14px; text-align: center; padding: 20px 0; }
 .donadosu-portal-footer-note { margin-top: 18px; font-size: 12px; color: #9ca3af; text-align: center; }

@@ -90,15 +90,27 @@ $errorMsg   = $errorKey ? ($errorMessages[$errorKey]   ?? __('An error occurred.
                         <?php esc_html_e('Receipt #:', 'donateocean-donation-suite'); ?> <?php echo esc_html($sub['receipt_no']); ?>
                     <?php endif; ?>
                 </div>
-                <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" onsubmit="return confirm('<?php echo esc_js(__('Cancel this recurring donation? This cannot be undone.', 'donateocean-donation-suite')); ?>');">
-                    <input type="hidden" name="action"          value="donadosu_portal_cancel" />
-                    <input type="hidden" name="donadosu_portal_token" value="<?php echo esc_attr($token); ?>" />
-                    <input type="hidden" name="post_id"         value="<?php echo esc_attr((string) $sub['post_id']); ?>" />
-                    <?php wp_nonce_field('donadosu_portal_cancel_' . $sub['post_id']); ?>
-                    <button type="submit" class="donadosu-btn-cancel">
-                        <?php esc_html_e('Cancel Subscription', 'donateocean-donation-suite'); ?>
-                    </button>
-                </form>
+                <div class="donadosu-sub-actions">
+                    <?php if (!empty($sub['is_paypal_managed']) && !empty($sub['manage_url'])) : ?>
+                        <a href="<?php echo esc_url($sub['manage_url']); ?>" class="donadosu-btn-manage" target="_blank" rel="noopener noreferrer">
+                            <?php esc_html_e('Update payment method', 'donateocean-donation-suite'); ?>
+                        </a>
+                    <?php endif; ?>
+                    <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" onsubmit="return confirm('<?php echo esc_js(__('Cancel this recurring donation? This cannot be undone.', 'donateocean-donation-suite')); ?>');">
+                        <input type="hidden" name="action"          value="donadosu_portal_cancel" />
+                        <input type="hidden" name="donadosu_portal_token" value="<?php echo esc_attr($token); ?>" />
+                        <input type="hidden" name="post_id"         value="<?php echo esc_attr((string) $sub['post_id']); ?>" />
+                        <?php wp_nonce_field('donadosu_portal_cancel_' . $sub['post_id']); ?>
+                        <button type="submit" class="donadosu-btn-cancel">
+                            <?php esc_html_e('Cancel Subscription', 'donateocean-donation-suite'); ?>
+                        </button>
+                    </form>
+                </div>
+                <?php if (empty($sub['is_paypal_managed'])) : ?>
+                    <p class="donadosu-sub-note">
+                        <?php esc_html_e('To update the card for this recurring donation, please cancel it and start a new donation, or contact us for help.', 'donateocean-donation-suite'); ?>
+                    </p>
+                <?php endif; ?>
             </div>
             <?php endforeach; ?>
         <?php endif; ?>

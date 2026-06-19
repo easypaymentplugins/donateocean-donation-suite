@@ -3,7 +3,7 @@
  * Plugin Name:       DonateOcean – Donations via PayPal
  * Plugin URI:        https://wordpress.org/plugins/donateocean-donation-suite
  * Description:       Accept secure PayPal donations in WordPress with webhook-verified completion, donation tracking, automated receipts, and a full charity-ready admin suite.
- * Version:           1.0.5
+ * Version:           1.0.6
  * Requires at least: 6.0
  * Tested up to:      7.0
  * Requires PHP:      7.4
@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 1.0.0
  * @var string
  */
-define( 'DONADOSU_VERSION', '1.0.5' );
+define( 'DONADOSU_VERSION', '1.0.6' );
 
 /**
  * Absolute path to the main plugin file.
@@ -142,6 +142,7 @@ register_deactivation_hook(
 		wp_clear_scheduled_hook( 'donadosu_donation_year_end_summary' );
 		wp_clear_scheduled_hook( 'donadosu_webhook_retry_cron' );
 		wp_clear_scheduled_hook( 'donadosu_renewal_charges' );
+		wp_clear_scheduled_hook( 'donadosu_scheduled_export' );
 	}
 );
 

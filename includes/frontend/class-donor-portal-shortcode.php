@@ -349,15 +349,40 @@ class DonorPortalShortcode {
 				continue;
 			}
 
+			$subscription_id = (string) get_post_meta( $id, DonationMeta::SUBSCRIPTION_ID, true );
+
 			$subscriptions[] = array(
-				'post_id'      => $id,
-				'status'       => $status,
-				'amount'       => (string) get_post_meta( $id, DonationMeta::AMOUNT, true ),
-				'currency'     => (string) get_post_meta( $id, DonationMeta::CURRENCY, true ),
-				'cycle'        => (string) get_post_meta( $id, DonationMeta::SUBSCRIPTION_CYCLE, true ),
-				'campaign'     => (string) get_post_meta( $id, DonationMeta::CAMPAIGN, true ),
-				'next_billing' => (string) get_post_meta( $id, DonationMeta::SUBSCRIPTION_NEXT_BILLING, true ),
-				'receipt_no'   => (string) get_post_meta( $id, DonationMeta::RECEIPT_NO, true ),
+				'post_id'           => $id,
+				'status'            => $status,
+				'amount'            => (string) get_post_meta( $id, DonationMeta::AMOUNT, true ),
+				'currency'          => (string) get_post_meta( $id, DonationMeta::CURRENCY, true ),
+				'cycle'             => (string) get_post_meta( $id, DonationMeta::SUBSCRIPTION_CYCLE, true ),
+				'campaign'          => (string) get_post_meta( $id, DonationMeta::CAMPAIGN, true ),
+				'next_billing'      => (string) get_post_meta( $id, DonationMeta::SUBSCRIPTION_NEXT_BILLING, true ),
+				'receipt_no'        => (string) get_post_meta( $id, DonationMeta::RECEIPT_NO, true ),
+				// PayPal-managed subscriptions (those with a PayPal subscription
+				// ID) can have their funding source updated by the donor in their
+				// own PayPal account; card-recurring donations cannot.
+				'is_paypal_managed' => '' !== $subscription_id,
+				'manage_url'        => '' !== $subscription_id
+					/**
+					 * Filters the URL a donor is sent to in order to update the
+					 * payment method for a PayPal-managed subscription. Defaults
+					 * to the donor's PayPal Automatic Payments page.
+					 *
+					 * @since 1.0.6
+					 *
+					 * @param string $url             Manage/update payment URL.
+					 * @param int    $post_id         Donation post ID.
+					 * @param string $subscription_id PayPal subscription ID.
+					 */
+					? (string) apply_filters(
+						'donadosu_subscription_manage_url',
+						'https://www.paypal.com/myaccount/autopay/',
+						$id,
+						$subscription_id
+					)
+					: '',
 			);
 		}
 

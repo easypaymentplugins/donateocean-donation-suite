@@ -40,8 +40,10 @@ wp_clear_scheduled_hook( 'donadosu_donation_reconcile' );
 wp_clear_scheduled_hook( 'donadosu_donation_year_end_summary' );
 wp_clear_scheduled_hook( 'donadosu_webhook_retry_cron' );
 wp_clear_scheduled_hook( 'donadosu_renewal_charges' );
+wp_clear_scheduled_hook( 'donadosu_scheduled_export' );
 
 delete_option( 'donadosu_activated_at' );
+delete_option( 'donadosu_last_scheduled_export' );
 
 // Review notice state (tiny options; cleaned regardless of the cleanup setting).
 delete_option( 'donadosu_review_notice_hide' );

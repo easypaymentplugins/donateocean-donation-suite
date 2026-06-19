@@ -375,6 +375,32 @@
                     </tr>
                 </table>
 
+                <h2 class="donadosu-settings-card__section-h2"><?php esc_html_e('Scheduled exports', 'donateocean-donation-suite'); ?></h2>
+                <p class="description"><?php esc_html_e('Automatically email a CSV export of donations on a recurring schedule.', 'donateocean-donation-suite'); ?></p>
+                <table class="form-table" role="presentation">
+                    <tr>
+                        <th scope="row"><?php esc_html_e('Enable scheduled export', 'donateocean-donation-suite'); ?><span class="donadosu-tooltip" tabindex="0" aria-label="<?php esc_attr_e('When enabled, a CSV of the previous period\'s donations is emailed automatically — weekly on Mondays or monthly on the 1st.', 'donateocean-donation-suite'); ?>"><span class="donadosu-tooltip__icon" aria-hidden="true">?</span></span></th>
+                        <td>
+                            <label><input id="donadosu-scheduled-export" type="checkbox" name="donadosu_settings[scheduled_export_enabled]" value="1" <?php checked(!empty($settings['scheduled_export_enabled'])); ?> /> <?php esc_html_e('Email a donation CSV automatically', 'donateocean-donation-suite'); ?></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="donadosu-scheduled-export-frequency"><?php esc_html_e('Frequency', 'donateocean-donation-suite'); ?></label></th>
+                        <td>
+                            <select id="donadosu-scheduled-export-frequency" name="donadosu_settings[scheduled_export_frequency]">
+                                <option value="weekly" <?php selected(($settings['scheduled_export_frequency'] ?? 'monthly'), 'weekly'); ?>><?php esc_html_e('Weekly (Mondays, previous 7 days)', 'donateocean-donation-suite'); ?></option>
+                                <option value="monthly" <?php selected(($settings['scheduled_export_frequency'] ?? 'monthly'), 'monthly'); ?>><?php esc_html_e('Monthly (1st, previous month)', 'donateocean-donation-suite'); ?></option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="donadosu-scheduled-export-email"><?php esc_html_e('Send to email', 'donateocean-donation-suite'); ?></label><span class="donadosu-tooltip" tabindex="0" aria-label="<?php esc_attr_e('Recipient for the scheduled export. Leave blank to use the charity contact email, then the site admin email.', 'donateocean-donation-suite'); ?>"><span class="donadosu-tooltip__icon" aria-hidden="true">?</span></span></th>
+                        <td>
+                            <input id="donadosu-scheduled-export-email" type="email" class="regular-text" name="donadosu_settings[scheduled_export_email]" value="<?php echo esc_attr((string) ($settings['scheduled_export_email'] ?? '')); ?>" placeholder="<?php esc_attr_e('Defaults to the charity contact / admin email', 'donateocean-donation-suite'); ?>" />
+                        </td>
+                    </tr>
+                </table>
+
                 <h2 class="donadosu-settings-card__section-h2"><?php esc_html_e('Logging', 'donateocean-donation-suite'); ?></h2>
                 <p class="description"><?php esc_html_e('Control diagnostic logging for troubleshooting.', 'donateocean-donation-suite'); ?></p>
                 <table class="form-table" role="presentation">

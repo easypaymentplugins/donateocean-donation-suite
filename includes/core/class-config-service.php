@@ -76,6 +76,10 @@ class ConfigService {
 			'tax_disclaimer'       => 'No goods or services were provided in exchange for this donation.',
 			'privacy_url'          => '',
 			'refund_url'           => '',
+			// Scheduled CSV export (emailed to the recipient below).
+			'scheduled_export_enabled'   => 0,
+			'scheduled_export_frequency' => 'monthly',
+			'scheduled_export_email'     => '',
 			// Feature 1: Recurring donations.
 			'enable_recurring'     => 1,
 			// Feature 2: Fee coverage.

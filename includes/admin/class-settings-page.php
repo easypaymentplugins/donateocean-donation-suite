@@ -305,6 +305,9 @@ class SettingsPage {
 			'enable_logging',
 			'logging_level',
 			'cleanup_on_uninstall',
+			'scheduled_export_enabled',
+			'scheduled_export_frequency',
+			'scheduled_export_email',
 		);
 
 		$integration_keys = array(
@@ -446,6 +449,11 @@ class SettingsPage {
 			),
 			'retention_months'         => max( 1, (int) $get_input_or_stored_value( 'retention_months', 24 ) ),
 			'store_raw_payload'        => empty( $get_input_or_stored_value( 'store_raw_payload', 0 ) ) ? 0 : 1,
+			'scheduled_export_enabled'   => empty( $get_input_or_stored_value( 'scheduled_export_enabled', 0 ) ) ? 0 : 1,
+			'scheduled_export_frequency' => in_array( (string) $get_input_or_stored_value( 'scheduled_export_frequency', 'monthly' ), array( 'weekly', 'monthly' ), true )
+				? (string) $get_input_or_stored_value( 'scheduled_export_frequency', 'monthly' )
+				: 'monthly',
+			'scheduled_export_email'     => sanitize_email( (string) $get_input_or_stored_value( 'scheduled_export_email', '' ) ),
 			'enable_recurring'             => empty( $get_input_or_stored_value( 'enable_recurring', 0 ) ) ? 0 : 1,
 			'enable_paypal_card_fields'    => empty( $get_input_or_stored_value( 'enable_paypal_card_fields', 0 ) ) ? 0 : 1,
 			'enable_fee_coverage'          => empty( $get_input_or_stored_value( 'enable_fee_coverage', 0 ) ) ? 0 : 1,
