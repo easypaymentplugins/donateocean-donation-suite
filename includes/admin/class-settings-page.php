@@ -258,6 +258,23 @@ class SettingsPage {
 			}
 		}
 
+		// When the credential fields are visible alongside a connected state,
+		// they submit empty. Preserve the stored credentials in that case so
+		// a plain "Save" doesn't wipe an existing connection.
+		foreach ( array( 'sandbox_', 'live_' ) as $env_prefix ) {
+			$submitted_id     = trim( (string) ( $input[ $env_prefix . 'client_id' ] ?? '' ) );
+			$submitted_secret = trim( (string) ( $input[ $env_prefix . 'secret' ] ?? '' ) );
+			$stored_id        = (string) ( $existing_settings[ $env_prefix . 'client_id' ] ?? '' );
+			$stored_secret    = (string) ( $existing_settings[ $env_prefix . 'secret' ] ?? '' );
+
+			if ( '' === $submitted_id && '' !== $stored_id ) {
+				$input[ $env_prefix . 'client_id' ] = ConfigService::decrypt_secret( $stored_id );
+			}
+			if ( '' === $submitted_secret && '' !== $stored_secret ) {
+				$input[ $env_prefix . 'secret' ] = ConfigService::decrypt_secret( $stored_secret );
+			}
+		}
+
 		$active_tab        = sanitize_text_field( (string) ( $input['_active_tab'] ?? '' ) );
 
 		$environment_keys = array(

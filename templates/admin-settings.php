@@ -195,15 +195,11 @@
                     </tr>
                     <?php endif; ?>
 
-                    <?php if ($sandboxConnected) : ?>
-                    <input type="hidden" name="donadosu_settings[sandbox_client_id]" value="<?php echo esc_attr($sandboxClientId); ?>" />
-                    <input type="hidden" name="donadosu_settings[sandbox_secret]" value="<?php echo esc_attr($sandboxSecret); ?>" />
-                    <?php else : ?>
                     <tr data-donadosu-env-row="sandbox">
                         <th scope="row"><label for="donadosu-sandbox-client-id"><?php esc_html_e('Sandbox Client ID', 'donateocean-donation-suite'); ?></label></th>
                         <td>
                             <div class="donadosu-password-field">
-                                <input id="donadosu-sandbox-client-id" type="password" class="regular-text code" name="donadosu_settings[sandbox_client_id]" value="<?php echo esc_attr($sandboxClientId); ?>" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" />
+                                <input id="donadosu-sandbox-client-id" type="password" class="regular-text code" name="donadosu_settings[sandbox_client_id]" value="<?php echo esc_attr($sandboxConnected ? '' : $sandboxClientId); ?>" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" placeholder="<?php echo $sandboxConnected ? esc_attr__('Enter new Client ID to reconnect', 'donateocean-donation-suite') : ''; ?>" />
                                 <button type="button" class="button donadosu-toggle-visibility" data-donadosu-toggle="donadosu-sandbox-client-id" aria-label="<?php esc_attr_e('Show or hide value', 'donateocean-donation-suite'); ?>">
                                     <span class="dashicons dashicons-visibility"></span>
                                 </button>
@@ -221,7 +217,6 @@
                             </div>
                         </td>
                     </tr>
-                    <?php endif; ?>
                     <input type="hidden" name="donadosu_settings[sandbox_webhook_id]" value="<?php echo esc_attr((string) ($settings['sandbox_webhook_id'] ?? '')); ?>" />
                     <input type="hidden" name="donadosu_settings[sandbox_connected_email]" value="<?php echo esc_attr($sandboxEmail); ?>" />
 
@@ -249,15 +244,11 @@
                     </tr>
                     <?php endif; ?>
 
-                    <?php if ($liveConnected) : ?>
-                    <input type="hidden" name="donadosu_settings[live_client_id]" value="<?php echo esc_attr($liveClientId); ?>" />
-                    <input type="hidden" name="donadosu_settings[live_secret]" value="<?php echo esc_attr($liveSecret); ?>" />
-                    <?php else : ?>
                     <tr data-donadosu-env-row="live">
                         <th scope="row"><label for="donadosu-live-client-id"><?php esc_html_e('Live Client ID', 'donateocean-donation-suite'); ?></label></th>
                         <td>
                             <div class="donadosu-password-field">
-                                <input id="donadosu-live-client-id" type="password" class="regular-text code" name="donadosu_settings[live_client_id]" value="<?php echo esc_attr($liveClientId); ?>" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" />
+                                <input id="donadosu-live-client-id" type="password" class="regular-text code" name="donadosu_settings[live_client_id]" value="<?php echo esc_attr($liveConnected ? '' : $liveClientId); ?>" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" placeholder="<?php echo $liveConnected ? esc_attr__('Enter new Client ID to reconnect', 'donateocean-donation-suite') : ''; ?>" />
                                 <button type="button" class="button donadosu-toggle-visibility" data-donadosu-toggle="donadosu-live-client-id" aria-label="<?php esc_attr_e('Show or hide value', 'donateocean-donation-suite'); ?>">
                                     <span class="dashicons dashicons-visibility"></span>
                                 </button>
@@ -275,7 +266,6 @@
                             </div>
                         </td>
                     </tr>
-                    <?php endif; ?>
                     <input type="hidden" name="donadosu_settings[live_webhook_id]" value="<?php echo esc_attr((string) ($settings['live_webhook_id'] ?? '')); ?>" />
                     <input type="hidden" name="donadosu_settings[live_connected_email]" value="<?php echo esc_attr($liveEmail); ?>" />
                 </table>
