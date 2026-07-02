@@ -577,6 +577,11 @@ class SettingsPage {
 						'error'
 					);
 
+					$existing_settings[ $credential_prefix . 'client_id' ]      = '';
+					$existing_settings[ $credential_prefix . 'secret' ]          = '';
+					$existing_settings[ $credential_prefix . 'webhook_id' ]      = '';
+					$existing_settings[ $credential_prefix . 'connected_email' ] = '';
+
 					return $existing_settings;
 				}
 
